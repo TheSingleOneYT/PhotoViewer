@@ -42,14 +42,23 @@ namespace PhotoViewer
             this.WelcomeLabel = new System.Windows.Forms.Label();
             this.CloseLabel = new System.Windows.Forms.Label();
             this.Minimize = new System.Windows.Forms.Label();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.MiniControl = new System.Windows.Forms.PictureBox();
             this.ProjectInfoBTN = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.tooltip = new System.Windows.Forms.ToolTip(this.components);
+            this.FiltersBar = new System.Windows.Forms.PictureBox();
+            this.GreyScaleBTN = new System.Windows.Forms.Button();
+            this.InvertBTN = new System.Windows.Forms.Button();
+            this.FiltersText = new System.Windows.Forms.Label();
+            this.zoomSlider = new System.Windows.Forms.TrackBar();
+            this.ZoomText = new System.Windows.Forms.Label();
+            this.ResetZoomBTN = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.MainImage)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ColourBar)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.EditBar)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.MiniControl)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.FiltersBar)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.zoomSlider)).BeginInit();
             this.SuspendLayout();
             // 
             // MainImage
@@ -183,14 +192,14 @@ namespace PhotoViewer
             this.Minimize.Click += new System.EventHandler(this.Minimize_Click);
             this.Minimize.MouseHover += new System.EventHandler(this.Minimize_MouseHover);
             // 
-            // pictureBox1
+            // MiniControl
             // 
-            this.pictureBox1.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.pictureBox1.Location = new System.Drawing.Point(721, -10);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(85, 42);
-            this.pictureBox1.TabIndex = 11;
-            this.pictureBox1.TabStop = false;
+            this.MiniControl.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.MiniControl.Location = new System.Drawing.Point(721, -10);
+            this.MiniControl.Name = "MiniControl";
+            this.MiniControl.Size = new System.Drawing.Size(85, 42);
+            this.MiniControl.TabIndex = 11;
+            this.MiniControl.TabStop = false;
             // 
             // ProjectInfoBTN
             // 
@@ -214,17 +223,101 @@ namespace PhotoViewer
             this.label1.TabIndex = 13;
             this.label1.Text = "Press the centre of the screen to import an image.";
             // 
+            // FiltersBar
+            // 
+            this.FiltersBar.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.FiltersBar.Location = new System.Drawing.Point(584, 389);
+            this.FiltersBar.Name = "FiltersBar";
+            this.FiltersBar.Size = new System.Drawing.Size(220, 32);
+            this.FiltersBar.TabIndex = 14;
+            this.FiltersBar.TabStop = false;
+            this.FiltersBar.Visible = false;
+            // 
+            // GreyScaleBTN
+            // 
+            this.GreyScaleBTN.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.GreyScaleBTN.Location = new System.Drawing.Point(721, 393);
+            this.GreyScaleBTN.Name = "GreyScaleBTN";
+            this.GreyScaleBTN.Size = new System.Drawing.Size(75, 23);
+            this.GreyScaleBTN.TabIndex = 15;
+            this.GreyScaleBTN.Text = "GreyScale";
+            this.GreyScaleBTN.UseVisualStyleBackColor = true;
+            this.GreyScaleBTN.Visible = false;
+            this.GreyScaleBTN.Click += new System.EventHandler(this.GreyScaleBTN_Click);
+            this.GreyScaleBTN.MouseHover += new System.EventHandler(this.GreyScaleBTN_MouseHover);
+            // 
+            // InvertBTN
+            // 
+            this.InvertBTN.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.InvertBTN.Location = new System.Drawing.Point(640, 393);
+            this.InvertBTN.Name = "InvertBTN";
+            this.InvertBTN.Size = new System.Drawing.Size(75, 23);
+            this.InvertBTN.TabIndex = 16;
+            this.InvertBTN.Text = "Invert";
+            this.InvertBTN.UseVisualStyleBackColor = true;
+            this.InvertBTN.Visible = false;
+            this.InvertBTN.Click += new System.EventHandler(this.InvertBTN_Click);
+            this.InvertBTN.MouseHover += new System.EventHandler(this.InvertBTN_MouseHover);
+            // 
+            // FiltersText
+            // 
+            this.FiltersText.AutoSize = true;
+            this.FiltersText.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.FiltersText.Location = new System.Drawing.Point(591, 398);
+            this.FiltersText.Name = "FiltersText";
+            this.FiltersText.Size = new System.Drawing.Size(43, 13);
+            this.FiltersText.TabIndex = 17;
+            this.FiltersText.Text = "Filters - ";
+            this.FiltersText.Visible = false;
+            // 
+            // zoomSlider
+            // 
+            this.zoomSlider.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.zoomSlider.Location = new System.Drawing.Point(403, 423);
+            this.zoomSlider.Name = "zoomSlider";
+            this.zoomSlider.Size = new System.Drawing.Size(193, 45);
+            this.zoomSlider.TabIndex = 18;
+            this.zoomSlider.Scroll += new System.EventHandler(this.zoomSlider_Scroll);
+            // 
+            // ZoomText
+            // 
+            this.ZoomText.AutoSize = true;
+            this.ZoomText.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.ZoomText.Location = new System.Drawing.Point(384, 428);
+            this.ZoomText.Name = "ZoomText";
+            this.ZoomText.Size = new System.Drawing.Size(13, 13);
+            this.ZoomText.TabIndex = 20;
+            this.ZoomText.Text = "0";
+            // 
+            // ResetZoomBTN
+            // 
+            this.ResetZoomBTN.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.ResetZoomBTN.Location = new System.Drawing.Point(594, 423);
+            this.ResetZoomBTN.Name = "ResetZoomBTN";
+            this.ResetZoomBTN.Size = new System.Drawing.Size(92, 23);
+            this.ResetZoomBTN.TabIndex = 21;
+            this.ResetZoomBTN.Text = "Reset Zoom";
+            this.ResetZoomBTN.UseVisualStyleBackColor = true;
+            this.ResetZoomBTN.Click += new System.EventHandler(this.ResetZoomBTN_Click);
+            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.ResetZoomBTN);
+            this.Controls.Add(this.ZoomText);
+            this.Controls.Add(this.zoomSlider);
+            this.Controls.Add(this.FiltersText);
+            this.Controls.Add(this.InvertBTN);
+            this.Controls.Add(this.GreyScaleBTN);
+            this.Controls.Add(this.FiltersBar);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.ProjectInfoBTN);
             this.Controls.Add(this.Minimize);
             this.Controls.Add(this.CloseLabel);
-            this.Controls.Add(this.pictureBox1);
+            this.Controls.Add(this.MiniControl);
             this.Controls.Add(this.WelcomeLabel);
             this.Controls.Add(this.FlipYBTN);
             this.Controls.Add(this.FlipXBTN);
@@ -245,7 +338,9 @@ namespace PhotoViewer
             ((System.ComponentModel.ISupportInitialize)(this.MainImage)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ColourBar)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.EditBar)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.MiniControl)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.FiltersBar)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.zoomSlider)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -264,10 +359,17 @@ namespace PhotoViewer
         private System.Windows.Forms.Label WelcomeLabel;
         private System.Windows.Forms.Label CloseLabel;
         private System.Windows.Forms.Label Minimize;
-        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.PictureBox MiniControl;
         private System.Windows.Forms.Button ProjectInfoBTN;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ToolTip tooltip;
+        private System.Windows.Forms.PictureBox FiltersBar;
+        private System.Windows.Forms.Button GreyScaleBTN;
+        private System.Windows.Forms.Button InvertBTN;
+        private System.Windows.Forms.Label FiltersText;
+        private System.Windows.Forms.TrackBar zoomSlider;
+        private System.Windows.Forms.Label ZoomText;
+        private System.Windows.Forms.Button ResetZoomBTN;
     }
 }
 

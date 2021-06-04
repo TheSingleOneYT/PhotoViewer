@@ -3,6 +3,7 @@ using System.Drawing;
 using System.IO;
 using System.Drawing.Imaging;
 using System.Windows.Forms;
+using System.Drawing.Drawing2D;
 
 namespace PhotoViewer
 {
@@ -11,6 +12,8 @@ namespace PhotoViewer
         Image file;
 
         public object LocalAppData = Environment.GetEnvironmentVariable("LocalAppData");
+
+        Bitmap newBitmap;
 
         public Main()
         {
@@ -32,16 +35,22 @@ namespace PhotoViewer
         {
             OpenFileDialog dialog = new OpenFileDialog();
 
-            dialog.Filter = "Images|*.png; *.JPG; *.GIF; *.JPEG";
+            dialog.Filter = "Images|*.png; *.JPG; *.GIF";
 
             if (dialog.ShowDialog() == DialogResult.OK)
             {
                 file = Image.FromFile(dialog.FileName);
-                MainImage.Image = file;
                 Main.ActiveForm.Text = "Photo Viewer & Editor - " + Path.GetFileName(dialog.FileName);
                 File.WriteAllText(LocalAppData + "/PhotoViewer/CurrentImportPath.txt", Path.GetDirectoryName(dialog.FileName));
                 File.WriteAllText(LocalAppData + "/PhotoViewer/CurrentImportName.txt", Path.GetFileNameWithoutExtension(dialog.FileName));
                 File.WriteAllText(LocalAppData + "/PhotoViewer/CurrentImportExt.txt", Path.GetExtension(dialog.FileName));
+
+                MainImage.Image = file;
+
+                if (EditBTN.Text == "Stop Editing")
+                {
+                    EditBTN.PerformClick();
+                }
             }
         }
 
@@ -54,6 +63,10 @@ namespace PhotoViewer
                 SaveBTN.Hide();
                 FlipXBTN.Hide();
                 FlipYBTN.Hide();
+                FiltersBar.Hide();
+                FiltersText.Hide();
+                InvertBTN.Hide();
+                GreyScaleBTN.Hide();
                 EditBTN.Text = "Edit";
             }
             else
@@ -67,6 +80,13 @@ namespace PhotoViewer
                 FlipXBTN.BringToFront();
                 FlipYBTN.Show();
                 FlipYBTN.BringToFront();
+                InvertBTN.Show();
+                InvertBTN.BringToFront();
+                FiltersBar.Show();
+                FiltersText.Show();
+                FiltersText.BringToFront();
+                GreyScaleBTN.Show();
+                GreyScaleBTN.BringToFront();
                 EditBTN.Text = "Stop Editing";
             }
         }
@@ -87,7 +107,7 @@ namespace PhotoViewer
             if (File.Exists(LocalAppData + "/PhotoViewer/CurrentImportName.txt"))
             {
                 var CIN = File.ReadAllText(LocalAppData + "/PhotoViewer/CurrentImportName.txt");
-                
+
                 if (CIN == "")
                 {
                     dialog.FileName = ".png";
@@ -108,10 +128,6 @@ namespace PhotoViewer
 
                 dialog.InitialDirectory = CIP;
             }
-            else
-            {
-
-            }
 
             dialog.Title = "Save image - PhotoViewer";
 
@@ -125,7 +141,7 @@ namespace PhotoViewer
                 {
                     MainImage.Image.Save(dialog.FileName, ImageFormat.Gif);
                 }
-                else if(dialog.FileName.EndsWith(".png"))
+                else if (dialog.FileName.EndsWith(".png"))
                 {
                     MainImage.Image.Save(dialog.FileName, ImageFormat.Png);
                 }
@@ -230,6 +246,102 @@ namespace PhotoViewer
         private void ProjectInfoBTN_MouseHover(object sender, EventArgs e)
         {
             tooltip.Show("Displays information about the Photo Viewer & Editor Project.", ProjectInfoBTN);
+        }
+
+        private void GreyScaleBTN_Click(object sender, EventArgs e)
+        {
+            newBitmap = new Bitmap(MainImage.Image);
+
+            this.Cursor = Cursors.WaitCursor;
+
+            Main.ActiveForm.Text = "Photo Viewer & Editor - " + File.ReadAllText(LocalAppData + "/PhotoViewer/CurrentImportName.txt") + File.ReadAllText(LocalAppData + "/PhotoViewer/CurrentImportExt.txt") + " *";
+
+            for (int x = 0; x < newBitmap.Width; x++)
+            {
+                for (int y = 0; y < newBitmap.Height; y++)
+                {
+                    Color original = newBitmap.GetPixel(x, y);
+
+                    int greyScale = (int)((original.R * .3) + (original.G * .59) + (original.B * .11));
+
+                    Color newcolor = Color.FromArgb(greyScale, greyScale, greyScale);
+
+                    newBitmap.SetPixel(x, y, newcolor);
+
+                    MainImage.Image = newBitmap;
+                }
+            }
+
+            this.Cursor = Cursors.Default;
+        }
+
+        private void InvertBTN_Click(object sender, EventArgs e)
+        {
+            newBitmap = new Bitmap(MainImage.Image);
+
+            Main.ActiveForm.Text = "Photo Viewer & Editor - " + File.ReadAllText(LocalAppData + "/PhotoViewer/CurrentImportName.txt") + File.ReadAllText(LocalAppData + "/PhotoViewer/CurrentImportExt.txt") + " *";
+
+            this.Cursor = Cursors.WaitCursor;
+
+            for (int x = 0; x < newBitmap.Width; x++)
+            {
+                for (int y = 0; y < newBitmap.Height; y++)
+                {
+                    Color pixel = newBitmap.GetPixel(x, y);
+
+                    int red = pixel.R;
+                    int green = pixel.G;
+                    int blue = pixel.B;
+
+                    newBitmap.SetPixel(x, y, Color.FromArgb(255 - red, 255 - green, 255 - blue));
+
+                    MainImage.Image = newBitmap;
+                }
+            }
+
+            this.Cursor = Cursors.Default;
+        }
+
+        private void InvertBTN_MouseHover(object sender, EventArgs e)
+        {
+            tooltip.Show("Inverts the image.", InvertBTN);
+        }
+
+        private void GreyScaleBTN_MouseHover(object sender, EventArgs e)
+        {
+            tooltip.Show("Makes the image go GreyScale.", GreyScaleBTN);
+        }
+
+        private void zoomSlider_Scroll(object sender, EventArgs e)
+        {
+            var OrgWidth = MainImage.Width;
+            var OrgHeight = MainImage.Height;
+            var img = MainImage.Image;
+            var prevvalue = ZoomText.Text.ToString();
+            int value = zoomSlider.Value;
+            ZoomText.Text = value.ToString();
+            int PV = Int32.Parse(prevvalue);
+            
+            if (value < PV)
+            {
+                MainImage.Width = OrgWidth - 5;
+                MainImage.Height = OrgHeight - 5;
+                MainImage.Image = img;
+            }
+            else
+            {
+                MainImage.Width = OrgWidth + 5;
+                MainImage.Height = OrgHeight + 5;
+                MainImage.Image = img;
+            }
+        }
+
+        private void ResetZoomBTN_Click(object sender, EventArgs e)
+        {
+            MainImage.Width = 809;
+            MainImage.Height = 391;
+            ZoomText.Text = 0.ToString();
+            zoomSlider.Value = 0;
         }
     }
 }
