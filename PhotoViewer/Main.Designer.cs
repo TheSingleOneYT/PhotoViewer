@@ -37,6 +37,7 @@ namespace PhotoViewer
             this.saveImageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.resetImageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.clearItemsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.openInLargeViewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ColourBar = new System.Windows.Forms.PictureBox();
             this.EditBTN = new System.Windows.Forms.Button();
             this.EditBar = new System.Windows.Forms.PictureBox();
@@ -59,7 +60,8 @@ namespace PhotoViewer
             this.ZoomText = new System.Windows.Forms.Label();
             this.ResetZoomBTN = new System.Windows.Forms.Button();
             this.EditBarSection2 = new System.Windows.Forms.PictureBox();
-            this.openInLargeViewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.notify = new System.Windows.Forms.NotifyIcon(this.components);
+            this.SettingsLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.MainImage)).BeginInit();
             this.MainImageContextStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ColourBar)).BeginInit();
@@ -91,35 +93,42 @@ namespace PhotoViewer
             this.clearItemsToolStripMenuItem,
             this.openInLargeViewToolStripMenuItem});
             this.MainImageContextStrip.Name = "MainImageContextStrip";
-            this.MainImageContextStrip.Size = new System.Drawing.Size(181, 136);
+            this.MainImageContextStrip.Size = new System.Drawing.Size(173, 114);
             // 
             // importImageToolStripMenuItem
             // 
             this.importImageToolStripMenuItem.Name = "importImageToolStripMenuItem";
-            this.importImageToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.importImageToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
             this.importImageToolStripMenuItem.Text = "Import Image";
             this.importImageToolStripMenuItem.Click += new System.EventHandler(this.importImageToolStripMenuItem_Click);
             // 
             // saveImageToolStripMenuItem
             // 
             this.saveImageToolStripMenuItem.Name = "saveImageToolStripMenuItem";
-            this.saveImageToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.saveImageToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
             this.saveImageToolStripMenuItem.Text = "Save Image";
             this.saveImageToolStripMenuItem.Click += new System.EventHandler(this.saveImageToolStripMenuItem_Click);
             // 
             // resetImageToolStripMenuItem
             // 
             this.resetImageToolStripMenuItem.Name = "resetImageToolStripMenuItem";
-            this.resetImageToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.resetImageToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
             this.resetImageToolStripMenuItem.Text = "Reset Image";
             this.resetImageToolStripMenuItem.Click += new System.EventHandler(this.resetImageToolStripMenuItem_Click);
             // 
             // clearItemsToolStripMenuItem
             // 
             this.clearItemsToolStripMenuItem.Name = "clearItemsToolStripMenuItem";
-            this.clearItemsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.clearItemsToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
             this.clearItemsToolStripMenuItem.Text = "Clear Items";
             this.clearItemsToolStripMenuItem.Click += new System.EventHandler(this.clearItemsToolStripMenuItem_Click);
+            // 
+            // openInLargeViewToolStripMenuItem
+            // 
+            this.openInLargeViewToolStripMenuItem.Name = "openInLargeViewToolStripMenuItem";
+            this.openInLargeViewToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
+            this.openInLargeViewToolStripMenuItem.Text = "Open in large view";
+            this.openInLargeViewToolStripMenuItem.Click += new System.EventHandler(this.openInLargeViewToolStripMenuItem_Click);
             // 
             // ColourBar
             // 
@@ -145,7 +154,7 @@ namespace PhotoViewer
             // EditBar
             // 
             this.EditBar.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.EditBar.Location = new System.Drawing.Point(621, -10);
+            this.EditBar.Location = new System.Drawing.Point(575, -10);
             this.EditBar.Name = "EditBar";
             this.EditBar.Size = new System.Drawing.Size(93, 42);
             this.EditBar.TabIndex = 3;
@@ -154,7 +163,7 @@ namespace PhotoViewer
             // Rotate90BTN
             // 
             this.Rotate90BTN.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.Rotate90BTN.Location = new System.Drawing.Point(387, 4);
+            this.Rotate90BTN.Location = new System.Drawing.Point(341, 4);
             this.Rotate90BTN.Name = "Rotate90BTN";
             this.Rotate90BTN.Size = new System.Drawing.Size(75, 23);
             this.Rotate90BTN.TabIndex = 4;
@@ -167,7 +176,7 @@ namespace PhotoViewer
             // SaveBTN
             // 
             this.SaveBTN.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.SaveBTN.Location = new System.Drawing.Point(630, 4);
+            this.SaveBTN.Location = new System.Drawing.Point(584, 4);
             this.SaveBTN.Name = "SaveBTN";
             this.SaveBTN.Size = new System.Drawing.Size(75, 23);
             this.SaveBTN.TabIndex = 5;
@@ -179,7 +188,7 @@ namespace PhotoViewer
             // FlipXBTN
             // 
             this.FlipXBTN.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.FlipXBTN.Location = new System.Drawing.Point(468, 4);
+            this.FlipXBTN.Location = new System.Drawing.Point(422, 4);
             this.FlipXBTN.Name = "FlipXBTN";
             this.FlipXBTN.Size = new System.Drawing.Size(75, 23);
             this.FlipXBTN.TabIndex = 6;
@@ -192,7 +201,7 @@ namespace PhotoViewer
             // FlipYBTN
             // 
             this.FlipYBTN.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.FlipYBTN.Location = new System.Drawing.Point(549, 4);
+            this.FlipYBTN.Location = new System.Drawing.Point(503, 4);
             this.FlipYBTN.Name = "FlipYBTN";
             this.FlipYBTN.Size = new System.Drawing.Size(75, 23);
             this.FlipYBTN.TabIndex = 7;
@@ -242,9 +251,9 @@ namespace PhotoViewer
             // MiniControl
             // 
             this.MiniControl.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.MiniControl.Location = new System.Drawing.Point(721, -10);
+            this.MiniControl.Location = new System.Drawing.Point(684, -10);
             this.MiniControl.Name = "MiniControl";
-            this.MiniControl.Size = new System.Drawing.Size(85, 42);
+            this.MiniControl.Size = new System.Drawing.Size(122, 42);
             this.MiniControl.TabIndex = 11;
             this.MiniControl.TabStop = false;
             // 
@@ -350,19 +359,31 @@ namespace PhotoViewer
             // EditBarSection2
             // 
             this.EditBarSection2.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.EditBarSection2.Location = new System.Drawing.Point(375, -10);
+            this.EditBarSection2.Location = new System.Drawing.Point(329, -10);
             this.EditBarSection2.Name = "EditBarSection2";
             this.EditBarSection2.Size = new System.Drawing.Size(249, 42);
             this.EditBarSection2.TabIndex = 22;
             this.EditBarSection2.TabStop = false;
             this.EditBarSection2.Visible = false;
             // 
-            // openInLargeViewToolStripMenuItem
+            // notify
             // 
-            this.openInLargeViewToolStripMenuItem.Name = "openInLargeViewToolStripMenuItem";
-            this.openInLargeViewToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.openInLargeViewToolStripMenuItem.Text = "Open in large view";
-            this.openInLargeViewToolStripMenuItem.Click += new System.EventHandler(this.openInLargeViewToolStripMenuItem_Click);
+            this.notify.Text = "PhotoViewer";
+            this.notify.Visible = true;
+            this.notify.BalloonTipClicked += new System.EventHandler(this.Notify_BalloonTipClicked);
+            // 
+            // SettingsLabel
+            // 
+            this.SettingsLabel.AutoSize = true;
+            this.SettingsLabel.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.SettingsLabel.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.SettingsLabel.Font = new System.Drawing.Font("HotKeys_01", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.SettingsLabel.Location = new System.Drawing.Point(689, 0);
+            this.SettingsLabel.Name = "SettingsLabel";
+            this.SettingsLabel.Size = new System.Drawing.Size(40, 27);
+            this.SettingsLabel.TabIndex = 23;
+            this.SettingsLabel.Text = "⚙️";
+            this.SettingsLabel.Click += new System.EventHandler(this.SettingsLabel_Click);
             // 
             // Main
             // 
@@ -370,6 +391,7 @@ namespace PhotoViewer
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.SettingsLabel);
             this.Controls.Add(this.ResetZoomBTN);
             this.Controls.Add(this.ZoomText);
             this.Controls.Add(this.zoomSlider);
@@ -445,6 +467,8 @@ namespace PhotoViewer
         private System.Windows.Forms.ToolStripMenuItem resetImageToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem clearItemsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem openInLargeViewToolStripMenuItem;
+        private System.Windows.Forms.NotifyIcon notify;
+        private System.Windows.Forms.Label SettingsLabel;
     }
 }
 

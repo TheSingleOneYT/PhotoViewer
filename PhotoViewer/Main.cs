@@ -3,6 +3,8 @@ using System.Drawing;
 using System.IO;
 using System.Drawing.Imaging;
 using System.Windows.Forms;
+using System.Reflection;
+using System.Diagnostics;
 
 namespace PhotoViewer
 {
@@ -12,13 +14,18 @@ namespace PhotoViewer
 
         public object LocalAppData = Environment.GetEnvironmentVariable("LocalAppData");
 
+        public object prefs = Environment.GetEnvironmentVariable("LocalAppData") + "/PhotoViewer/Preferences";
+
         Bitmap newBitmap;
+
+        public object NewVer;
 
         public Main()
         {
             InitializeComponent();
 
             Directory.CreateDirectory(LocalAppData + "/PhotoViewer");
+            Directory.CreateDirectory(LocalAppData + "/PhotoViewer/Preferences");
 
             var UserOnWin = SystemInformation.UserName.ToString();
             WelcomeLabel.Text = "PhotoViewer - Welcome " + UserOnWin + "!";
@@ -29,6 +36,71 @@ namespace PhotoViewer
                 File.Delete(LocalAppData + "/PhotoViewer/%%Temp%%.png");
 
             ControlBox = false;
+
+            if (File.Exists(prefs + "/CFUOASChkBx.txt"))
+            {
+                var CFU = File.ReadAllText(prefs + "/CFUOASChkBx.txt");
+
+                if (CFU == "true")
+                {
+                    var url = "https://raw.githubusercontent.com/TheSingleOneYT/PhotoViewer/main/Update/Version.txt";
+                    var wc = new System.Net.WebClient();
+                    var GithubVer = wc.DownloadString(url).Split(new[] { '\r', '\n' })[0].Replace(" ", "");
+                    var AppVer = Assembly.GetExecutingAssembly().GetName().Version.ToString();
+
+                    if (AppVer == GithubVer)
+                    {
+
+                    }
+                    else
+                    {
+                        notify.Icon = SystemIcons.Application;
+                        notify.BalloonTipText = "A new version of PhotoViewer is available. Click to install new version";
+                        notify.ShowBalloonTip(1000);
+                        notify.BalloonTipClicked += Notify_BalloonTipClicked;
+                        NewVer = GithubVer;
+                    }
+                }
+            }
+            else
+            {
+                var url = "https://raw.githubusercontent.com/TheSingleOneYT/PhotoViewer/main/Update/Version.txt";
+                var wc = new System.Net.WebClient();
+                var GithubVer = wc.DownloadString(url).Split(new[] { '\r', '\n' })[0].Replace(" ", "");
+                var AppVer = Assembly.GetExecutingAssembly().GetName().Version.ToString();
+
+                if (AppVer == GithubVer)
+                {
+
+                }
+                else
+                {
+                    notify.Icon = SystemIcons.Application;
+                    notify.BalloonTipText = "A new version of PhotoViewer is available. Click to install new version";
+                    notify.ShowBalloonTip(1000);
+                    notify.BalloonTipClicked += Notify_BalloonTipClicked;
+                    NewVer = GithubVer;
+                }
+            }
+        }
+
+        private void Notify_BalloonTipClicked(object sender, EventArgs e)
+        {
+            var process = "https://github.com/TheSingleOneYT/PhotoViewer/releases/download/" + NewVer + "/PhotoViewer.exe";
+            Process.Start(process);
+            var Downloads = @"C:\Users\" + SystemInformation.UserName.ToString() + @"\Downloads";
+            Application.Exit();
+
+            while (File.Exists(Downloads + "/PhotoViewer.exe") == false)
+            {
+                this.Cursor = Cursors.WaitCursor;
+            }
+
+            notify.Icon = SystemIcons.Application;
+            notify.BalloonTipText = "Download Complete!";
+            notify.ShowBalloonTip(1000);
+
+            Process.Start(Downloads + "/PhotoViewer.exe");
         }
 
         private void MainImage_Click(object sender, EventArgs e)
@@ -252,7 +324,8 @@ namespace PhotoViewer
 
         private void ProjectInfoBTN_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("The Photo Viewer Project\nAn Open-source Photo Viewer And Simple Editor Intended For Use With Windows Sandbox\n\nBy TheSingleOne (TS1)\nProject Github - https://www.github.com/TheSingleOneYT/PhotoViewer", "Project Information", MessageBoxButtons.OK);
+            var AppVer = Assembly.GetExecutingAssembly().GetName().Version.ToString();
+            MessageBox.Show("The Photo Viewer Project\nVersion: " + AppVer + "\nAn Open-source Photo Viewer And Simple Editor Intended For Use With Windows Sandbox\n\nBy TheSingleOne (TS1)\nProject Github - https://www.github.com/TheSingleOneYT/PhotoViewer", "Project Information", MessageBoxButtons.OK);
         }
 
         private void FlipXBTN_MouseHover(object sender, EventArgs e)
@@ -475,6 +548,12 @@ namespace PhotoViewer
             imgnew = MainImage.Image;
             LargeView lv = new LargeView(img);
             lv.Show();
+        }
+
+        private void SettingsLabel_Click(object sender, EventArgs e)
+        {
+            Settings settings = new Settings();
+            settings.Show();
         }
     }
 }

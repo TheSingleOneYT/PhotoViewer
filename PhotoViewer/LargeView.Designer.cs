@@ -90,6 +90,7 @@ namespace PhotoViewer
             this.Controls.Add(this.CloseLabel);
             this.Controls.Add(this.MiniControl);
             this.Controls.Add(this.LargeImage);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.Name = "LargeView";
             this.ShowIcon = false;
