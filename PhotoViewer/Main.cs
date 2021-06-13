@@ -3,7 +3,6 @@ using System.Drawing;
 using System.IO;
 using System.Drawing.Imaging;
 using System.Windows.Forms;
-using System.Drawing.Drawing2D;
 
 namespace PhotoViewer
 {
@@ -24,9 +23,10 @@ namespace PhotoViewer
             var UserOnWin = SystemInformation.UserName.ToString();
             WelcomeLabel.Text = "PhotoViewer - Welcome " + UserOnWin + "!";
 
-            File.Delete(LocalAppData + "/PhotoViewer/CurrentImportPath.txt");
-            File.Delete(LocalAppData + "/PhotoViewer/CurrentImportName.txt");
-            File.Delete(LocalAppData + "/PhotoViewer/CurrentImportExt.txt");
+                File.Delete(LocalAppData + "/PhotoViewer/CurrentImportPath.txt");
+                File.Delete(LocalAppData + "/PhotoViewer/CurrentImportName.txt");
+                File.Delete(LocalAppData + "/PhotoViewer/CurrentImportExt.txt");
+                File.Delete(LocalAppData + "/PhotoViewer/%%Temp%%.png");
 
             ControlBox = false;
         }
@@ -35,7 +35,13 @@ namespace PhotoViewer
         {
             OpenFileDialog dialog = new OpenFileDialog();
 
-            dialog.Filter = "Images|*.png; *.JPG; *.GIF";
+            dialog.Filter = "All Supported | *.png; *.JPG; *.JPEG; *.JPE; *.JPX; *.JP2; *.J2C; *.J2K; *.JPC *.GIF; *.ico; *.Tiff; *.Tif *.bmp; *.rle; *.dib" +
+                            "|PNG Images |*.png" +
+                            "|JPEG Images | *.JPG; *.JPEG: *.JPE; *.JPX; *.JP2; *.J2C; *.J2K; *.JPC" +
+                            "|GIF Images | *.GIF" +
+                            "|Icons | *.ico" +
+                            "|Tiff Images | *.Tiff; *.Tif" +
+                            "|Bitmaps | *.bmp; *.rle; *.dib";
 
             if (dialog.ShowDialog() == DialogResult.OK)
             {
@@ -56,11 +62,9 @@ namespace PhotoViewer
 
         private void EditBTN_Click(object sender, EventArgs e)
         {
-            if (EditBar.Visible == true)
+            if (FiltersBar.Visible == true)
             {
-                EditBar.Hide();
                 Rotate90BTN.Hide();
-                SaveBTN.Hide();
                 FlipXBTN.Hide();
                 FlipYBTN.Hide();
                 FiltersBar.Hide();
@@ -68,10 +72,11 @@ namespace PhotoViewer
                 InvertBTN.Hide();
                 GreyScaleBTN.Hide();
                 EditBTN.Text = "Edit";
+                EditBarSection2.Hide();
             }
             else
             {
-                EditBar.Show();
+                EditBarSection2.Show();
                 Rotate90BTN.Show();
                 Rotate90BTN.BringToFront();
                 SaveBTN.Show();
@@ -102,7 +107,12 @@ namespace PhotoViewer
         {
             SaveFileDialog dialog = new SaveFileDialog();
 
-            dialog.Filter = "Images|*.png; *.jpg; *.GIF";
+            dialog.Filter = "PNG Images |*.png" +
+                "|JPEG Images | *.JPG; *.JPEG: *.JPE; *.JPX; *.JP2; *.J2C; *.J2K; *.JPC" +
+                "|GIF Images | *.GIF" +
+                "|Icons | *.ico" +
+                "|Tiff Images | *.Tiff; *.Tif" +
+                "|Bitmaps | *.bmp; *.rle; *.dib";
 
             if (File.Exists(LocalAppData + "/PhotoViewer/CurrentImportName.txt"))
             {
@@ -144,6 +154,18 @@ namespace PhotoViewer
                 else if (dialog.FileName.EndsWith(".png"))
                 {
                     MainImage.Image.Save(dialog.FileName, ImageFormat.Png);
+                }
+                else if (dialog.FileName.EndsWith(".ico"))
+                {
+                    MainImage.Image.Save(dialog.FileName, ImageFormat.Icon);
+                }
+                else if (dialog.FileName.EndsWith(".Tiff"))
+                {
+                    MainImage.Image.Save(dialog.FileName, ImageFormat.Tiff);
+                }
+                else if (dialog.FileName.EndsWith(".bmp"))
+                {
+                    MainImage.Image.Save(dialog.FileName, ImageFormat.Bmp);
                 }
                 else
                 {
@@ -230,7 +252,7 @@ namespace PhotoViewer
 
         private void ProjectInfoBTN_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("The Photo Viewer Project\nAn Open-source Photo Viewer And Simple Editor Intended For Use With Windows Sandbox\n\nBy TheSingleOne (TS1)\nGithub - https://www.github.com/TheSingleOneYT", "Project Information", MessageBoxButtons.OK);
+            MessageBox.Show("The Photo Viewer Project\nAn Open-source Photo Viewer And Simple Editor Intended For Use With Windows Sandbox\n\nBy TheSingleOne (TS1)\nProject Github - https://www.github.com/TheSingleOneYT/PhotoViewer", "Project Information", MessageBoxButtons.OK);
         }
 
         private void FlipXBTN_MouseHover(object sender, EventArgs e)
@@ -342,6 +364,117 @@ namespace PhotoViewer
             MainImage.Height = 391;
             ZoomText.Text = 0.ToString();
             zoomSlider.Value = 0;
+        }
+
+        private void Main_Load(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void importImageToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog dialog = new OpenFileDialog();
+
+            dialog.Filter = "All Supported | *.png; *.JPG; *.GIF; *.ico; *.Tiff; *.bmp |PNG Images |*.png|JPEG Images | *.JPG|GIF Images | *.GIF|Icons | *.ico|Tiff Images | *.Tiff|Bitmaps | *.bmp";
+
+            if (dialog.ShowDialog() == DialogResult.OK)
+            {
+                file = Image.FromFile(dialog.FileName);
+                Main.ActiveForm.Text = "Photo Viewer & Editor - " + Path.GetFileName(dialog.FileName);
+                File.WriteAllText(LocalAppData + "/PhotoViewer/CurrentImportPath.txt", Path.GetDirectoryName(dialog.FileName));
+                File.WriteAllText(LocalAppData + "/PhotoViewer/CurrentImportName.txt", Path.GetFileNameWithoutExtension(dialog.FileName));
+                File.WriteAllText(LocalAppData + "/PhotoViewer/CurrentImportExt.txt", Path.GetExtension(dialog.FileName));
+
+                MainImage.Image = file;
+
+                if (EditBTN.Text == "Stop Editing")
+                {
+                    EditBTN.PerformClick();
+                }
+            }
+        }
+
+
+        private void saveImageToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            SaveBTN.PerformClick();
+        }
+
+        private void resetImageToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (Form.ActiveForm.Text.EndsWith("*"))
+            {
+                DialogResult dialog = MessageBox.Show("This image has been modified. Resetting would mean losing changes. Should we continue?", "Photo Viewer & Editor", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
+
+                if (dialog == DialogResult.OK)
+                {
+                    MainImage.Image = null;
+
+                    var path = File.ReadAllText(LocalAppData + "/PhotoViewer/CurrentImportPath.txt");
+                    var name = File.ReadAllText(LocalAppData + "/PhotoViewer/CurrentImportName.txt");
+                    var ext = File.ReadAllText(LocalAppData + "/PhotoViewer/CurrentImportExt.txt");
+
+                    MainImage.Image = Image.FromFile(path + "/" + name + ext);
+
+                    Main.ActiveForm.Text = "Photo Viewer & Editor - " + File.ReadAllText(LocalAppData + "/PhotoViewer/CurrentImportName.txt") + File.ReadAllText(LocalAppData + "/PhotoViewer/CurrentImportExt.txt");
+                }
+            }
+            else
+            {
+                MainImage.Image = null;
+
+                var path = File.ReadAllText(LocalAppData + "/PhotoViewer/CurrentImportPath.txt");
+                var name = File.ReadAllText(LocalAppData + "/PhotoViewer/CurrentImportName.txt");
+                var ext = File.ReadAllText(LocalAppData + "/PhotoViewer/CurrentImportExt.txt");
+
+                MainImage.Image = Image.FromFile(path + "/" + name + ext);
+
+                Main.ActiveForm.Text = "Photo Viewer & Editor - " + File.ReadAllText(LocalAppData + "/PhotoViewer/CurrentImportName.txt") + File.ReadAllText(LocalAppData + "/PhotoViewer/CurrentImportExt.txt");
+            }
+        }
+
+        private void clearItemsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (Form.ActiveForm.Text.EndsWith("*"))
+            {
+                DialogResult dialog = MessageBox.Show("This image has been modified. Clearing this image would mean losing changes. Should we continue?", "Photo Viewer & Editor", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
+
+                if (dialog == DialogResult.OK)
+                {
+                    MainImage.Image = null;
+
+                    Form.ActiveForm.Text = "Photo Viewer & Editor";
+
+                    File.Delete(LocalAppData + "/PhotoViewer/CurrentImportPath.txt");
+                    File.Delete(LocalAppData + "/PhotoViewer/CurrentImportName.txt");
+                    File.Delete(LocalAppData + "/PhotoViewer/CurrentImportExt.txt");
+                }
+            }
+            else
+            {
+                MainImage.Image = null;
+
+                Form.ActiveForm.Text = "Photo Viewer & Editor";
+
+                File.Delete(LocalAppData + "/PhotoViewer/CurrentImportPath.txt");
+                File.Delete(LocalAppData + "/PhotoViewer/CurrentImportName.txt");
+                File.Delete(LocalAppData + "/PhotoViewer/CurrentImportExt.txt");
+            }
+        }
+
+        public static Image img;
+
+        public static Image imgnew
+        {
+            get { return img; }
+            set { img = value; }
+        }
+
+        private void openInLargeViewToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            imgnew = MainImage.Image;
+            LargeView lv = new LargeView(img);
+            lv.Show();
         }
     }
 }
