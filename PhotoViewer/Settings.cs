@@ -34,6 +34,24 @@ namespace PhotoViewer
             {
                 CFUOASChkBx.Checked = true;
             }
+
+            if (File.Exists(prefs + "/AOEMOIIChkBx.txt"))
+            {
+                var prefonAOEMOIIChkBx = File.ReadAllText(prefs + "/AOEMOIIChkBx.txt");
+
+                if (prefonAOEMOIIChkBx == "true")
+                {
+                    AOEMOIIChkBx.Checked = true;
+                }
+                else
+                {
+                    AOEMOIIChkBx.Checked = false;
+                }
+            }
+            else
+            {
+                File.WriteAllText(prefs + "/AOEMOIIChkBx.txt", "false");
+            }
         }
 
         private void CFUBTN_Click(object sender, EventArgs e)
@@ -88,6 +106,73 @@ namespace PhotoViewer
             {
                 File.WriteAllText(prefs + "/CFUOASChkBx.txt", "false");
             }
+        }
+
+        private void UpdatesTabBTN_Click(object sender, EventArgs e)
+        {
+            CFUBTN.Show();
+            CFUOASChkBx.Show();
+            AOEMOIIChkBx.Hide();
+            StartPhotoViewerLADBTN.Hide();
+            OpenPrefsFolderBTN.Hide();
+            UpdatesTabBTN.BackColor = Color.Black;
+            UpdatesTabBTN.ForeColor = Color.White;
+            EditFunctionBTN.BackColor = Color.White;
+            EditFunctionBTN.ForeColor = Color.Black;
+            OtherBTN.BackColor = Color.White;
+            OtherBTN.ForeColor = Color.Black;
+        }
+
+        private void EditFunctionBTN_Click(object sender, EventArgs e)
+        {
+            CFUBTN.Hide();
+            CFUOASChkBx.Hide();
+            AOEMOIIChkBx.Show();
+            StartPhotoViewerLADBTN.Hide();
+            OpenPrefsFolderBTN.Hide();
+            EditFunctionBTN.BackColor = Color.Black;
+            EditFunctionBTN.ForeColor = Color.White;
+            UpdatesTabBTN.BackColor = Color.White;
+            UpdatesTabBTN.ForeColor = Color.Black;
+            OtherBTN.BackColor = Color.White;
+            OtherBTN.ForeColor = Color.Black;
+        }
+
+        private void AOEMOIIChkBx_CheckedChanged(object sender, EventArgs e)
+        {
+            if (AOEMOIIChkBx.Checked == true)
+            {
+                File.WriteAllText(prefs + "/AOEMOIIChkBx.txt", "true");
+            }
+            else
+            {
+                File.WriteAllText(prefs + "/AOEMOIIChkBx.txt", "false");
+            }
+        }
+
+        private void StartPhotoViewerLADBTN_Click(object sender, EventArgs e)
+        {
+            Process.Start(Environment.GetEnvironmentVariable("LocalAppData") + "/PhotoViewer");
+        }
+
+        private void OtherBTN_Click(object sender, EventArgs e)
+        {
+            CFUBTN.Hide();
+            CFUOASChkBx.Hide();
+            AOEMOIIChkBx.Hide();
+            StartPhotoViewerLADBTN.Show();
+            OpenPrefsFolderBTN.Show();
+            OtherBTN.BackColor = Color.Black;
+            OtherBTN.ForeColor = Color.White;
+            UpdatesTabBTN.BackColor = Color.White;
+            UpdatesTabBTN.ForeColor = Color.Black;
+            EditFunctionBTN.BackColor = Color.White;
+            EditFunctionBTN.ForeColor = Color.Black;
+        }
+
+        private void OpenPrefsFolderBTN_Click(object sender, EventArgs e)
+        {
+            Process.Start((string)prefs);
         }
     }
 }

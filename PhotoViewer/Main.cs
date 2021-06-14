@@ -86,8 +86,7 @@ namespace PhotoViewer
 
         private void Notify_BalloonTipClicked(object sender, EventArgs e)
         {
-            var process = "https://github.com/TheSingleOneYT/PhotoViewer/releases/download/" + NewVer + "/PhotoViewer.exe";
-            Process.Start(process);
+            Process.Start("https://github.com/TheSingleOneYT/PhotoViewer/releases/download/" + NewVer + "/PhotoViewer.exe");
             var Downloads = @"C:\Users\" + SystemInformation.UserName.ToString() + @"\Downloads";
             Application.Exit();
 
@@ -128,6 +127,16 @@ namespace PhotoViewer
                 if (EditBTN.Text == "Stop Editing")
                 {
                     EditBTN.PerformClick();
+                }
+
+                if (File.Exists(prefs + "/AOEMOIIChkBx.txt"))
+                {
+                    var prefonAOEMOIIChkBx = File.ReadAllText(prefs + "/AOEMOIIChkBx.txt");
+
+                    if (prefonAOEMOIIChkBx == "true")
+                    {
+                        EditBTN.PerformClick();
+                    }
                 }
             }
         }
@@ -554,6 +563,16 @@ namespace PhotoViewer
         {
             Settings settings = new Settings();
             settings.Show();
+        }
+
+        private void SettingsLabel_MouseHover(object sender, EventArgs e)
+        {
+            tooltip.Show("Opens the settings app for PhotoViewer.", SettingsLabel);
+        }
+
+        private void ResetZoomBTN_MouseHover(object sender, EventArgs e)
+        {
+            tooltip.Show("Resets the image zoom.", ResetZoomBTN);
         }
     }
 }

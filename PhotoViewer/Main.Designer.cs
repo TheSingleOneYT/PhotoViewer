@@ -355,6 +355,7 @@ namespace PhotoViewer
             this.ResetZoomBTN.Text = "Reset Zoom";
             this.ResetZoomBTN.UseVisualStyleBackColor = true;
             this.ResetZoomBTN.Click += new System.EventHandler(this.ResetZoomBTN_Click);
+            this.ResetZoomBTN.MouseHover += new System.EventHandler(this.ResetZoomBTN_MouseHover);
             // 
             // EditBarSection2
             // 
@@ -384,6 +385,7 @@ namespace PhotoViewer
             this.SettingsLabel.TabIndex = 23;
             this.SettingsLabel.Text = "⚙️";
             this.SettingsLabel.Click += new System.EventHandler(this.SettingsLabel_Click);
+            this.SettingsLabel.MouseHover += new System.EventHandler(this.SettingsLabel_MouseHover);
             // 
             // Main
             // 
