@@ -153,8 +153,6 @@ namespace PhotoViewer
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(705, 291);
-            this.Controls.Add(this.OpenPrefsFolderBTN);
-            this.Controls.Add(this.StartPhotoViewerLADBTN);
             this.Controls.Add(this.OtherBTN);
             this.Controls.Add(this.AOEMOIIChkBx);
             this.Controls.Add(this.EditFunctionBTN);
@@ -162,6 +160,8 @@ namespace PhotoViewer
             this.Controls.Add(this.ColourBox1);
             this.Controls.Add(this.CFUOASChkBx);
             this.Controls.Add(this.CFUBTN);
+            this.Controls.Add(this.StartPhotoViewerLADBTN);
+            this.Controls.Add(this.OpenPrefsFolderBTN);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.MinimizeBox = false;

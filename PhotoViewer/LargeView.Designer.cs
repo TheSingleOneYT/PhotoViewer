@@ -97,6 +97,7 @@ namespace PhotoViewer
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "LargeView - Image From Main";
+            this.Load += new System.EventHandler(this.LargeView_Load);
             ((System.ComponentModel.ISupportInitialize)(this.LargeImage)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.MiniControl)).EndInit();
             this.ResumeLayout(false);

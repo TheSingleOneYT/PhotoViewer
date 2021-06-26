@@ -83,6 +83,8 @@ namespace PhotoViewer
             this.MainImage.TabIndex = 0;
             this.MainImage.TabStop = false;
             this.MainImage.Click += new System.EventHandler(this.MainImage_Click);
+            this.MainImage.DragDrop += new System.Windows.Forms.DragEventHandler(this.MainImage_DragDrop);
+            this.MainImage.DragEnter += new System.Windows.Forms.DragEventHandler(this.MainImage_DragEnter);
             // 
             // MainImageContextStrip
             // 
@@ -369,6 +371,8 @@ namespace PhotoViewer
             // 
             // notify
             // 
+            this.notify.BalloonTipIcon = System.Windows.Forms.ToolTipIcon.Info;
+            this.notify.ContextMenuStrip = this.MainImageContextStrip;
             this.notify.Text = "PhotoViewer";
             this.notify.Visible = true;
             this.notify.BalloonTipClicked += new System.EventHandler(this.Notify_BalloonTipClicked);
@@ -425,6 +429,7 @@ namespace PhotoViewer
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Photo Viewer & Editor";
             this.Load += new System.EventHandler(this.Main_Load);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Main_KeyDown);
             ((System.ComponentModel.ISupportInitialize)(this.MainImage)).EndInit();
             this.MainImageContextStrip.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.ColourBar)).EndInit();

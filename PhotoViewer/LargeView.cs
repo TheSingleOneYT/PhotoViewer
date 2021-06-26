@@ -27,5 +27,10 @@ namespace PhotoViewer
         {
             this.WindowState = FormWindowState.Minimized;
         }
+
+        private void LargeView_Load(object sender, EventArgs e)
+        {
+            ControlBox = false;
+        }
     }
 }

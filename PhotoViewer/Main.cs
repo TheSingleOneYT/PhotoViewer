@@ -24,6 +24,10 @@ namespace PhotoViewer
         {
             InitializeComponent();
 
+            MainImage.AllowDrop = true;
+
+            this.KeyPreview = true;
+
             Directory.CreateDirectory(LocalAppData + "/PhotoViewer");
             Directory.CreateDirectory(LocalAppData + "/PhotoViewer/Preferences");
 
@@ -573,6 +577,52 @@ namespace PhotoViewer
         private void ResetZoomBTN_MouseHover(object sender, EventArgs e)
         {
             tooltip.Show("Resets the image zoom.", ResetZoomBTN);
+        }
+
+        private void Main_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Control == true && e.Shift == false && e.KeyCode == Keys.C)
+            {
+                Clipboard.SetDataObject(MainImage.Image);
+            }
+            else if (e.Control == true && e.KeyCode == Keys.I)
+            {
+                InvertBTN.PerformClick();
+            }
+            else if (e.Control == true && e.KeyCode == Keys.G)
+            {
+                GreyScaleBTN.PerformClick();
+            }
+            else if (e.Control == true && e.KeyCode == Keys.S)
+            {
+                SaveBTN.PerformClick();
+            }
+            else if (e.Control == true && e.KeyCode == Keys.V)
+            {
+                MainImage.Image = Clipboard.GetImage();
+            }
+            else if (e.Control == true && e.Shift == true && e.KeyCode == Keys.C)
+            {
+                MainImage.Image = null;
+            }
+            else if (e.Control == true && e.KeyCode == Keys.L)
+            {
+                openInLargeViewToolStripMenuItem.PerformClick();
+            }
+        }
+
+        private void MainImage_DragEnter(object sender, DragEventArgs e)
+        {
+            e.Effect = DragDropEffects.Copy;
+        }
+
+        private void MainImage_DragDrop(object sender, DragEventArgs e)
+        {
+            foreach (string dragged in ((string[])e.Data.GetData(DataFormats.FileDrop)))
+            {
+                file = Image.FromFile(dragged);
+                MainImage.Image = file;
+            }
         }
     }
 }
