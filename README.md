@@ -6,8 +6,9 @@ Windows Sandbox does not come with the Photos app or Paint app like normal Windo
 # Use
 Import an image, edit it and then save it all within one app.
 
-# Plans
-Make the editing tool better. Only allows for rotation at the moment.
+# Requirements
+-Dotnet (.NET) 5.0
+-Some features require lots of RAM, 8GB+ is recommended.
 
 # Credits
 I did not make the code for everything in this program, I followed some tutorials:
