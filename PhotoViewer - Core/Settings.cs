@@ -1,8 +1,10 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using System;
 using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Reflection;
+using System.Runtime.InteropServices;
 using System.Windows.Forms;
 
 namespace PhotoViewer
@@ -33,24 +35,6 @@ namespace PhotoViewer
             else
             {
                 CFUOASChkBx.Checked = true;
-            }
-
-            if (File.Exists(prefs + "/AOEMOIIChkBx.txt"))
-            {
-                var prefonAOEMOIIChkBx = File.ReadAllText(prefs + "/AOEMOIIChkBx.txt");
-
-                if (prefonAOEMOIIChkBx == "true")
-                {
-                    AOEMOIIChkBx.Checked = true;
-                }
-                else
-                {
-                    AOEMOIIChkBx.Checked = false;
-                }
-            }
-            else
-            {
-                File.WriteAllText(prefs + "/AOEMOIIChkBx.txt", "false");
             }
 
             if (File.Exists(prefs + "/ASWOPS.txt"))
@@ -131,7 +115,6 @@ namespace PhotoViewer
         {
             CFUBTN.Show();
             CFUOASChkBx.Show();
-            AOEMOIIChkBx.Hide();
             StartPhotoViewerLADBTN.Hide();
             OpenPrefsFolderBTN.Hide();
             ASWOPS.Hide();
@@ -147,7 +130,6 @@ namespace PhotoViewer
         {
             CFUBTN.Hide();
             CFUOASChkBx.Hide();
-            AOEMOIIChkBx.Show();
             StartPhotoViewerLADBTN.Hide();
             OpenPrefsFolderBTN.Hide();
             ASWOPS.Show();
@@ -159,17 +141,6 @@ namespace PhotoViewer
             OtherBTN.ForeColor = Color.Black;
         }
 
-        private void AOEMOIIChkBx_CheckedChanged(object sender, EventArgs e)
-        {
-            if (AOEMOIIChkBx.Checked == true)
-            {
-                File.WriteAllText(prefs + "/AOEMOIIChkBx.txt", "true");
-            }
-            else
-            {
-                File.WriteAllText(prefs + "/AOEMOIIChkBx.txt", "false");
-            }
-        }
 
         private void StartPhotoViewerLADBTN_Click(object sender, EventArgs e)
         {
@@ -180,7 +151,6 @@ namespace PhotoViewer
         {
             CFUBTN.Hide();
             CFUOASChkBx.Hide();
-            AOEMOIIChkBx.Hide();
             ASWOPS.Hide();
             StartPhotoViewerLADBTN.Show();
             OpenPrefsFolderBTN.Show();

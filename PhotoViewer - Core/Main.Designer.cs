@@ -36,52 +36,58 @@ namespace PhotoViewer
             this.importImageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveImageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.resetImageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.clearItemsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openInLargeViewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ColourBar = new System.Windows.Forms.PictureBox();
-            this.EditBTN = new System.Windows.Forms.Button();
-            this.EditBar = new System.Windows.Forms.PictureBox();
-            this.Rotate90BTN = new System.Windows.Forms.Button();
-            this.SaveBTN = new System.Windows.Forms.Button();
-            this.FlipXBTN = new System.Windows.Forms.Button();
-            this.FlipYBTN = new System.Windows.Forms.Button();
             this.WelcomeLabel = new System.Windows.Forms.Label();
             this.CloseLabel = new System.Windows.Forms.Label();
             this.Minimize = new System.Windows.Forms.Label();
             this.MiniControl = new System.Windows.Forms.PictureBox();
             this.ProjectInfoBTN = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
             this.tooltip = new System.Windows.Forms.ToolTip(this.components);
-            this.FiltersBar = new System.Windows.Forms.PictureBox();
-            this.GreyScaleBTN = new System.Windows.Forms.Button();
-            this.InvertBTN = new System.Windows.Forms.Button();
-            this.FiltersText = new System.Windows.Forms.Label();
             this.zoomSlider = new System.Windows.Forms.TrackBar();
             this.ZoomText = new System.Windows.Forms.Label();
             this.ResetZoomBTN = new System.Windows.Forms.Button();
-            this.EditBarSection2 = new System.Windows.Forms.PictureBox();
             this.notify = new System.Windows.Forms.NotifyIcon(this.components);
             this.SettingsLabel = new System.Windows.Forms.Label();
-            this.PaintBTN = new System.Windows.Forms.Button();
-            this.PaintTab = new System.Windows.Forms.PictureBox();
+            this.EditingBar = new System.Windows.Forms.PictureBox();
+            this.FileLabel = new System.Windows.Forms.Label();
+            this.FileCMS = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.EditLabel = new System.Windows.Forms.Label();
+            this.EditCMS = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.flipAxisToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.flipXToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.flipYToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.rotateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.rotate90ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.filtersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.invertToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.greyScaleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.paintToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ViewLabel = new System.Windows.Forms.Label();
+            this.ViewCMS = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.viewInLargeViewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.HelpLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.MainImage)).BeginInit();
             this.MainImageContextStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ColourBar)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.EditBar)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.MiniControl)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.FiltersBar)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.zoomSlider)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.EditBarSection2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.PaintTab)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.EditingBar)).BeginInit();
+            this.FileCMS.SuspendLayout();
+            this.EditCMS.SuspendLayout();
+            this.ViewCMS.SuspendLayout();
             this.SuspendLayout();
             // 
             // MainImage
             // 
             this.MainImage.BackColor = System.Drawing.Color.WhiteSmoke;
             this.MainImage.ContextMenuStrip = this.MainImageContextStrip;
-            this.MainImage.Location = new System.Drawing.Point(-6, 33);
+            this.MainImage.Location = new System.Drawing.Point(-7, 37);
+            this.MainImage.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.MainImage.Name = "MainImage";
-            this.MainImage.Size = new System.Drawing.Size(809, 391);
+            this.MainImage.Size = new System.Drawing.Size(944, 452);
             this.MainImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.MainImage.TabIndex = 0;
             this.MainImage.TabStop = false;
@@ -95,10 +101,9 @@ namespace PhotoViewer
             this.importImageToolStripMenuItem,
             this.saveImageToolStripMenuItem,
             this.resetImageToolStripMenuItem,
-            this.clearItemsToolStripMenuItem,
             this.openInLargeViewToolStripMenuItem});
             this.MainImageContextStrip.Name = "MainImageContextStrip";
-            this.MainImageContextStrip.Size = new System.Drawing.Size(173, 114);
+            this.MainImageContextStrip.Size = new System.Drawing.Size(173, 92);
             // 
             // importImageToolStripMenuItem
             // 
@@ -121,13 +126,6 @@ namespace PhotoViewer
             this.resetImageToolStripMenuItem.Text = "Reset Image";
             this.resetImageToolStripMenuItem.Click += new System.EventHandler(this.resetImageToolStripMenuItem_Click);
             // 
-            // clearItemsToolStripMenuItem
-            // 
-            this.clearItemsToolStripMenuItem.Name = "clearItemsToolStripMenuItem";
-            this.clearItemsToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
-            this.clearItemsToolStripMenuItem.Text = "Clear Items";
-            this.clearItemsToolStripMenuItem.Click += new System.EventHandler(this.clearItemsToolStripMenuItem_Click);
-            // 
             // openInLargeViewToolStripMenuItem
             // 
             this.openInLargeViewToolStripMenuItem.Name = "openInLargeViewToolStripMenuItem";
@@ -138,90 +136,21 @@ namespace PhotoViewer
             // ColourBar
             // 
             this.ColourBar.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.ColourBar.Location = new System.Drawing.Point(-10, 419);
+            this.ColourBar.Location = new System.Drawing.Point(-12, 483);
+            this.ColourBar.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.ColourBar.Name = "ColourBar";
-            this.ColourBar.Size = new System.Drawing.Size(813, 36);
+            this.ColourBar.Size = new System.Drawing.Size(948, 42);
             this.ColourBar.TabIndex = 1;
             this.ColourBar.TabStop = false;
-            // 
-            // EditBTN
-            // 
-            this.EditBTN.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.EditBTN.Location = new System.Drawing.Point(3, 423);
-            this.EditBTN.Name = "EditBTN";
-            this.EditBTN.Size = new System.Drawing.Size(103, 23);
-            this.EditBTN.TabIndex = 2;
-            this.EditBTN.Text = "Edit";
-            this.EditBTN.UseVisualStyleBackColor = true;
-            this.EditBTN.Click += new System.EventHandler(this.EditBTN_Click);
-            this.EditBTN.MouseHover += new System.EventHandler(this.EditBTN_MouseHover);
-            // 
-            // EditBar
-            // 
-            this.EditBar.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.EditBar.Location = new System.Drawing.Point(575, -10);
-            this.EditBar.Name = "EditBar";
-            this.EditBar.Size = new System.Drawing.Size(93, 42);
-            this.EditBar.TabIndex = 3;
-            this.EditBar.TabStop = false;
-            // 
-            // Rotate90BTN
-            // 
-            this.Rotate90BTN.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.Rotate90BTN.Location = new System.Drawing.Point(341, 4);
-            this.Rotate90BTN.Name = "Rotate90BTN";
-            this.Rotate90BTN.Size = new System.Drawing.Size(75, 23);
-            this.Rotate90BTN.TabIndex = 4;
-            this.Rotate90BTN.Text = "Rotate 90";
-            this.Rotate90BTN.UseVisualStyleBackColor = true;
-            this.Rotate90BTN.Visible = false;
-            this.Rotate90BTN.Click += new System.EventHandler(this.Rotate90BTN_Click);
-            this.Rotate90BTN.MouseHover += new System.EventHandler(this.Rotate90BTN_MouseHover);
-            // 
-            // SaveBTN
-            // 
-            this.SaveBTN.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.SaveBTN.Location = new System.Drawing.Point(584, 4);
-            this.SaveBTN.Name = "SaveBTN";
-            this.SaveBTN.Size = new System.Drawing.Size(75, 23);
-            this.SaveBTN.TabIndex = 5;
-            this.SaveBTN.Text = "Save";
-            this.SaveBTN.UseVisualStyleBackColor = true;
-            this.SaveBTN.Click += new System.EventHandler(this.SaveBTN_Click);
-            this.SaveBTN.MouseHover += new System.EventHandler(this.SaveBTN_MouseHover);
-            // 
-            // FlipXBTN
-            // 
-            this.FlipXBTN.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.FlipXBTN.Location = new System.Drawing.Point(422, 4);
-            this.FlipXBTN.Name = "FlipXBTN";
-            this.FlipXBTN.Size = new System.Drawing.Size(75, 23);
-            this.FlipXBTN.TabIndex = 6;
-            this.FlipXBTN.Text = "Flip X";
-            this.FlipXBTN.UseVisualStyleBackColor = true;
-            this.FlipXBTN.Visible = false;
-            this.FlipXBTN.Click += new System.EventHandler(this.FlipXBTN_Click);
-            this.FlipXBTN.MouseHover += new System.EventHandler(this.FlipXBTN_MouseHover);
-            // 
-            // FlipYBTN
-            // 
-            this.FlipYBTN.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.FlipYBTN.Location = new System.Drawing.Point(503, 4);
-            this.FlipYBTN.Name = "FlipYBTN";
-            this.FlipYBTN.Size = new System.Drawing.Size(75, 23);
-            this.FlipYBTN.TabIndex = 7;
-            this.FlipYBTN.Text = "Flip Y";
-            this.FlipYBTN.UseVisualStyleBackColor = true;
-            this.FlipYBTN.Visible = false;
-            this.FlipYBTN.Click += new System.EventHandler(this.FlipYBTN_Click);
-            this.FlipYBTN.MouseHover += new System.EventHandler(this.FlipYBTN_MouseHover);
             // 
             // WelcomeLabel
             // 
             this.WelcomeLabel.AutoSize = true;
-            this.WelcomeLabel.Location = new System.Drawing.Point(3, 9);
+            this.WelcomeLabel.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.WelcomeLabel.Location = new System.Drawing.Point(13, 495);
+            this.WelcomeLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.WelcomeLabel.Name = "WelcomeLabel";
-            this.WelcomeLabel.Size = new System.Drawing.Size(103, 13);
+            this.WelcomeLabel.Size = new System.Drawing.Size(116, 15);
             this.WelcomeLabel.TabIndex = 8;
             this.WelcomeLabel.Text = "PhotoViewer - Hello!";
             // 
@@ -230,8 +159,9 @@ namespace PhotoViewer
             this.CloseLabel.AutoSize = true;
             this.CloseLabel.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.CloseLabel.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.CloseLabel.Font = new System.Drawing.Font("HotKeys_01", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.CloseLabel.Location = new System.Drawing.Point(768, -1);
+            this.CloseLabel.Font = new System.Drawing.Font("HotKeys_01", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.CloseLabel.Location = new System.Drawing.Point(896, -1);
+            this.CloseLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.CloseLabel.Name = "CloseLabel";
             this.CloseLabel.Size = new System.Drawing.Size(28, 29);
             this.CloseLabel.TabIndex = 9;
@@ -244,8 +174,9 @@ namespace PhotoViewer
             this.Minimize.AutoSize = true;
             this.Minimize.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.Minimize.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.Minimize.Font = new System.Drawing.Font("HotKeys_01", 21.75F, System.Drawing.FontStyle.Bold);
-            this.Minimize.Location = new System.Drawing.Point(735, -4);
+            this.Minimize.Font = new System.Drawing.Font("HotKeys_01", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.Minimize.Location = new System.Drawing.Point(858, -5);
+            this.Minimize.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.Minimize.Name = "Minimize";
             this.Minimize.Size = new System.Drawing.Size(21, 29);
             this.Minimize.TabIndex = 10;
@@ -256,87 +187,33 @@ namespace PhotoViewer
             // MiniControl
             // 
             this.MiniControl.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.MiniControl.Location = new System.Drawing.Point(684, -10);
+            this.MiniControl.Location = new System.Drawing.Point(798, -12);
+            this.MiniControl.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.MiniControl.Name = "MiniControl";
-            this.MiniControl.Size = new System.Drawing.Size(122, 42);
+            this.MiniControl.Size = new System.Drawing.Size(142, 48);
             this.MiniControl.TabIndex = 11;
             this.MiniControl.TabStop = false;
             // 
             // ProjectInfoBTN
             // 
             this.ProjectInfoBTN.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.ProjectInfoBTN.Location = new System.Drawing.Point(692, 423);
+            this.ProjectInfoBTN.Location = new System.Drawing.Point(669, 4);
+            this.ProjectInfoBTN.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.ProjectInfoBTN.Name = "ProjectInfoBTN";
-            this.ProjectInfoBTN.Size = new System.Drawing.Size(104, 23);
+            this.ProjectInfoBTN.Size = new System.Drawing.Size(121, 27);
             this.ProjectInfoBTN.TabIndex = 12;
             this.ProjectInfoBTN.Text = "Project Info";
             this.ProjectInfoBTN.UseVisualStyleBackColor = true;
             this.ProjectInfoBTN.Click += new System.EventHandler(this.ProjectInfoBTN_Click);
             this.ProjectInfoBTN.MouseHover += new System.EventHandler(this.ProjectInfoBTN_MouseHover);
             // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.label1.Location = new System.Drawing.Point(112, 428);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(241, 13);
-            this.label1.TabIndex = 13;
-            this.label1.Text = "Press the centre of the screen to import an image.";
-            // 
-            // FiltersBar
-            // 
-            this.FiltersBar.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.FiltersBar.Location = new System.Drawing.Point(584, 389);
-            this.FiltersBar.Name = "FiltersBar";
-            this.FiltersBar.Size = new System.Drawing.Size(220, 32);
-            this.FiltersBar.TabIndex = 14;
-            this.FiltersBar.TabStop = false;
-            this.FiltersBar.Visible = false;
-            // 
-            // GreyScaleBTN
-            // 
-            this.GreyScaleBTN.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.GreyScaleBTN.Location = new System.Drawing.Point(721, 393);
-            this.GreyScaleBTN.Name = "GreyScaleBTN";
-            this.GreyScaleBTN.Size = new System.Drawing.Size(75, 23);
-            this.GreyScaleBTN.TabIndex = 15;
-            this.GreyScaleBTN.Text = "GreyScale";
-            this.GreyScaleBTN.UseVisualStyleBackColor = true;
-            this.GreyScaleBTN.Visible = false;
-            this.GreyScaleBTN.Click += new System.EventHandler(this.GreyScaleBTN_Click);
-            this.GreyScaleBTN.MouseHover += new System.EventHandler(this.GreyScaleBTN_MouseHover);
-            // 
-            // InvertBTN
-            // 
-            this.InvertBTN.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.InvertBTN.Location = new System.Drawing.Point(640, 393);
-            this.InvertBTN.Name = "InvertBTN";
-            this.InvertBTN.Size = new System.Drawing.Size(75, 23);
-            this.InvertBTN.TabIndex = 16;
-            this.InvertBTN.Text = "Invert";
-            this.InvertBTN.UseVisualStyleBackColor = true;
-            this.InvertBTN.Visible = false;
-            this.InvertBTN.Click += new System.EventHandler(this.InvertBTN_Click);
-            this.InvertBTN.MouseHover += new System.EventHandler(this.InvertBTN_MouseHover);
-            // 
-            // FiltersText
-            // 
-            this.FiltersText.AutoSize = true;
-            this.FiltersText.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.FiltersText.Location = new System.Drawing.Point(591, 398);
-            this.FiltersText.Name = "FiltersText";
-            this.FiltersText.Size = new System.Drawing.Size(43, 13);
-            this.FiltersText.TabIndex = 17;
-            this.FiltersText.Text = "Filters - ";
-            this.FiltersText.Visible = false;
-            // 
             // zoomSlider
             // 
             this.zoomSlider.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.zoomSlider.Location = new System.Drawing.Point(403, 423);
+            this.zoomSlider.Location = new System.Drawing.Point(590, 488);
+            this.zoomSlider.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.zoomSlider.Name = "zoomSlider";
-            this.zoomSlider.Size = new System.Drawing.Size(193, 45);
+            this.zoomSlider.Size = new System.Drawing.Size(225, 45);
             this.zoomSlider.TabIndex = 18;
             this.zoomSlider.Scroll += new System.EventHandler(this.zoomSlider_Scroll);
             // 
@@ -344,33 +221,25 @@ namespace PhotoViewer
             // 
             this.ZoomText.AutoSize = true;
             this.ZoomText.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.ZoomText.Location = new System.Drawing.Point(384, 428);
+            this.ZoomText.Location = new System.Drawing.Point(580, 494);
+            this.ZoomText.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.ZoomText.Name = "ZoomText";
-            this.ZoomText.Size = new System.Drawing.Size(13, 13);
+            this.ZoomText.Size = new System.Drawing.Size(13, 15);
             this.ZoomText.TabIndex = 20;
             this.ZoomText.Text = "0";
             // 
             // ResetZoomBTN
             // 
             this.ResetZoomBTN.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.ResetZoomBTN.Location = new System.Drawing.Point(594, 423);
+            this.ResetZoomBTN.Location = new System.Drawing.Point(817, 488);
+            this.ResetZoomBTN.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.ResetZoomBTN.Name = "ResetZoomBTN";
-            this.ResetZoomBTN.Size = new System.Drawing.Size(92, 23);
+            this.ResetZoomBTN.Size = new System.Drawing.Size(107, 27);
             this.ResetZoomBTN.TabIndex = 21;
             this.ResetZoomBTN.Text = "Reset Zoom";
             this.ResetZoomBTN.UseVisualStyleBackColor = true;
             this.ResetZoomBTN.Click += new System.EventHandler(this.ResetZoomBTN_Click);
             this.ResetZoomBTN.MouseHover += new System.EventHandler(this.ResetZoomBTN_MouseHover);
-            // 
-            // EditBarSection2
-            // 
-            this.EditBarSection2.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.EditBarSection2.Location = new System.Drawing.Point(329, -10);
-            this.EditBarSection2.Name = "EditBarSection2";
-            this.EditBarSection2.Size = new System.Drawing.Size(249, 42);
-            this.EditBarSection2.TabIndex = 22;
-            this.EditBarSection2.TabStop = false;
-            this.EditBarSection2.Visible = false;
             // 
             // notify
             // 
@@ -385,8 +254,9 @@ namespace PhotoViewer
             this.SettingsLabel.AutoSize = true;
             this.SettingsLabel.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.SettingsLabel.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.SettingsLabel.Font = new System.Drawing.Font("HotKeys_01", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.SettingsLabel.Location = new System.Drawing.Point(689, 0);
+            this.SettingsLabel.Font = new System.Drawing.Font("HotKeys_01", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.SettingsLabel.Location = new System.Drawing.Point(804, 0);
+            this.SettingsLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.SettingsLabel.Name = "SettingsLabel";
             this.SettingsLabel.Size = new System.Drawing.Size(40, 27);
             this.SettingsLabel.TabIndex = 23;
@@ -394,61 +264,210 @@ namespace PhotoViewer
             this.SettingsLabel.Click += new System.EventHandler(this.SettingsLabel_Click);
             this.SettingsLabel.MouseHover += new System.EventHandler(this.SettingsLabel_MouseHover);
             // 
-            // PaintBTN
+            // EditingBar
             // 
-            this.PaintBTN.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.PaintBTN.Location = new System.Drawing.Point(241, 4);
-            this.PaintBTN.Name = "PaintBTN";
-            this.PaintBTN.Size = new System.Drawing.Size(75, 23);
-            this.PaintBTN.TabIndex = 24;
-            this.PaintBTN.Text = "Paint";
-            this.PaintBTN.UseVisualStyleBackColor = true;
-            this.PaintBTN.Visible = false;
-            this.PaintBTN.Click += new System.EventHandler(this.PaintBTN_Click);
+            this.EditingBar.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.EditingBar.Location = new System.Drawing.Point(-7, -1);
+            this.EditingBar.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.EditingBar.Name = "EditingBar";
+            this.EditingBar.Size = new System.Drawing.Size(807, 37);
+            this.EditingBar.TabIndex = 25;
+            this.EditingBar.TabStop = false;
             // 
-            // PaintTab
+            // FileLabel
             // 
-            this.PaintTab.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.PaintTab.Location = new System.Drawing.Point(234, 0);
-            this.PaintTab.Name = "PaintTab";
-            this.PaintTab.Size = new System.Drawing.Size(89, 32);
-            this.PaintTab.TabIndex = 25;
-            this.PaintTab.TabStop = false;
-            this.PaintTab.Visible = false;
+            this.FileLabel.AutoSize = true;
+            this.FileLabel.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.FileLabel.ContextMenuStrip = this.FileCMS;
+            this.FileLabel.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.FileLabel.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.FileLabel.Location = new System.Drawing.Point(13, 6);
+            this.FileLabel.Name = "FileLabel";
+            this.FileLabel.Size = new System.Drawing.Size(41, 25);
+            this.FileLabel.TabIndex = 26;
+            this.FileLabel.Text = "File";
+            this.FileLabel.Click += new System.EventHandler(this.FileLabel_Click);
+            // 
+            // FileCMS
+            // 
+            this.FileCMS.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.openToolStripMenuItem,
+            this.saveToolStripMenuItem});
+            this.FileCMS.Name = "FileCMS";
+            this.FileCMS.Size = new System.Drawing.Size(104, 48);
+            // 
+            // openToolStripMenuItem
+            // 
+            this.openToolStripMenuItem.Name = "openToolStripMenuItem";
+            this.openToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
+            this.openToolStripMenuItem.Text = "Open";
+            this.openToolStripMenuItem.Click += new System.EventHandler(this.MainImage_Click);
+            // 
+            // saveToolStripMenuItem
+            // 
+            this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
+            this.saveToolStripMenuItem.Text = "Save";
+            this.saveToolStripMenuItem.Click += new System.EventHandler(this.SaveBTN_Click);
+            // 
+            // EditLabel
+            // 
+            this.EditLabel.AutoSize = true;
+            this.EditLabel.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.EditLabel.ContextMenuStrip = this.EditCMS;
+            this.EditLabel.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.EditLabel.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.EditLabel.Location = new System.Drawing.Point(60, 6);
+            this.EditLabel.Name = "EditLabel";
+            this.EditLabel.Size = new System.Drawing.Size(44, 25);
+            this.EditLabel.TabIndex = 27;
+            this.EditLabel.Text = "Edit";
+            this.EditLabel.Click += new System.EventHandler(this.EditLabel_Click);
+            // 
+            // EditCMS
+            // 
+            this.EditCMS.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.flipAxisToolStripMenuItem,
+            this.rotateToolStripMenuItem,
+            this.filtersToolStripMenuItem,
+            this.paintToolStripMenuItem});
+            this.EditCMS.Name = "EditCMS";
+            this.EditCMS.Size = new System.Drawing.Size(119, 92);
+            // 
+            // flipAxisToolStripMenuItem
+            // 
+            this.flipAxisToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.flipXToolStripMenuItem,
+            this.flipYToolStripMenuItem});
+            this.flipAxisToolStripMenuItem.Name = "flipAxisToolStripMenuItem";
+            this.flipAxisToolStripMenuItem.Size = new System.Drawing.Size(118, 22);
+            this.flipAxisToolStripMenuItem.Text = "Flip Axis";
+            // 
+            // flipXToolStripMenuItem
+            // 
+            this.flipXToolStripMenuItem.Name = "flipXToolStripMenuItem";
+            this.flipXToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
+            this.flipXToolStripMenuItem.Text = "Flip X";
+            this.flipXToolStripMenuItem.Click += new System.EventHandler(this.FlipXBTN_Click);
+            // 
+            // flipYToolStripMenuItem
+            // 
+            this.flipYToolStripMenuItem.Name = "flipYToolStripMenuItem";
+            this.flipYToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
+            this.flipYToolStripMenuItem.Text = "Flip Y";
+            this.flipYToolStripMenuItem.Click += new System.EventHandler(this.FlipYBTN_Click);
+            // 
+            // rotateToolStripMenuItem
+            // 
+            this.rotateToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.rotate90ToolStripMenuItem});
+            this.rotateToolStripMenuItem.Name = "rotateToolStripMenuItem";
+            this.rotateToolStripMenuItem.Size = new System.Drawing.Size(118, 22);
+            this.rotateToolStripMenuItem.Text = "Rotate";
+            // 
+            // rotate90ToolStripMenuItem
+            // 
+            this.rotate90ToolStripMenuItem.Name = "rotate90ToolStripMenuItem";
+            this.rotate90ToolStripMenuItem.Size = new System.Drawing.Size(127, 22);
+            this.rotate90ToolStripMenuItem.Text = "Rotate 90⁰";
+            this.rotate90ToolStripMenuItem.Click += new System.EventHandler(this.Rotate90BTN_Click);
+            // 
+            // filtersToolStripMenuItem
+            // 
+            this.filtersToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.invertToolStripMenuItem,
+            this.greyScaleToolStripMenuItem});
+            this.filtersToolStripMenuItem.Name = "filtersToolStripMenuItem";
+            this.filtersToolStripMenuItem.Size = new System.Drawing.Size(118, 22);
+            this.filtersToolStripMenuItem.Text = "Filters";
+            // 
+            // invertToolStripMenuItem
+            // 
+            this.invertToolStripMenuItem.Name = "invertToolStripMenuItem";
+            this.invertToolStripMenuItem.Size = new System.Drawing.Size(125, 22);
+            this.invertToolStripMenuItem.Text = "Invert";
+            this.invertToolStripMenuItem.Click += new System.EventHandler(this.InvertBTN_Click);
+            // 
+            // greyScaleToolStripMenuItem
+            // 
+            this.greyScaleToolStripMenuItem.Name = "greyScaleToolStripMenuItem";
+            this.greyScaleToolStripMenuItem.Size = new System.Drawing.Size(125, 22);
+            this.greyScaleToolStripMenuItem.Text = "GreyScale";
+            this.greyScaleToolStripMenuItem.Click += new System.EventHandler(this.GreyScaleBTN_Click);
+            // 
+            // paintToolStripMenuItem
+            // 
+            this.paintToolStripMenuItem.Name = "paintToolStripMenuItem";
+            this.paintToolStripMenuItem.Size = new System.Drawing.Size(118, 22);
+            this.paintToolStripMenuItem.Text = "Paint";
+            this.paintToolStripMenuItem.Click += new System.EventHandler(this.PaintBTN_Click);
+            // 
+            // ViewLabel
+            // 
+            this.ViewLabel.AutoSize = true;
+            this.ViewLabel.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.ViewLabel.ContextMenuStrip = this.ViewCMS;
+            this.ViewLabel.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.ViewLabel.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.ViewLabel.Location = new System.Drawing.Point(110, 6);
+            this.ViewLabel.Name = "ViewLabel";
+            this.ViewLabel.Size = new System.Drawing.Size(53, 25);
+            this.ViewLabel.TabIndex = 28;
+            this.ViewLabel.Text = "View";
+            this.ViewLabel.Click += new System.EventHandler(this.ViewLabel_Click);
+            // 
+            // ViewCMS
+            // 
+            this.ViewCMS.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.viewInLargeViewToolStripMenuItem});
+            this.ViewCMS.Name = "ViewCMS";
+            this.ViewCMS.Size = new System.Drawing.Size(173, 26);
+            // 
+            // viewInLargeViewToolStripMenuItem
+            // 
+            this.viewInLargeViewToolStripMenuItem.Name = "viewInLargeViewToolStripMenuItem";
+            this.viewInLargeViewToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
+            this.viewInLargeViewToolStripMenuItem.Text = "View In Large View";
+            this.viewInLargeViewToolStripMenuItem.Click += new System.EventHandler(this.openInLargeViewToolStripMenuItem_Click);
+            // 
+            // HelpLabel
+            // 
+            this.HelpLabel.AutoSize = true;
+            this.HelpLabel.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.HelpLabel.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.HelpLabel.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.HelpLabel.Location = new System.Drawing.Point(169, 6);
+            this.HelpLabel.Name = "HelpLabel";
+            this.HelpLabel.Size = new System.Drawing.Size(51, 25);
+            this.HelpLabel.TabIndex = 29;
+            this.HelpLabel.Text = "Help";
+            this.HelpLabel.Click += new System.EventHandler(this.HelpLabel_Click);
             // 
             // Main
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.ClientSize = new System.Drawing.Size(803, 450);
-            this.Controls.Add(this.PaintBTN);
+            this.ClientSize = new System.Drawing.Size(937, 519);
+            this.Controls.Add(this.HelpLabel);
+            this.Controls.Add(this.ViewLabel);
+            this.Controls.Add(this.EditLabel);
+            this.Controls.Add(this.FileLabel);
             this.Controls.Add(this.SettingsLabel);
             this.Controls.Add(this.ResetZoomBTN);
             this.Controls.Add(this.ZoomText);
             this.Controls.Add(this.zoomSlider);
-            this.Controls.Add(this.FiltersText);
-            this.Controls.Add(this.InvertBTN);
-            this.Controls.Add(this.GreyScaleBTN);
-            this.Controls.Add(this.FiltersBar);
-            this.Controls.Add(this.label1);
             this.Controls.Add(this.ProjectInfoBTN);
             this.Controls.Add(this.Minimize);
             this.Controls.Add(this.CloseLabel);
             this.Controls.Add(this.MiniControl);
             this.Controls.Add(this.WelcomeLabel);
-            this.Controls.Add(this.FlipYBTN);
-            this.Controls.Add(this.FlipXBTN);
-            this.Controls.Add(this.SaveBTN);
-            this.Controls.Add(this.Rotate90BTN);
-            this.Controls.Add(this.EditBar);
-            this.Controls.Add(this.EditBTN);
             this.Controls.Add(this.ColourBar);
             this.Controls.Add(this.MainImage);
-            this.Controls.Add(this.EditBarSection2);
-            this.Controls.Add(this.PaintTab);
+            this.Controls.Add(this.EditingBar);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "Main";
@@ -461,12 +480,12 @@ namespace PhotoViewer
             ((System.ComponentModel.ISupportInitialize)(this.MainImage)).EndInit();
             this.MainImageContextStrip.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.ColourBar)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.EditBar)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.MiniControl)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.FiltersBar)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.zoomSlider)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.EditBarSection2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.PaintTab)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.EditingBar)).EndInit();
+            this.FileCMS.ResumeLayout(false);
+            this.EditCMS.ResumeLayout(false);
+            this.ViewCMS.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -476,37 +495,42 @@ namespace PhotoViewer
 
         private System.Windows.Forms.PictureBox MainImage;
         private System.Windows.Forms.PictureBox ColourBar;
-        private System.Windows.Forms.Button EditBTN;
-        private System.Windows.Forms.PictureBox EditBar;
-        private System.Windows.Forms.Button Rotate90BTN;
-        private System.Windows.Forms.Button SaveBTN;
-        private System.Windows.Forms.Button FlipXBTN;
-        private System.Windows.Forms.Button FlipYBTN;
         private System.Windows.Forms.Label WelcomeLabel;
         private System.Windows.Forms.Label CloseLabel;
         private System.Windows.Forms.Label Minimize;
         private System.Windows.Forms.PictureBox MiniControl;
         private System.Windows.Forms.Button ProjectInfoBTN;
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ToolTip tooltip;
-        private System.Windows.Forms.PictureBox FiltersBar;
-        private System.Windows.Forms.Button GreyScaleBTN;
-        private System.Windows.Forms.Button InvertBTN;
-        private System.Windows.Forms.Label FiltersText;
         private System.Windows.Forms.TrackBar zoomSlider;
         private System.Windows.Forms.Label ZoomText;
         private System.Windows.Forms.Button ResetZoomBTN;
-        private System.Windows.Forms.PictureBox EditBarSection2;
         private System.Windows.Forms.ContextMenuStrip MainImageContextStrip;
         private System.Windows.Forms.ToolStripMenuItem importImageToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem saveImageToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem resetImageToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem clearItemsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem openInLargeViewToolStripMenuItem;
         private System.Windows.Forms.NotifyIcon notify;
         private System.Windows.Forms.Label SettingsLabel;
-        private System.Windows.Forms.Button PaintBTN;
-        private System.Windows.Forms.PictureBox PaintTab;
+        private System.Windows.Forms.PictureBox EditingBar;
+        private System.Windows.Forms.Label FileLabel;
+        private System.Windows.Forms.Label EditLabel;
+        private System.Windows.Forms.Label ViewLabel;
+        private System.Windows.Forms.Label HelpLabel;
+        private System.Windows.Forms.ContextMenuStrip FileCMS;
+        private System.Windows.Forms.ToolStripMenuItem openToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem saveToolStripMenuItem;
+        private System.Windows.Forms.ContextMenuStrip EditCMS;
+        private System.Windows.Forms.ToolStripMenuItem flipAxisToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem flipXToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem flipYToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem rotateToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem rotate90ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem filtersToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem invertToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem greyScaleToolStripMenuItem;
+        private System.Windows.Forms.ContextMenuStrip ViewCMS;
+        private System.Windows.Forms.ToolStripMenuItem viewInLargeViewToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem paintToolStripMenuItem;
     }
 }
 

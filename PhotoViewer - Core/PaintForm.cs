@@ -37,18 +37,32 @@ namespace PhotoViewer
             int x = Cursor.Position.X;
             int y = Cursor.Position.Y;
 
-            int w = MainImage.Image.Width;
-            int h = MainImage.Image.Height;
-
-            Pen redPen = new Pen(Color.Red, 1);
+            if (CS.ToString() == "black")
+            {
+                pen = new Pen(Color.Black, 1);
+            }
+            else if (CS.ToString() == "red")
+            {
+                pen = new Pen(Color.Red, 1);
+            }
+            else if (CS.ToString() == "green")
+            {
+                pen = new Pen(Color.Green, 1);
+            }
+            else if (CS.ToString() == "white")
+            {
+                pen = new Pen(Color.White, 1);
+            }
 
             Bitmap b1 = new Bitmap(MainImage.Image);
 
             Graphics g1 = Graphics.FromImage(b1);
 
-            g1.DrawRectangle(redPen, x, y, 1, 1);//draw a rectangle to the bitmap
+            g1.DrawRectangle(pen, x, y, 2, 2);
 
-            MainImage.Image = b1;//show the bitmap in a picture box control
+            MainImage.Image = b1;
+
+            MainImage.Image.Save(LocalAppData + "/PhotoViewer/%%Temp.png", ImageFormat.Png);
         }
 
         private void MainImage_MouseMove(object sender, MouseEventArgs e)

@@ -7,13 +7,13 @@
     <UseWindowsForms>true</UseWindowsForms>
     <AssemblyName>PhotoViewer</AssemblyName>
     <ApplicationIcon>Logo 1.ico</ApplicationIcon>
-    <Version>2.0.0.0</Version>
+    <Version>2.1.0.0</Version>
     <Description>PhotoViewer &amp; Editor</Description>
     <Copyright>Copyright (C) TS1</Copyright>
     <Authors>TS1</Authors>
     <Company>TS1</Company>
-    <AssemblyVersion>2.0.0.0</AssemblyVersion>
-    <FileVersion>2.0.0.0</FileVersion>
+    <AssemblyVersion>2.1.0.0</AssemblyVersion>
+    <FileVersion>2.1.0.0</FileVersion>
   </PropertyGroup>
 
 </Project>
