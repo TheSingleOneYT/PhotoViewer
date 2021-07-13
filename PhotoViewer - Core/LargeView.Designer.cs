@@ -29,30 +29,23 @@ namespace PhotoViewer
         /// </summary>
         private void InitializeComponent()
         {
-            this.LargeImage = new System.Windows.Forms.PictureBox();
+            this.components = new System.ComponentModel.Container();
             this.Minimize = new System.Windows.Forms.Label();
             this.CloseLabel = new System.Windows.Forms.Label();
             this.MiniControl = new System.Windows.Forms.PictureBox();
-            ((System.ComponentModel.ISupportInitialize)(this.LargeImage)).BeginInit();
+            this.LargeImage = new PhotoViewer.MovablePB(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.MiniControl)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.LargeImage)).BeginInit();
             this.SuspendLayout();
-            // 
-            // LargeImage
-            // 
-            this.LargeImage.Location = new System.Drawing.Point(-5, 37);
-            this.LargeImage.Name = "LargeImage";
-            this.LargeImage.Size = new System.Drawing.Size(1188, 602);
-            this.LargeImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.LargeImage.TabIndex = 0;
-            this.LargeImage.TabStop = false;
             // 
             // Minimize
             // 
             this.Minimize.AutoSize = true;
             this.Minimize.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.Minimize.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.Minimize.Font = new System.Drawing.Font("HotKeys_01", 21.75F, System.Drawing.FontStyle.Bold);
-            this.Minimize.Location = new System.Drawing.Point(1105, -5);
+            this.Minimize.Font = new System.Drawing.Font("HotKeys_01", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.Minimize.Location = new System.Drawing.Point(1289, -6);
+            this.Minimize.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.Minimize.Name = "Minimize";
             this.Minimize.Size = new System.Drawing.Size(21, 29);
             this.Minimize.TabIndex = 13;
@@ -64,8 +57,9 @@ namespace PhotoViewer
             this.CloseLabel.AutoSize = true;
             this.CloseLabel.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.CloseLabel.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.CloseLabel.Font = new System.Drawing.Font("HotKeys_01", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.CloseLabel.Location = new System.Drawing.Point(1138, -2);
+            this.CloseLabel.Font = new System.Drawing.Font("HotKeys_01", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.CloseLabel.Location = new System.Drawing.Point(1328, -2);
+            this.CloseLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.CloseLabel.Name = "CloseLabel";
             this.CloseLabel.Size = new System.Drawing.Size(28, 29);
             this.CloseLabel.TabIndex = 12;
@@ -75,22 +69,33 @@ namespace PhotoViewer
             // MiniControl
             // 
             this.MiniControl.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.MiniControl.Location = new System.Drawing.Point(1091, -11);
+            this.MiniControl.Location = new System.Drawing.Point(1273, -13);
+            this.MiniControl.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.MiniControl.Name = "MiniControl";
-            this.MiniControl.Size = new System.Drawing.Size(85, 42);
+            this.MiniControl.Size = new System.Drawing.Size(99, 48);
             this.MiniControl.TabIndex = 14;
             this.MiniControl.TabStop = false;
             // 
+            // LargeImage
+            // 
+            this.LargeImage.Location = new System.Drawing.Point(-6, 30);
+            this.LargeImage.Name = "LargeImage";
+            this.LargeImage.Size = new System.Drawing.Size(1386, 695);
+            this.LargeImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.LargeImage.TabIndex = 15;
+            this.LargeImage.TabStop = false;
+            // 
             // LargeView
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1178, 634);
+            this.ClientSize = new System.Drawing.Size(1374, 732);
             this.Controls.Add(this.Minimize);
             this.Controls.Add(this.CloseLabel);
             this.Controls.Add(this.MiniControl);
             this.Controls.Add(this.LargeImage);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.MaximizeBox = false;
             this.Name = "LargeView";
             this.ShowIcon = false;
@@ -98,18 +103,17 @@ namespace PhotoViewer
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "LargeView - Image From Main";
             this.Load += new System.EventHandler(this.LargeView_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.LargeImage)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.MiniControl)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.LargeImage)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
-
-        private System.Windows.Forms.PictureBox LargeImage;
         private System.Windows.Forms.Label Minimize;
         private System.Windows.Forms.Label CloseLabel;
         private System.Windows.Forms.PictureBox MiniControl;
+        private MovablePB LargeImage;
     }
 }

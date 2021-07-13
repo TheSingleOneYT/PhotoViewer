@@ -15,13 +15,13 @@
     {
         "Entry"
         {
-        "MsmKey" = "8:_035B8ED910744B0AA2D61F861237810D"
+        "MsmKey" = "8:_6B1424898F1941E49DCE99537A74A24A"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_A928E84757C245038BE3FFBFCCB4F071"
+        "MsmKey" = "8:_A7364D5C08B9453498C207C13D986BBB"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -35,12 +35,6 @@
         {
         "MsmKey" = "8:_E6315AAA961846E0B502D1B8C24E770D"
         "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_A928E84757C245038BE3FFBFCCB4F071"
         "MsmSig" = "8:_UNDEFINED"
         }
     }
@@ -148,41 +142,10 @@
         }
         "File"
         {
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_035B8ED910744B0AA2D61F861237810D"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_6B1424898F1941E49DCE99537A74A24A"
             {
             "SourcePath" = "8:..\\PhotoViewer - Core\\bin\\Debug\\net5.0-windows\\PhotoViewer.exe"
             "TargetName" = "8:PhotoViewer.exe"
-            "Tag" = "8:"
-            "Folder" = "8:_0187E2BC992E44FB843627FB582893D9"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_A928E84757C245038BE3FFBFCCB4F071"
-            {
-            "AssemblyRegister" = "3:1"
-            "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:PhotoViewer, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL"
-                "ScatterAssemblies"
-                {
-                    "_A928E84757C245038BE3FFBFCCB4F071"
-                    {
-                    "Name" = "8:PhotoViewer.dll"
-                    "Attributes" = "3:512"
-                    }
-                }
-            "SourcePath" = "8:..\\PhotoViewer - Core\\bin\\Debug\\net5.0-windows\\PhotoViewer.dll"
-            "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_0187E2BC992E44FB843627FB582893D9"
             "Condition" = "8:"
@@ -296,7 +259,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:PhotoViewer"
         "ProductCode" = "8:{3172B1BC-F3D0-4A63-85CE-7D57F1BB2CFE}"
-        "PackageCode" = "8:{5A77D36B-85CC-4308-BC32-24998F7845A7}"
+        "PackageCode" = "8:{BD84D3B8-7710-4F36-AD9F-D943A25D023E}"
         "UpgradeCode" = "8:{11E42841-D2E2-4210-8347-A204B0ABC069}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
@@ -424,7 +387,7 @@
             "ShowCmd" = "3:1"
             "IconIndex" = "3:0"
             "Transitive" = "11:FALSE"
-            "Target" = "8:_035B8ED910744B0AA2D61F861237810D"
+            "Target" = "8:"
             "Folder" = "8:_B60AEC6A72F84E62B494D9EDD9CC0ECE"
             "WorkingFolder" = "8:_0187E2BC992E44FB843627FB582893D9"
             "Icon" = "8:_AFD8C6EF9E3E4EE08A293359341A42C7"
@@ -438,7 +401,7 @@
             "ShowCmd" = "3:1"
             "IconIndex" = "3:0"
             "Transitive" = "11:FALSE"
-            "Target" = "8:_035B8ED910744B0AA2D61F861237810D"
+            "Target" = "8:"
             "Folder" = "8:_E934A94407844368BC5F4A5A84D62A87"
             "WorkingFolder" = "8:_0187E2BC992E44FB843627FB582893D9"
             "Icon" = "8:_AFD8C6EF9E3E4EE08A293359341A42C7"
@@ -843,6 +806,34 @@
         }
         "ProjectOutput"
         {
+            "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_A7364D5C08B9453498C207C13D986BBB"
+            {
+            "SourcePath" = "8:..\\PhotoViewer - Core\\obj\\Debug\\net5.0-windows\\PhotoViewer.dll"
+            "TargetName" = "8:"
+            "Tag" = "8:"
+            "Folder" = "8:_0187E2BC992E44FB843627FB582893D9"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            "ProjectOutputGroupRegister" = "3:1"
+            "OutputConfiguration" = "8:"
+            "OutputGroupCanonicalName" = "8:Built"
+            "OutputProjectGuid" = "8:{25FEA499-9F82-419C-BA2F-C812139FDA84}"
+            "ShowKeyOutput" = "11:TRUE"
+                "ExcludeFilters"
+                {
+                }
+            }
         }
     }
 }

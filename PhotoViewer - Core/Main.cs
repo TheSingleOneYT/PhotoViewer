@@ -37,9 +37,9 @@ namespace PhotoViewer
             var UserOnWin = SystemInformation.UserName.ToString();
             WelcomeLabel.Text = "PhotoViewer - Welcome " + UserOnWin + "!";
 
-                File.Delete(LocalAppData + "/PhotoViewer/CurrentImportPath.txt");
-                File.Delete(LocalAppData + "/PhotoViewer/CurrentImportName.txt");
-                File.Delete(LocalAppData + "/PhotoViewer/CurrentImportExt.txt");
+            File.Delete(LocalAppData + "/PhotoViewer/CurrentImportPath.txt");
+            File.Delete(LocalAppData + "/PhotoViewer/CurrentImportName.txt");
+            File.Delete(LocalAppData + "/PhotoViewer/CurrentImportExt.txt");
 
             ControlBox = false;
 
@@ -346,17 +346,17 @@ namespace PhotoViewer
             int value = zoomSlider.Value;
             ZoomText.Text = value.ToString();
             int PV = Int32.Parse(prevvalue);
-            
+
             if (value < PV)
             {
-                MainImage.Width = OrgWidth - 5;
-                MainImage.Height = OrgHeight - 5;
+                MainImage.Width = OrgWidth - 10;
+                MainImage.Height = OrgHeight - 10;
                 MainImage.Image = img;
             }
             else
             {
-                MainImage.Width = OrgWidth + 5;
-                MainImage.Height = OrgHeight + 5;
+                MainImage.Width = OrgWidth + 10;
+                MainImage.Height = OrgHeight + 10;
                 MainImage.Image = img;
             }
         }
@@ -372,7 +372,7 @@ namespace PhotoViewer
 
         private void Main_Load(object sender, EventArgs e)
         {
-            
+
         }
 
         private void importImageToolStripMenuItem_Click(object sender, EventArgs e)
@@ -552,7 +552,7 @@ namespace PhotoViewer
             }
             else
             {
-                   DialogResult dr = MessageBox.Show("Painting uses a large amount of memory. Please only use if you have a reasonable amount of RAM installed. Click OK to continue", "PhotoViewer - Warning!", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
+                DialogResult dr = MessageBox.Show("Painting uses a large amount of memory. Please only use if you have a reasonable amount of RAM installed. Click OK to continue", "PhotoViewer - Warning!", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
 
                 if (dr == DialogResult.OK)
                 {
@@ -602,6 +602,28 @@ namespace PhotoViewer
         {
             Help help = new Help();
             help.Show();
+        }
+
+        private void rotate180ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            MainImage.Image.RotateFlip(RotateFlipType.Rotate180FlipNone);
+            MainImage.Refresh();
+            Main.ActiveForm.Text = "Photo Viewer & Editor - " + File.ReadAllText(LocalAppData + "/PhotoViewer/CurrentImportName.txt") + File.ReadAllText(LocalAppData + "/PhotoViewer/CurrentImportExt.txt") + " *";
+
+        }
+
+        private void rotate270ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            MainImage.Image.RotateFlip(RotateFlipType.Rotate180FlipNone);
+            MainImage.Image.RotateFlip(RotateFlipType.Rotate90FlipNone);
+            MainImage.Refresh();
+            Main.ActiveForm.Text = "Photo Viewer & Editor - " + File.ReadAllText(LocalAppData + "/PhotoViewer/CurrentImportName.txt") + File.ReadAllText(LocalAppData + "/PhotoViewer/CurrentImportExt.txt") + " *";
+        }
+
+        private void ConsoleBTN_Click(object sender, EventArgs e)
+        {
+            console cmd = new console();
+            cmd.Show();
         }
     }
 }

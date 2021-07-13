@@ -31,7 +31,6 @@ namespace PhotoViewer
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Main));
-            this.MainImage = new System.Windows.Forms.PictureBox();
             this.MainImageContextStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.importImageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveImageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -61,6 +60,8 @@ namespace PhotoViewer
             this.flipYToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.rotateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.rotate90ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.rotate180ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.rotate270ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.filtersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.invertToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.greyScaleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -68,8 +69,11 @@ namespace PhotoViewer
             this.ViewLabel = new System.Windows.Forms.Label();
             this.ViewCMS = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.viewInLargeViewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.resetToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.zoomToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.HelpLabel = new System.Windows.Forms.Label();
-            ((System.ComponentModel.ISupportInitialize)(this.MainImage)).BeginInit();
+            this.MainImage = new PhotoViewer.MovablePB(this.components);
+            this.ConsoleBTN = new System.Windows.Forms.Button();
             this.MainImageContextStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ColourBar)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.MiniControl)).BeginInit();
@@ -78,22 +82,8 @@ namespace PhotoViewer
             this.FileCMS.SuspendLayout();
             this.EditCMS.SuspendLayout();
             this.ViewCMS.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.MainImage)).BeginInit();
             this.SuspendLayout();
-            // 
-            // MainImage
-            // 
-            this.MainImage.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.MainImage.ContextMenuStrip = this.MainImageContextStrip;
-            this.MainImage.Location = new System.Drawing.Point(-7, 37);
-            this.MainImage.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.MainImage.Name = "MainImage";
-            this.MainImage.Size = new System.Drawing.Size(944, 452);
-            this.MainImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.MainImage.TabIndex = 0;
-            this.MainImage.TabStop = false;
-            this.MainImage.Click += new System.EventHandler(this.MainImage_Click);
-            this.MainImage.DragDrop += new System.Windows.Forms.DragEventHandler(this.MainImage_DragDrop);
-            this.MainImage.DragEnter += new System.Windows.Forms.DragEventHandler(this.MainImage_DragEnter);
             // 
             // MainImageContextStrip
             // 
@@ -360,7 +350,9 @@ namespace PhotoViewer
             // rotateToolStripMenuItem
             // 
             this.rotateToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.rotate90ToolStripMenuItem});
+            this.rotate90ToolStripMenuItem,
+            this.rotate180ToolStripMenuItem,
+            this.rotate270ToolStripMenuItem});
             this.rotateToolStripMenuItem.Name = "rotateToolStripMenuItem";
             this.rotateToolStripMenuItem.Size = new System.Drawing.Size(118, 22);
             this.rotateToolStripMenuItem.Text = "Rotate";
@@ -368,9 +360,23 @@ namespace PhotoViewer
             // rotate90ToolStripMenuItem
             // 
             this.rotate90ToolStripMenuItem.Name = "rotate90ToolStripMenuItem";
-            this.rotate90ToolStripMenuItem.Size = new System.Drawing.Size(127, 22);
+            this.rotate90ToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
             this.rotate90ToolStripMenuItem.Text = "Rotate 90⁰";
             this.rotate90ToolStripMenuItem.Click += new System.EventHandler(this.Rotate90BTN_Click);
+            // 
+            // rotate180ToolStripMenuItem
+            // 
+            this.rotate180ToolStripMenuItem.Name = "rotate180ToolStripMenuItem";
+            this.rotate180ToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
+            this.rotate180ToolStripMenuItem.Text = "Rotate 180⁰";
+            this.rotate180ToolStripMenuItem.Click += new System.EventHandler(this.rotate180ToolStripMenuItem_Click);
+            // 
+            // rotate270ToolStripMenuItem
+            // 
+            this.rotate270ToolStripMenuItem.Name = "rotate270ToolStripMenuItem";
+            this.rotate270ToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
+            this.rotate270ToolStripMenuItem.Text = "Rotate 270⁰";
+            this.rotate270ToolStripMenuItem.Click += new System.EventHandler(this.rotate270ToolStripMenuItem_Click);
             // 
             // filtersToolStripMenuItem
             // 
@@ -419,16 +425,32 @@ namespace PhotoViewer
             // ViewCMS
             // 
             this.ViewCMS.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.viewInLargeViewToolStripMenuItem});
+            this.viewInLargeViewToolStripMenuItem,
+            this.resetToolStripMenuItem});
             this.ViewCMS.Name = "ViewCMS";
-            this.ViewCMS.Size = new System.Drawing.Size(173, 26);
+            this.ViewCMS.Size = new System.Drawing.Size(181, 70);
             // 
             // viewInLargeViewToolStripMenuItem
             // 
             this.viewInLargeViewToolStripMenuItem.Name = "viewInLargeViewToolStripMenuItem";
-            this.viewInLargeViewToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
+            this.viewInLargeViewToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.viewInLargeViewToolStripMenuItem.Text = "View In Large View";
             this.viewInLargeViewToolStripMenuItem.Click += new System.EventHandler(this.openInLargeViewToolStripMenuItem_Click);
+            // 
+            // resetToolStripMenuItem
+            // 
+            this.resetToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.zoomToolStripMenuItem});
+            this.resetToolStripMenuItem.Name = "resetToolStripMenuItem";
+            this.resetToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.resetToolStripMenuItem.Text = "Reset";
+            // 
+            // zoomToolStripMenuItem
+            // 
+            this.zoomToolStripMenuItem.Name = "zoomToolStripMenuItem";
+            this.zoomToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.zoomToolStripMenuItem.Text = "Zoom";
+            this.zoomToolStripMenuItem.Click += new System.EventHandler(this.ResetZoomBTN_Click);
             // 
             // HelpLabel
             // 
@@ -443,12 +465,38 @@ namespace PhotoViewer
             this.HelpLabel.Text = "Help";
             this.HelpLabel.Click += new System.EventHandler(this.HelpLabel_Click);
             // 
+            // MainImage
+            // 
+            this.MainImage.ContextMenuStrip = this.MainImageContextStrip;
+            this.MainImage.Location = new System.Drawing.Point(-3, 34);
+            this.MainImage.Name = "MainImage";
+            this.MainImage.Size = new System.Drawing.Size(944, 452);
+            this.MainImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.MainImage.TabIndex = 30;
+            this.MainImage.TabStop = false;
+            this.MainImage.Click += new System.EventHandler(this.MainImage_Click);
+            this.MainImage.DragDrop += new System.Windows.Forms.DragEventHandler(this.MainImage_DragDrop);
+            this.MainImage.DragEnter += new System.Windows.Forms.DragEventHandler(this.MainImage_DragEnter);
+            // 
+            // ConsoleBTN
+            // 
+            this.ConsoleBTN.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.ConsoleBTN.Location = new System.Drawing.Point(580, 4);
+            this.ConsoleBTN.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.ConsoleBTN.Name = "ConsoleBTN";
+            this.ConsoleBTN.Size = new System.Drawing.Size(81, 27);
+            this.ConsoleBTN.TabIndex = 31;
+            this.ConsoleBTN.Text = "Console";
+            this.ConsoleBTN.UseVisualStyleBackColor = true;
+            this.ConsoleBTN.Click += new System.EventHandler(this.ConsoleBTN_Click);
+            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.ClientSize = new System.Drawing.Size(937, 519);
+            this.Controls.Add(this.ConsoleBTN);
             this.Controls.Add(this.HelpLabel);
             this.Controls.Add(this.ViewLabel);
             this.Controls.Add(this.EditLabel);
@@ -463,8 +511,8 @@ namespace PhotoViewer
             this.Controls.Add(this.MiniControl);
             this.Controls.Add(this.WelcomeLabel);
             this.Controls.Add(this.ColourBar);
-            this.Controls.Add(this.MainImage);
             this.Controls.Add(this.EditingBar);
+            this.Controls.Add(this.MainImage);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
@@ -477,7 +525,6 @@ namespace PhotoViewer
             this.Activated += new System.EventHandler(this.Main_Activated);
             this.Load += new System.EventHandler(this.Main_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Main_KeyDown);
-            ((System.ComponentModel.ISupportInitialize)(this.MainImage)).EndInit();
             this.MainImageContextStrip.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.ColourBar)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.MiniControl)).EndInit();
@@ -486,14 +533,13 @@ namespace PhotoViewer
             this.FileCMS.ResumeLayout(false);
             this.EditCMS.ResumeLayout(false);
             this.ViewCMS.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.MainImage)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
-
-        private System.Windows.Forms.PictureBox MainImage;
         private System.Windows.Forms.PictureBox ColourBar;
         private System.Windows.Forms.Label WelcomeLabel;
         private System.Windows.Forms.Label CloseLabel;
@@ -531,6 +577,12 @@ namespace PhotoViewer
         private System.Windows.Forms.ContextMenuStrip ViewCMS;
         private System.Windows.Forms.ToolStripMenuItem viewInLargeViewToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem paintToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem rotate180ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem rotate270ToolStripMenuItem;
+        private MovablePB MainImage;
+        private System.Windows.Forms.ToolStripMenuItem resetToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem zoomToolStripMenuItem;
+        private System.Windows.Forms.Button ConsoleBTN;
     }
 }
 

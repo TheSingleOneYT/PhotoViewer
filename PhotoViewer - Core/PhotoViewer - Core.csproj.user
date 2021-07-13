@@ -2,6 +2,9 @@
 <Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup />
   <ItemGroup>
+    <Compile Update="console.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="Help.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -10,6 +13,9 @@
     </Compile>
     <Compile Update="Main.cs">
       <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="MovablePB.cs">
+      <SubType>Component</SubType>
     </Compile>
     <Compile Update="PaintForm.cs">
       <SubType>Form</SubType>
