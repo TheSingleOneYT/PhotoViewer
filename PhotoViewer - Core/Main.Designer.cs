@@ -53,6 +53,7 @@ namespace PhotoViewer
             this.FileCMS = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.printToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.EditLabel = new System.Windows.Forms.Label();
             this.EditCMS = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.flipAxisToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -282,9 +283,10 @@ namespace PhotoViewer
             // 
             this.FileCMS.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.openToolStripMenuItem,
-            this.saveToolStripMenuItem});
+            this.saveToolStripMenuItem,
+            this.printToolStripMenuItem});
             this.FileCMS.Name = "FileCMS";
-            this.FileCMS.Size = new System.Drawing.Size(104, 48);
+            this.FileCMS.Size = new System.Drawing.Size(104, 70);
             // 
             // openToolStripMenuItem
             // 
@@ -299,6 +301,13 @@ namespace PhotoViewer
             this.saveToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
             this.saveToolStripMenuItem.Text = "Save";
             this.saveToolStripMenuItem.Click += new System.EventHandler(this.SaveBTN_Click);
+            // 
+            // printToolStripMenuItem
+            // 
+            this.printToolStripMenuItem.Name = "printToolStripMenuItem";
+            this.printToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
+            this.printToolStripMenuItem.Text = "Print";
+            this.printToolStripMenuItem.Click += new System.EventHandler(this.printToolStripMenuItem_Click);
             // 
             // EditLabel
             // 
@@ -428,12 +437,12 @@ namespace PhotoViewer
             this.viewInLargeViewToolStripMenuItem,
             this.resetToolStripMenuItem});
             this.ViewCMS.Name = "ViewCMS";
-            this.ViewCMS.Size = new System.Drawing.Size(181, 70);
+            this.ViewCMS.Size = new System.Drawing.Size(173, 48);
             // 
             // viewInLargeViewToolStripMenuItem
             // 
             this.viewInLargeViewToolStripMenuItem.Name = "viewInLargeViewToolStripMenuItem";
-            this.viewInLargeViewToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.viewInLargeViewToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
             this.viewInLargeViewToolStripMenuItem.Text = "View In Large View";
             this.viewInLargeViewToolStripMenuItem.Click += new System.EventHandler(this.openInLargeViewToolStripMenuItem_Click);
             // 
@@ -442,13 +451,13 @@ namespace PhotoViewer
             this.resetToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.zoomToolStripMenuItem});
             this.resetToolStripMenuItem.Name = "resetToolStripMenuItem";
-            this.resetToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.resetToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
             this.resetToolStripMenuItem.Text = "Reset";
             // 
             // zoomToolStripMenuItem
             // 
             this.zoomToolStripMenuItem.Name = "zoomToolStripMenuItem";
-            this.zoomToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.zoomToolStripMenuItem.Size = new System.Drawing.Size(106, 22);
             this.zoomToolStripMenuItem.Text = "Zoom";
             this.zoomToolStripMenuItem.Click += new System.EventHandler(this.ResetZoomBTN_Click);
             // 
@@ -467,6 +476,7 @@ namespace PhotoViewer
             // 
             // MainImage
             // 
+            this.MainImage.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.MainImage.ContextMenuStrip = this.MainImageContextStrip;
             this.MainImage.Location = new System.Drawing.Point(-3, 34);
             this.MainImage.Name = "MainImage";
@@ -513,6 +523,7 @@ namespace PhotoViewer
             this.Controls.Add(this.ColourBar);
             this.Controls.Add(this.EditingBar);
             this.Controls.Add(this.MainImage);
+            this.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
@@ -583,6 +594,7 @@ namespace PhotoViewer
         private System.Windows.Forms.ToolStripMenuItem resetToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem zoomToolStripMenuItem;
         private System.Windows.Forms.Button ConsoleBTN;
+        private System.Windows.Forms.ToolStripMenuItem printToolStripMenuItem;
     }
 }
 

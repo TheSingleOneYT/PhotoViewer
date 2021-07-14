@@ -15,7 +15,7 @@
     {
         "Entry"
         {
-        "MsmKey" = "8:_6B1424898F1941E49DCE99537A74A24A"
+        "MsmKey" = "8:_A601EAF7AA564137A1B4707BD03F3829"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -27,13 +27,13 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_AFD8C6EF9E3E4EE08A293359341A42C7"
+        "MsmKey" = "8:_E6315AAA961846E0B502D1B8C24E770D"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_E6315AAA961846E0B502D1B8C24E770D"
+        "MsmKey" = "8:_F93C2ED11DE44A1FA076B7EF5F79E8DD"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -142,7 +142,7 @@
         }
         "File"
         {
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_6B1424898F1941E49DCE99537A74A24A"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_A601EAF7AA564137A1B4707BD03F3829"
             {
             "SourcePath" = "8:..\\PhotoViewer - Core\\bin\\Debug\\net5.0-windows\\PhotoViewer.exe"
             "TargetName" = "8:PhotoViewer.exe"
@@ -153,26 +153,6 @@
             "Vital" = "11:TRUE"
             "ReadOnly" = "11:FALSE"
             "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_AFD8C6EF9E3E4EE08A293359341A42C7"
-            {
-            "SourcePath" = "8:..\\PhotoViewer - Core\\Logo 1.ico"
-            "TargetName" = "8:icon.ico"
-            "Tag" = "8:"
-            "Folder" = "8:_0187E2BC992E44FB843627FB582893D9"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:TRUE"
             "System" = "11:FALSE"
             "Permanent" = "11:FALSE"
             "SharedLegacy" = "11:FALSE"
@@ -193,6 +173,26 @@
             "Vital" = "11:TRUE"
             "ReadOnly" = "11:FALSE"
             "Hidden" = "11:TRUE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_F93C2ED11DE44A1FA076B7EF5F79E8DD"
+            {
+            "SourcePath" = "8:..\\PhotoViewer - Core\\Logo 1.ico"
+            "TargetName" = "8:Icon.ico"
+            "Tag" = "8:"
+            "Folder" = "8:_0187E2BC992E44FB843627FB582893D9"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
             "System" = "11:FALSE"
             "Permanent" = "11:FALSE"
             "SharedLegacy" = "11:FALSE"
@@ -379,7 +379,7 @@
         }
         "Shortcut"
         {
-            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_A27B3844885B4EF7A2CFD1D319B3C8FD"
+            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_082429AA1C2B4BA3BE1404E11DABE9F2"
             {
             "Name" = "8:PhotoViewer"
             "Arguments" = "8:"
@@ -387,13 +387,13 @@
             "ShowCmd" = "3:1"
             "IconIndex" = "3:0"
             "Transitive" = "11:FALSE"
-            "Target" = "8:"
+            "Target" = "8:_A601EAF7AA564137A1B4707BD03F3829"
             "Folder" = "8:_B60AEC6A72F84E62B494D9EDD9CC0ECE"
             "WorkingFolder" = "8:_0187E2BC992E44FB843627FB582893D9"
-            "Icon" = "8:_AFD8C6EF9E3E4EE08A293359341A42C7"
+            "Icon" = "8:_F93C2ED11DE44A1FA076B7EF5F79E8DD"
             "Feature" = "8:"
             }
-            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_E1DA78FB5B1C4FE6A88397D77EC5754D"
+            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_A5E4A3229C5B4DDD9A74AAAB3DDF37F8"
             {
             "Name" = "8:PhotoViewer"
             "Arguments" = "8:"
@@ -401,10 +401,10 @@
             "ShowCmd" = "3:1"
             "IconIndex" = "3:0"
             "Transitive" = "11:FALSE"
-            "Target" = "8:"
+            "Target" = "8:_A601EAF7AA564137A1B4707BD03F3829"
             "Folder" = "8:_E934A94407844368BC5F4A5A84D62A87"
             "WorkingFolder" = "8:_0187E2BC992E44FB843627FB582893D9"
-            "Icon" = "8:_AFD8C6EF9E3E4EE08A293359341A42C7"
+            "Icon" = "8:_F93C2ED11DE44A1FA076B7EF5F79E8DD"
             "Feature" = "8:"
             }
         }

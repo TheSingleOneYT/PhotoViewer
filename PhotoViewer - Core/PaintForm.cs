@@ -11,6 +11,7 @@ namespace PhotoViewer
     public partial class PaintForm : Form
     {
         public object LocalAppData = Environment.GetEnvironmentVariable("LocalAppData");
+        public object prefs = Environment.GetEnvironmentVariable("LocalAppData") + "/PhotoViewer/Preferences";
         public int paint = 0;
         Pen pen;
 
@@ -18,6 +19,27 @@ namespace PhotoViewer
         {
             InitializeComponent();
             MainImage.Image = Main.img;
+
+            if (File.Exists(prefs + "/ColourMode.txt"))
+            {
+                var CM = File.ReadAllText(prefs + "/ColourMode.txt");
+
+                if (CM == "l")
+                {
+                    MainImage.BackColor = Color.White;
+                    this.BackColor = Color.White;
+                }
+                else
+                {
+                    MainImage.BackColor = Color.Gray;
+                    this.BackColor = Color.Gray;
+                }
+            }
+            else
+            {
+                MainImage.BackColor = Color.White;
+                this.BackColor = Color.White;
+            }
         }
 
         private void CloseLabel_Click(object sender, EventArgs e)

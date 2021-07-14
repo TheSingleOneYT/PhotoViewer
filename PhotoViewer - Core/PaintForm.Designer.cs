@@ -31,18 +31,18 @@ namespace PhotoViewer
         {
             this.Minimize = new System.Windows.Forms.Label();
             this.CloseLabel = new System.Windows.Forms.Label();
-            this.MiniControl = new System.Windows.Forms.PictureBox();
             this.MainImage = new System.Windows.Forms.PictureBox();
             this.BlackSelector = new System.Windows.Forms.PictureBox();
             this.RedSelector = new System.Windows.Forms.PictureBox();
             this.WhiteSelector = new System.Windows.Forms.PictureBox();
             this.GreenSelector = new System.Windows.Forms.PictureBox();
-            ((System.ComponentModel.ISupportInitialize)(this.MiniControl)).BeginInit();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.MainImage)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.BlackSelector)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.RedSelector)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.WhiteSelector)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.GreenSelector)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // Minimize
@@ -50,8 +50,9 @@ namespace PhotoViewer
             this.Minimize.AutoSize = true;
             this.Minimize.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.Minimize.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.Minimize.Font = new System.Drawing.Font("HotKeys_01", 21.75F, System.Drawing.FontStyle.Bold);
-            this.Minimize.Location = new System.Drawing.Point(738, -5);
+            this.Minimize.Font = new System.Drawing.Font("HotKeys_01", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.Minimize.Location = new System.Drawing.Point(861, -6);
+            this.Minimize.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.Minimize.Name = "Minimize";
             this.Minimize.Size = new System.Drawing.Size(21, 29);
             this.Minimize.TabIndex = 14;
@@ -63,29 +64,22 @@ namespace PhotoViewer
             this.CloseLabel.AutoSize = true;
             this.CloseLabel.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.CloseLabel.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.CloseLabel.Font = new System.Drawing.Font("HotKeys_01", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.CloseLabel.Location = new System.Drawing.Point(771, -2);
+            this.CloseLabel.Font = new System.Drawing.Font("HotKeys_01", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.CloseLabel.Location = new System.Drawing.Point(899, -2);
+            this.CloseLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.CloseLabel.Name = "CloseLabel";
             this.CloseLabel.Size = new System.Drawing.Size(28, 29);
             this.CloseLabel.TabIndex = 13;
             this.CloseLabel.Text = "X";
             this.CloseLabel.Click += new System.EventHandler(this.CloseLabel_Click);
             // 
-            // MiniControl
-            // 
-            this.MiniControl.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.MiniControl.Location = new System.Drawing.Point(726, -11);
-            this.MiniControl.Name = "MiniControl";
-            this.MiniControl.Size = new System.Drawing.Size(83, 42);
-            this.MiniControl.TabIndex = 15;
-            this.MiniControl.TabStop = false;
-            // 
             // MainImage
             // 
             this.MainImage.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.MainImage.Location = new System.Drawing.Point(-3, 32);
+            this.MainImage.Location = new System.Drawing.Point(-4, 30);
+            this.MainImage.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.MainImage.Name = "MainImage";
-            this.MainImage.Size = new System.Drawing.Size(809, 391);
+            this.MainImage.Size = new System.Drawing.Size(944, 458);
             this.MainImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.MainImage.TabIndex = 12;
             this.MainImage.TabStop = false;
@@ -97,9 +91,10 @@ namespace PhotoViewer
             // BlackSelector
             // 
             this.BlackSelector.BackColor = System.Drawing.Color.Black;
-            this.BlackSelector.Location = new System.Drawing.Point(7, 6);
+            this.BlackSelector.Location = new System.Drawing.Point(8, 7);
+            this.BlackSelector.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.BlackSelector.Name = "BlackSelector";
-            this.BlackSelector.Size = new System.Drawing.Size(20, 20);
+            this.BlackSelector.Size = new System.Drawing.Size(23, 23);
             this.BlackSelector.TabIndex = 16;
             this.BlackSelector.TabStop = false;
             this.BlackSelector.Click += new System.EventHandler(this.BlackSelector_Click);
@@ -107,9 +102,10 @@ namespace PhotoViewer
             // RedSelector
             // 
             this.RedSelector.BackColor = System.Drawing.Color.Red;
-            this.RedSelector.Location = new System.Drawing.Point(33, 6);
+            this.RedSelector.Location = new System.Drawing.Point(38, 7);
+            this.RedSelector.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.RedSelector.Name = "RedSelector";
-            this.RedSelector.Size = new System.Drawing.Size(20, 20);
+            this.RedSelector.Size = new System.Drawing.Size(23, 23);
             this.RedSelector.TabIndex = 17;
             this.RedSelector.TabStop = false;
             this.RedSelector.Click += new System.EventHandler(this.RedSelector_Click);
@@ -117,9 +113,10 @@ namespace PhotoViewer
             // WhiteSelector
             // 
             this.WhiteSelector.BackColor = System.Drawing.Color.White;
-            this.WhiteSelector.Location = new System.Drawing.Point(59, 6);
+            this.WhiteSelector.Location = new System.Drawing.Point(69, 7);
+            this.WhiteSelector.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.WhiteSelector.Name = "WhiteSelector";
-            this.WhiteSelector.Size = new System.Drawing.Size(20, 20);
+            this.WhiteSelector.Size = new System.Drawing.Size(23, 23);
             this.WhiteSelector.TabIndex = 18;
             this.WhiteSelector.TabStop = false;
             this.WhiteSelector.Click += new System.EventHandler(this.WhiteSelector_Click);
@@ -127,39 +124,51 @@ namespace PhotoViewer
             // GreenSelector
             // 
             this.GreenSelector.BackColor = System.Drawing.Color.Lime;
-            this.GreenSelector.Location = new System.Drawing.Point(85, 6);
+            this.GreenSelector.Location = new System.Drawing.Point(99, 7);
+            this.GreenSelector.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.GreenSelector.Name = "GreenSelector";
-            this.GreenSelector.Size = new System.Drawing.Size(20, 20);
+            this.GreenSelector.Size = new System.Drawing.Size(23, 23);
             this.GreenSelector.TabIndex = 19;
             this.GreenSelector.TabStop = false;
             this.GreenSelector.Click += new System.EventHandler(this.GreenSelector_Click);
             // 
+            // pictureBox1
+            // 
+            this.pictureBox1.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.pictureBox1.Location = new System.Drawing.Point(-4, -13);
+            this.pictureBox1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(948, 48);
+            this.pictureBox1.TabIndex = 20;
+            this.pictureBox1.TabStop = false;
+            // 
             // PaintForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(803, 420);
+            this.ClientSize = new System.Drawing.Size(937, 485);
             this.Controls.Add(this.GreenSelector);
             this.Controls.Add(this.WhiteSelector);
             this.Controls.Add(this.RedSelector);
             this.Controls.Add(this.BlackSelector);
             this.Controls.Add(this.Minimize);
             this.Controls.Add(this.CloseLabel);
-            this.Controls.Add(this.MiniControl);
+            this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.MainImage);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "PaintForm";
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Paint";
-            ((System.ComponentModel.ISupportInitialize)(this.MiniControl)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.MainImage)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.BlackSelector)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.RedSelector)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.WhiteSelector)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.GreenSelector)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -169,11 +178,11 @@ namespace PhotoViewer
 
         private System.Windows.Forms.Label Minimize;
         private System.Windows.Forms.Label CloseLabel;
-        private System.Windows.Forms.PictureBox MiniControl;
         private System.Windows.Forms.PictureBox MainImage;
         private System.Windows.Forms.PictureBox BlackSelector;
         private System.Windows.Forms.PictureBox RedSelector;
         private System.Windows.Forms.PictureBox WhiteSelector;
         private System.Windows.Forms.PictureBox GreenSelector;
+        private System.Windows.Forms.PictureBox pictureBox1;
     }
 }

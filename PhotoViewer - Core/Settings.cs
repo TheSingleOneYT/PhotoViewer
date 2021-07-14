@@ -6,6 +6,7 @@ using System.IO;
 using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
+using static System.Environment;
 
 namespace PhotoViewer
 {
@@ -35,6 +36,28 @@ namespace PhotoViewer
             else
             {
                 CFUOASChkBx.Checked = true;
+            }
+
+            if (File.Exists(prefs + "/ColourMode.txt"))
+            {
+                var CM = File.ReadAllText(prefs + "/ColourMode.txt");
+
+                if (CM == "l")
+                {
+                    ColourModeBTN.Text = "Change Colour Mode: Current = Light";
+                    this.BackColor = Color.White;
+                }
+                else
+                {
+                    ColourModeBTN.Text = "Change Colour Mode: Current = Dark";
+                    this.BackColor = Color.Gray;
+                }
+            }
+            else
+            {
+                ColourModeBTN.Text = "Change Colour Mode: Current = Light";
+                File.WriteAllText(prefs + "/ColourMode.txt", "l");
+                this.BackColor = Color.White;
             }
 
             if (File.Exists(prefs + "/ASWOPS.txt"))
@@ -82,12 +105,15 @@ namespace PhotoViewer
 
         private void Notify_BalloonTipClicked(object sender, EventArgs e)
         {
-            var process = "https://github.com/TheSingleOneYT/PhotoViewer/releases/download/" + NewVer + "/PhotoViewer.exe";
-            Process.Start(process);
+            System.Diagnostics.Process.Start(new ProcessStartInfo
+            {
+                FileName = "https://github.com/TheSingleOneYT/PhotoViewer/releases/download/" + NewVer + "/Installer.msi",
+                UseShellExecute = true
+            });
             var Downloads = @"C:\Users\" + SystemInformation.UserName.ToString() + @"\Downloads";
             Application.Exit();
 
-            while (File.Exists(Downloads + "/PhotoViewer.exe") == false)
+            while (File.Exists(Downloads + "/Installer.msi") == false)
             {
                 this.Cursor = Cursors.WaitCursor;
             }
@@ -96,7 +122,7 @@ namespace PhotoViewer
             notify.BalloonTipText = "Download Complete!";
             notify.ShowBalloonTip(1000);
 
-            Process.Start(Downloads + "/PhotoViewer.exe");
+            Process.Start(Downloads + "/Installer.msi");
         }
 
         private void CFUOASChkBx_CheckedChanged(object sender, EventArgs e)
@@ -118,6 +144,7 @@ namespace PhotoViewer
             StartPhotoViewerLADBTN.Hide();
             OpenPrefsFolderBTN.Hide();
             ASWOPS.Hide();
+            ColourModeBTN.Hide();
             UpdatesTabBTN.BackColor = Color.Black;
             UpdatesTabBTN.ForeColor = Color.White;
             EditFunctionBTN.BackColor = Color.White;
@@ -133,6 +160,7 @@ namespace PhotoViewer
             StartPhotoViewerLADBTN.Hide();
             OpenPrefsFolderBTN.Hide();
             ASWOPS.Show();
+            ColourModeBTN.Hide();
             EditFunctionBTN.BackColor = Color.Black;
             EditFunctionBTN.ForeColor = Color.White;
             UpdatesTabBTN.BackColor = Color.White;
@@ -154,6 +182,7 @@ namespace PhotoViewer
             ASWOPS.Hide();
             StartPhotoViewerLADBTN.Show();
             OpenPrefsFolderBTN.Show();
+            ColourModeBTN.Show();
             OtherBTN.BackColor = Color.Black;
             OtherBTN.ForeColor = Color.White;
             UpdatesTabBTN.BackColor = Color.White;
@@ -176,6 +205,28 @@ namespace PhotoViewer
             else
             {
                 File.WriteAllText(prefs + "/ASWOPS.txt", "false");
+            }
+        }
+
+        private void ColourModeBTN_Click(object sender, EventArgs e)
+        {
+            DialogResult msg = MessageBox.Show("Changing this will cause a restart. Please save your work, then change this option. Press OK to change colour mode.", "Photo Viewer & Editor", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
+
+            if (msg == DialogResult.OK)
+            {
+                if (ColourModeBTN.Text.Contains("Light"))
+                {
+                    File.WriteAllText(prefs + "/ColourMode.txt", "d");
+                    ColourModeBTN.Text = "Change Colour Mode: Current = Dark";
+                }
+                else
+                {
+                    File.WriteAllText(prefs + "/ColourMode.txt", "l");
+                    ColourModeBTN.Text = "Change Colour Mode: Current = Light";
+                }
+
+                Application.Exit();
+                Process.Start(Application.ExecutablePath);
             }
         }
     }

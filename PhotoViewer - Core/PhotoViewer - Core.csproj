@@ -7,13 +7,15 @@
     <UseWindowsForms>true</UseWindowsForms>
     <AssemblyName>PhotoViewer</AssemblyName>
     <ApplicationIcon>Logo 1.ico</ApplicationIcon>
-    <Version>2.2.0.0</Version>
+    <Version>2.3.0.0</Version>
     <Description>PhotoViewer &amp; Editor</Description>
     <Copyright>Copyright (C) TS1</Copyright>
     <Authors>TS1</Authors>
     <Company>TS1</Company>
-    <AssemblyVersion>2.2.0.0</AssemblyVersion>
-    <FileVersion>2.2.0.0</FileVersion>
+    <AssemblyVersion>2.3.0.0</AssemblyVersion>
+    <FileVersion>2.3.0.0</FileVersion>
+    <PackageProjectUrl>https://TheSingleOneYT.github.io/PhotoViewer</PackageProjectUrl>
+    <RepositoryUrl>https://www.github.com/TheSingleOneYT/PhotoViewer</RepositoryUrl>
   </PropertyGroup>
 
   <ItemGroup>

@@ -37,6 +37,7 @@ namespace PhotoViewer
             // 
             // InputFeed
             // 
+            this.InputFeed.BackColor = System.Drawing.Color.White;
             this.InputFeed.Location = new System.Drawing.Point(12, 12);
             this.InputFeed.Name = "InputFeed";
             this.InputFeed.Size = new System.Drawing.Size(403, 23);
@@ -44,6 +45,7 @@ namespace PhotoViewer
             // 
             // Submit
             // 
+            this.Submit.Cursor = System.Windows.Forms.Cursors.Hand;
             this.Submit.Location = new System.Drawing.Point(421, 12);
             this.Submit.Name = "Submit";
             this.Submit.Size = new System.Drawing.Size(75, 23);
@@ -54,11 +56,12 @@ namespace PhotoViewer
             // 
             // OutputFeed
             // 
+            this.OutputFeed.BackColor = System.Drawing.Color.White;
             this.OutputFeed.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.OutputFeed.Cursor = System.Windows.Forms.Cursors.Arrow;
-            this.OutputFeed.Enabled = false;
             this.OutputFeed.Location = new System.Drawing.Point(12, 61);
             this.OutputFeed.Name = "OutputFeed";
+            this.OutputFeed.ReadOnly = true;
             this.OutputFeed.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.ForcedBoth;
             this.OutputFeed.Size = new System.Drawing.Size(484, 267);
             this.OutputFeed.TabIndex = 2;
@@ -67,6 +70,7 @@ namespace PhotoViewer
             // label1
             // 
             this.label1.AutoSize = true;
+            this.label1.ForeColor = System.Drawing.Color.Black;
             this.label1.Location = new System.Drawing.Point(12, 43);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(76, 15);

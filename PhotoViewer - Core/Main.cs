@@ -5,6 +5,8 @@ using System.Drawing.Imaging;
 using System.Windows.Forms;
 using System.Reflection;
 using System.Diagnostics;
+using System.Drawing.Printing;
+using System.Runtime.InteropServices;
 
 namespace PhotoViewer
 {
@@ -42,6 +44,28 @@ namespace PhotoViewer
             File.Delete(LocalAppData + "/PhotoViewer/CurrentImportExt.txt");
 
             ControlBox = false;
+
+            if (File.Exists(prefs + "/ColourMode.txt"))
+            {
+                var CM = File.ReadAllText(prefs + "/ColourMode.txt");
+
+                if (CM == "l")
+                {
+                    MainImage.BackColor = Color.White;
+                    this.BackColor = Color.White;
+                }
+                else
+                {
+                    MainImage.BackColor = Color.Gray;
+                    this.BackColor = Color.Gray;
+                }
+            }
+            else
+            {
+                File.WriteAllText(prefs + "/ColourMode.txt", "l");
+                MainImage.BackColor = Color.White;
+                this.BackColor = Color.White;
+            }
 
             if (File.Exists(prefs + "/CFUOASChkBx.txt"))
             {
@@ -92,7 +116,11 @@ namespace PhotoViewer
 
         private void Notify_BalloonTipClicked(object sender, EventArgs e)
         {
-            Process.Start("https://github.com/TheSingleOneYT/PhotoViewer/releases/download/" + NewVer + "/Installer.msi");
+            System.Diagnostics.Process.Start(new ProcessStartInfo
+            {
+                FileName = "https://github.com/TheSingleOneYT/PhotoViewer/releases/download/" + NewVer + "/Installer.msi",
+                UseShellExecute = true
+            });
             var Downloads = @"C:\Users\" + SystemInformation.UserName.ToString() + @"\Downloads";
             Application.Exit();
 
@@ -277,7 +305,7 @@ namespace PhotoViewer
         private void ProjectInfoBTN_Click(object sender, EventArgs e)
         {
             var AppVer = Assembly.GetExecutingAssembly().GetName().Version.ToString();
-            MessageBox.Show("The Photo Viewer Project\nVersion: " + AppVer + "\nAn Open-source Photo Viewer And Simple Editor Intended For Use With Windows Sandbox\n\nBy TheSingleOne (TS1)\nProject Github - https://www.github.com/TheSingleOneYT/PhotoViewer", "Project Information", MessageBoxButtons.OK);
+            MessageBox.Show("The Photo Viewer Project\nVersion: " + AppVer + "\nAn Open-source Photo Viewer And Simple Editor Intended For Use With Windows Sandbox\n\nBy TheSingleOne (TS1)\nProject Github - https://www.github.com/TheSingleOneYT/PhotoViewer" + "\nProject Website - https://TheSingleOneYT.github.io/PhotoViewer", "Project Information", MessageBoxButtons.OK);
         }
 
         private void ProjectInfoBTN_MouseHover(object sender, EventArgs e)
@@ -624,6 +652,27 @@ namespace PhotoViewer
         {
             console cmd = new console();
             cmd.Show();
+        }
+
+        private void printToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            PrintDialog pd = new PrintDialog();
+            PrintDocument doc = new PrintDocument();
+            doc.PrintPage += Doc_PrintPage;
+            pd.Document = doc;
+            if (pd.ShowDialog() == DialogResult.OK)
+            {
+                doc.Print();
+            }
+        }
+
+        private void Doc_PrintPage(object sender, PrintPageEventArgs e)
+        {
+            //Print image
+            Bitmap bm = new Bitmap(MainImage.Width, MainImage.Height);
+            MainImage.DrawToBitmap(bm, new Rectangle(0, 0, MainImage.Width, MainImage.Height));
+            e.Graphics.DrawImage(bm, 0, 0);
+            bm.Dispose();
         }
     }
 }
