@@ -75,7 +75,7 @@ namespace PhotoViewer
             // 
             // MainImage
             // 
-            this.MainImage.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.MainImage.BackColor = System.Drawing.Color.White;
             this.MainImage.Location = new System.Drawing.Point(-4, 30);
             this.MainImage.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.MainImage.Name = "MainImage";

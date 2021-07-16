@@ -1,8 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
+using System.Linq;
 using System.Reflection;
 using System.Windows.Forms;
 
@@ -13,6 +15,8 @@ namespace PhotoViewer
         public console()
         {
             InitializeComponent();
+
+            KeyPreview = true;
 
             if (File.Exists(prefs + "/ColourMode.txt"))
             {
@@ -505,6 +509,176 @@ namespace PhotoViewer
                 OutputFeed.Text = InputFeed.Text.ToString() + " is a parameter and requires more context.\nERROR: 2";
                 System.Media.SoundPlayer player = new System.Media.SoundPlayer(@"C:\Windows\Media\Windows Error.wav");
                 player.Play();
+            }
+        }
+
+        private void InputFeed_TextChanged(object sender, EventArgs e)
+        {
+            if (InputFeed.Text.StartsWith("e") && !InputFeed.Text.StartsWith("edit")) //commands-start
+            {
+                DYMText.Text = "Did you mean 'edit'?";
+            }
+            else if (InputFeed.Text.StartsWith("h") && !InputFeed.Text.StartsWith("help"))
+            {
+                DYMText.Text = "Did you mean 'help'?";
+            }
+            else if (InputFeed.Text.StartsWith("o") && !InputFeed.Text.StartsWith("output"))
+            {
+                DYMText.Text = "Did you mean 'output'?";
+            }
+            else if (InputFeed.Text.StartsWith("inp") && !InputFeed.Text.StartsWith("input"))
+            {
+                DYMText.Text = "Did you mean 'input'?";
+            }
+            else if (InputFeed.Text.StartsWith("inf") && !InputFeed.Text.StartsWith("info"))
+            {
+                DYMText.Text = "Did you mean 'info'?";
+            }
+            else if (InputFeed.Text.StartsWith("c") && !InputFeed.Text.StartsWith("console"))
+            {
+                DYMText.Text = "Did you mean 'console'?";
+            }
+            else if (InputFeed.Text.StartsWith("r") && !InputFeed.Text.StartsWith("run"))
+            {
+                DYMText.Text = "Did you mean 'run'?";
+            }
+            else if (InputFeed.Text.StartsWith("a") && !InputFeed.Text.StartsWith("application"))
+            {
+                DYMText.Text = "Did you mean 'application'?";
+            }
+            else if (InputFeed.Text.StartsWith("edit-i") && !InputFeed.Text.StartsWith("edit-invert")) //edit //extensions-start
+            {
+                DYMText.Text = "Did you mean 'edit-invert'?";
+            }
+            else if (InputFeed.Text.StartsWith("edit-g") && !InputFeed.Text.StartsWith("edit-gs"))
+            {
+                DYMText.Text = "Did you mean 'edit-gs'?";
+            }
+            else if (InputFeed.Text.StartsWith("edit-9") && !InputFeed.Text.StartsWith("edit-90"))
+            {
+                DYMText.Text = "Did you mean 'edit-90'?";
+            }
+            else if (InputFeed.Text.StartsWith("edit-1") && !InputFeed.Text.StartsWith("edit-180"))
+            {
+                DYMText.Text = "Did you mean 'edit-180'?";
+            }
+            else if (InputFeed.Text.StartsWith("edit-2") && !InputFeed.Text.StartsWith("edit-270"))
+            {
+                DYMText.Text = "Did you mean 'edit-270'?";
+            }
+            else if (InputFeed.Text.StartsWith("help-s") && !InputFeed.Text.StartsWith("help-show")) //help
+            {
+                DYMText.Text = "Did you mean 'help-show'?";
+            }
+            else if (InputFeed.Text.StartsWith("output-cl") && !InputFeed.Text.StartsWith("output-clear")) //output
+            {
+                DYMText.Text = "Did you mean 'output-clear'?";
+            }
+            else if (InputFeed.Text.StartsWith("output-co") && !InputFeed.Text.StartsWith("output-copy"))
+            {
+                DYMText.Text = "Did you mean 'output-copy'?";
+            }
+            else if (InputFeed.Text.StartsWith("input-cl") && !InputFeed.Text.StartsWith("input-clear")) //input
+            {
+                DYMText.Text = "Did you mean 'input-clear'?";
+            }
+            else if (InputFeed.Text.StartsWith("input-co") && !InputFeed.Text.StartsWith("input-copy"))
+            {
+                DYMText.Text = "Did you mean 'input-copy'?";
+            }
+            else if (InputFeed.Text.StartsWith("info-v") && !InputFeed.Text.StartsWith("info-ver")) //info
+            {
+                DYMText.Text = "Did you mean 'info-ver'?";
+            }
+            else if (InputFeed.Text.StartsWith("info-p") && !InputFeed.Text.StartsWith("info-projectinfo"))
+            {
+                DYMText.Text = "Did you mean 'info-projectinfo'?";
+            }
+            else if (InputFeed.Text.StartsWith("info-g") && !InputFeed.Text.StartsWith("info-github"))
+            {
+                DYMText.Text = "Did you mean 'info-github'?";
+            }
+            else if (InputFeed.Text.StartsWith("info-w") && !InputFeed.Text.StartsWith("info-website"))
+            {
+                DYMText.Text = "Did you mean 'info-website'?";
+            }
+            else if (InputFeed.Text.StartsWith("console-h") && !InputFeed.Text.StartsWith("console-hide")) //console
+            {
+                DYMText.Text = "Did you mean 'console-hide'?";
+            }
+            else if (InputFeed.Text.StartsWith("run-w") && !InputFeed.Text.StartsWith("run-website")) //run
+            {
+                DYMText.Text = "Did you mean 'run-website'?";
+            }
+            else if (InputFeed.Text.StartsWith("run-g") && !InputFeed.Text.StartsWith("run-github"))
+            {
+                DYMText.Text = "Did you mean 'run-github'?";
+            }
+            else if (InputFeed.Text.StartsWith("application-k") && !InputFeed.Text.StartsWith("application-kill")) //application
+            {
+                DYMText.Text = "Did you mean 'application-kill'?";
+            }
+            else if (InputFeed.Text.StartsWith("application-r") && !InputFeed.Text.StartsWith("application-restart"))
+            {
+                DYMText.Text = "Did you mean 'application-restart'?";
+            }
+            else
+            {
+                DYMText.Text = "No Predictions.";
+            }
+        }
+
+        private void DYMText_Click(object sender, EventArgs e)
+        {
+            if (DYMText.Text != "No Predictions.")
+            {
+                System.Media.SoundPlayer player = new System.Media.SoundPlayer(@"C:\Windows\Media\Windows Print Complete.wav");
+                player.Play();
+
+                string i = DYMText.Text.Remove(0, 14);
+                int length = i.Length;
+                int lt2 = length - 2;
+                string ii = i.Remove(lt2, 2);
+
+                if (InputFeed.Text.Contains("-"))
+                {
+                    InputFeed.Text = ii;
+                    InputFeed.Select(lt2, lt2);
+                }
+                else
+                {
+                    string iii = ii + "-";
+                    InputFeed.Text = iii;
+                    InputFeed.Select(lt2 + 1, lt2 + 1);
+                }
+            }
+        }
+
+        private void console_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter && e.Control == false)
+            {
+                DYMText_Click(sender, e);
+                e.Handled = e.SuppressKeyPress = true;
+            }
+            else if (e.KeyCode == Keys.Enter && e.Control == true)
+            {
+                Submit.PerformClick();
+                e.Handled = e.SuppressKeyPress = true;
+            }
+        }
+
+        private void InputFeed_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter && e.Control == false)
+            {
+                DYMText_Click(sender, e);
+                e.Handled = e.SuppressKeyPress = true;
+            }
+            else if (e.KeyCode == Keys.Enter && e.Control == true)
+            {
+                Submit.PerformClick();
+                e.Handled = e.SuppressKeyPress = true;
             }
         }
     }

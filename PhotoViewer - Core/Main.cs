@@ -304,8 +304,11 @@ namespace PhotoViewer
 
         private void ProjectInfoBTN_Click(object sender, EventArgs e)
         {
+            System.Media.SoundPlayer player = new System.Media.SoundPlayer(@"C:\Windows\Media\Windows Print Complete.wav");
+            player.Play();
+
             var AppVer = Assembly.GetExecutingAssembly().GetName().Version.ToString();
-            MessageBox.Show("The Photo Viewer Project\nVersion: " + AppVer + "\nAn Open-source Photo Viewer And Simple Editor Intended For Use With Windows Sandbox\n\nBy TheSingleOne (TS1)\nProject Github - https://www.github.com/TheSingleOneYT/PhotoViewer" + "\nProject Website - https://TheSingleOneYT.github.io/PhotoViewer", "Project Information", MessageBoxButtons.OK);
+            MessageBox.Show("The Photo Viewer Project\nVersion: " + AppVer + "\nAn Open-source Photo Viewer And Simple Editor Intended For Use With Windows Sandbox\n\nBy TheSingleOne (TS1)\nProject Github - https://www.github.com/TheSingleOneYT/PhotoViewer" + "\nProject Website - https://TheSingleOneYT.github.io/PhotoViewer", "Project Information", MessageBoxButtons.OK, MessageBoxIcon.None, MessageBoxDefaultButton.Button1);
         }
 
         private void ProjectInfoBTN_MouseHover(object sender, EventArgs e)
