@@ -42,10 +42,3 @@ body:
       value: "Current version."
     validations:
       required: true
-  - type: checkboxes
-    id: terms
-    attributes:
-      label: Ready to submit?
-      description: Please double check to see if this issue is being worked on already and you have provided as much detail as possible.
-        label: I have checked my issue submission
-          required: true
