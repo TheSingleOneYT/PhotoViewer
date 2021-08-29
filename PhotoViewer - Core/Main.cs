@@ -6,7 +6,6 @@ using System.Windows.Forms;
 using System.Reflection;
 using System.Diagnostics;
 using System.Drawing.Printing;
-using System.Runtime.InteropServices;
 
 namespace PhotoViewer
 {
@@ -124,7 +123,7 @@ namespace PhotoViewer
             var Downloads = @"C:\Users\" + SystemInformation.UserName.ToString() + @"\Downloads";
             Application.Exit();
 
-            while (File.Exists(Downloads + "/Installer.msi") == false)
+            while (!File.Exists(Downloads + "/Installer.msi"))
             {
                 this.Cursor = Cursors.WaitCursor;
             }
@@ -133,7 +132,11 @@ namespace PhotoViewer
             notify.BalloonTipText = "Download Complete!";
             notify.ShowBalloonTip(1000);
 
-            Process.Start(Downloads + "/Installer.msi");
+            Process.Start(new ProcessStartInfo
+            {
+                FileName = Downloads + "/Installer.msi",
+                UseShellExecute = true
+            });
         }
 
         private void MainImage_Click(object sender, EventArgs e)
@@ -530,7 +533,11 @@ namespace PhotoViewer
             else if (e.Control == true && e.KeyCode == Keys.R)
             {
                 Application.Exit();
-                Process.Start(Application.ExecutablePath);
+                Process.Start(new ProcessStartInfo
+                {
+                    FileName = Application.ExecutablePath,
+                    UseShellExecute = true
+                });
             }
         }
 

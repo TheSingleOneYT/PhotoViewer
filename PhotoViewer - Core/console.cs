@@ -479,6 +479,41 @@ namespace PhotoViewer
                     UseShellExecute = true
                 });
             }
+            else if (In.StartsWith("update-do"))
+            {
+                var url = "https://raw.githubusercontent.com/TheSingleOneYT/PhotoViewer/main/Update/Version.txt";
+                var wc = new System.Net.WebClient();
+                var GithubVer = wc.DownloadString(url).Split(new[] { '\r', '\n' })[0].Replace(" ", "");
+                var AppVer = Assembly.GetExecutingAssembly().GetName().Version.ToString();
+
+                if (AppVer == GithubVer)
+                {
+                    MessageBox.Show("Could not find a newer version of PhotoViewer", "PhotoViewer", icon: MessageBoxIcon.Information, buttons: MessageBoxButtons.OK);
+                }
+                else
+                {
+                    MessageBox.Show("Newer version found, press OK to continue updating...", "PhotoViewer", icon: MessageBoxIcon.Information, buttons: MessageBoxButtons.OK);
+
+                    System.Diagnostics.Process.Start(new ProcessStartInfo
+                    {
+                        FileName = "https://github.com/TheSingleOneYT/PhotoViewer/releases/download/" + GithubVer + "/Installer.msi",
+                        UseShellExecute = true
+                    });
+                    var Downloads = @"C:\Users\" + SystemInformation.UserName.ToString() + @"\Downloads";
+                    Application.Exit();
+
+                    while (!File.Exists(Downloads + "/Installer.msi"))
+                    {
+                        this.Cursor = Cursors.WaitCursor;
+                    }
+
+                    Process.Start(new ProcessStartInfo
+                    {
+                        FileName = Downloads + "/Installer.msi",
+                        UseShellExecute = true
+                    });
+                }
+            }
             else
             {
                 OutputFeed.Text = InputFeed.Text.ToString() + " is not recognised.\nERROR: 1";
@@ -545,6 +580,10 @@ namespace PhotoViewer
             else if (InputFeed.Text.StartsWith("a") && !InputFeed.Text.StartsWith("application"))
             {
                 DYMText.Text = "Did you mean 'application'?";
+            }
+            else if (InputFeed.Text.StartsWith("u") && !InputFeed.Text.StartsWith("update"))
+            {
+                DYMText.Text = "Did you mean 'update'?";
             }
             else if (InputFeed.Text.StartsWith("edit-i") && !InputFeed.Text.StartsWith("edit-invert")) //edit //extensions-start
             {
@@ -621,6 +660,10 @@ namespace PhotoViewer
             else if (InputFeed.Text.StartsWith("application-r") && !InputFeed.Text.StartsWith("application-restart"))
             {
                 DYMText.Text = "Did you mean 'application-restart'?";
+            }
+            else if (InputFeed.Text.StartsWith("update-d") && !InputFeed.Text.StartsWith("update-do"))
+            {
+                DYMText.Text = "Did you mean 'update-do'?";
             }
             else
             {

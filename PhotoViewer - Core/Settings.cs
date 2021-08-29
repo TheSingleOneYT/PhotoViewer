@@ -122,7 +122,11 @@ namespace PhotoViewer
             notify.BalloonTipText = "Download Complete!";
             notify.ShowBalloonTip(1000);
 
-            Process.Start(Downloads + "/Installer.msi");
+            Process.Start(new ProcessStartInfo
+            {
+                FileName = Downloads + "/Installer.msi",
+                UseShellExecute = true
+            });
         }
 
         private void CFUOASChkBx_CheckedChanged(object sender, EventArgs e)
@@ -172,7 +176,11 @@ namespace PhotoViewer
 
         private void StartPhotoViewerLADBTN_Click(object sender, EventArgs e)
         {
-            Process.Start(Environment.GetEnvironmentVariable("LocalAppData") + "/PhotoViewer");
+            Process.Start(new ProcessStartInfo
+            {
+                FileName = Environment.GetEnvironmentVariable("LocalAppData") + "/PhotoViewer",
+                UseShellExecute = true
+            });
         }
 
         private void OtherBTN_Click(object sender, EventArgs e)
@@ -193,7 +201,11 @@ namespace PhotoViewer
 
         private void OpenPrefsFolderBTN_Click(object sender, EventArgs e)
         {
-            Process.Start((string)prefs);
+            Process.Start(new ProcessStartInfo
+            {
+                FileName = (string)prefs,
+                UseShellExecute = true
+            });
         }
 
         private void ASWOPS_CheckedChanged(object sender, EventArgs e)
@@ -226,7 +238,11 @@ namespace PhotoViewer
                 }
 
                 Application.Exit();
-                Process.Start(Application.ExecutablePath);
+                Process.Start(new ProcessStartInfo
+                {
+                    FileName = Application.ExecutablePath,
+                    UseShellExecute = true
+                });
             }
         }
     }
