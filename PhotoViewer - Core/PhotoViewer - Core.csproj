@@ -20,6 +20,18 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Include=".medfi\medfi_creator.cs" />
+    <Compile Include=".medfi\medfi_creator.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include=".medfi\medfi_creator.resx" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Edit Forms\mass_resize.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="Properties\Resources.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>

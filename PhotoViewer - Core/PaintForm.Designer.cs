@@ -37,12 +37,14 @@ namespace PhotoViewer
             this.WhiteSelector = new System.Windows.Forms.PictureBox();
             this.GreenSelector = new System.Windows.Forms.PictureBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.BlueSelector = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.MainImage)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.BlackSelector)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.RedSelector)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.WhiteSelector)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.GreenSelector)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.BlueSelector)).BeginInit();
             this.SuspendLayout();
             // 
             // Minimize
@@ -142,11 +144,23 @@ namespace PhotoViewer
             this.pictureBox1.TabIndex = 20;
             this.pictureBox1.TabStop = false;
             // 
+            // BlueSelector
+            // 
+            this.BlueSelector.BackColor = System.Drawing.Color.Blue;
+            this.BlueSelector.Location = new System.Drawing.Point(130, 7);
+            this.BlueSelector.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.BlueSelector.Name = "BlueSelector";
+            this.BlueSelector.Size = new System.Drawing.Size(23, 23);
+            this.BlueSelector.TabIndex = 21;
+            this.BlueSelector.TabStop = false;
+            this.BlueSelector.Click += new System.EventHandler(this.BlueSelector_Click);
+            // 
             // PaintForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(937, 485);
+            this.Controls.Add(this.BlueSelector);
             this.Controls.Add(this.GreenSelector);
             this.Controls.Add(this.WhiteSelector);
             this.Controls.Add(this.RedSelector);
@@ -169,6 +183,7 @@ namespace PhotoViewer
             ((System.ComponentModel.ISupportInitialize)(this.WhiteSelector)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.GreenSelector)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.BlueSelector)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -184,5 +199,6 @@ namespace PhotoViewer
         private System.Windows.Forms.PictureBox WhiteSelector;
         private System.Windows.Forms.PictureBox GreenSelector;
         private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.PictureBox BlueSelector;
     }
 }

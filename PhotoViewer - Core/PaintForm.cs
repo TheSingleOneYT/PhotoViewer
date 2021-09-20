@@ -75,6 +75,10 @@ namespace PhotoViewer
             {
                 pen = new Pen(Color.White, 1);
             }
+            else if (CS.ToString() == "blue")
+            {
+                pen = new Pen(Color.Blue, 1);
+            }
 
             Bitmap b1 = new Bitmap(MainImage.Image);
 
@@ -112,6 +116,10 @@ namespace PhotoViewer
                 else if (CS.ToString() == "white")
                 {
                     pen = new Pen(Color.White, 1);
+                }
+                else if (CS.ToString() == "blue")
+                {
+                    pen = new Pen(Color.Blue, 1);
                 }
 
                 Bitmap b1 = new Bitmap(MainImage.Image);
@@ -156,6 +164,11 @@ namespace PhotoViewer
         private void WhiteSelector_Click(object sender, EventArgs e)
         {
             File.WriteAllText(LocalAppData + "/PhotoViewer/ColourSelected.txt", "white");
+        }
+
+        private void BlueSelector_Click(object sender, EventArgs e)
+        {
+            File.WriteAllText(LocalAppData + "/PhotoViewer/ColourSelected.txt", "blue");
         }
     }
 }
