@@ -80,6 +80,7 @@ namespace PhotoViewer
             this.HelpLabel = new System.Windows.Forms.Label();
             this.MainImage = new PhotoViewer.MovablePB(this.components);
             this.ConsoleBTN = new System.Windows.Forms.Button();
+            this.massFilterToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.MainImageContextStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ColourBar)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.MiniControl)).BeginInit();
@@ -327,7 +328,8 @@ namespace PhotoViewer
             // openMedfiToolStripMenuItem
             // 
             this.openMedfiToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.massResizeToolStripMenuItem});
+            this.massResizeToolStripMenuItem,
+            this.massFilterToolStripMenuItem});
             this.openMedfiToolStripMenuItem.Name = "openMedfiToolStripMenuItem";
             this.openMedfiToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.openMedfiToolStripMenuItem.Text = "Open .medfi";
@@ -335,7 +337,7 @@ namespace PhotoViewer
             // massResizeToolStripMenuItem
             // 
             this.massResizeToolStripMenuItem.Name = "massResizeToolStripMenuItem";
-            this.massResizeToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
+            this.massResizeToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.massResizeToolStripMenuItem.Text = "Mass Resize";
             this.massResizeToolStripMenuItem.Click += new System.EventHandler(this.massResizeToolStripMenuItem_Click);
             // 
@@ -545,6 +547,13 @@ namespace PhotoViewer
             this.ConsoleBTN.UseVisualStyleBackColor = true;
             this.ConsoleBTN.Click += new System.EventHandler(this.ConsoleBTN_Click);
             // 
+            // massFilterToolStripMenuItem
+            // 
+            this.massFilterToolStripMenuItem.Name = "massFilterToolStripMenuItem";
+            this.massFilterToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.massFilterToolStripMenuItem.Text = "Mass Filter";
+            this.massFilterToolStripMenuItem.Click += new System.EventHandler(this.massFilterToolStripMenuItem_Click);
+            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -645,6 +654,7 @@ namespace PhotoViewer
         private System.Windows.Forms.ToolStripMenuItem openMedfiToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem massResizeToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem createmedfiToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem massFilterToolStripMenuItem;
     }
 }
 

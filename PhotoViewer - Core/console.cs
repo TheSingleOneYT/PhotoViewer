@@ -594,7 +594,7 @@ namespace PhotoViewer
             {
                 DYMText.Text = "Did you mean 'update'?";
             }
-            else if (InputFeed.Text.StartsWith("re") && !InputFeed.Text.StartsWith("update"))
+            else if (InputFeed.Text.StartsWith("re") && !InputFeed.Text.StartsWith("resize"))
             {
                 DYMText.Text = "Did you mean 'resize'?";
             }
@@ -678,7 +678,7 @@ namespace PhotoViewer
             {
                 DYMText.Text = "Did you mean 'update-do'?";
             }
-            else if (InputFeed.Text.StartsWith("resize-show") && !InputFeed.Text.StartsWith("update-do")) //update
+            else if (InputFeed.Text.StartsWith("resize-s") && !InputFeed.Text.StartsWith("resize-show")) //resize
             {
                 DYMText.Text = "Did you mean 'resize-show'?";
             }

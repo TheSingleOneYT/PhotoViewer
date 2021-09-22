@@ -312,7 +312,7 @@ namespace PhotoViewer
             player.Play();
 
             var AppVer = Assembly.GetExecutingAssembly().GetName().Version.ToString();
-            MessageBox.Show("The Photo Viewer Project\nVersion: " + AppVer + "\nAn Open-source Photo Viewer And Simple Editor Intended For Use With Windows Sandbox\n\nBy TheSingleOne (TS1)\nProject Github - https://www.github.com/TheSingleOneYT/PhotoViewer" + "\nProject Website - https://TheSingleOneYT.github.io/PhotoViewer", "Project Information", MessageBoxButtons.OK, MessageBoxIcon.None, MessageBoxDefaultButton.Button1);
+            MessageBox.Show("The Photo Viewer Project\nVersion: " + AppVer + "\nAn Open-source Photo Viewer And Simple Editor.\n\nBy TheSingleOne (TS1)\nProject Github - https://www.github.com/TheSingleOneYT/PhotoViewer" + "\nProject Website - https://TheSingleOneYT.github.io/PhotoViewer", "Project Information", MessageBoxButtons.OK, MessageBoxIcon.None, MessageBoxDefaultButton.Button1);
         }
 
         private void ProjectInfoBTN_MouseHover(object sender, EventArgs e)
@@ -700,16 +700,30 @@ namespace PhotoViewer
         {
             OpenFileDialog ofd = new OpenFileDialog();
             ofd.Filter = "MEDFI | *.medfi";
-            ofd.ShowDialog();
 
-            mass_resize mr = new mass_resize(ofd.FileName);
-            mr.Show();
+            if (ofd.ShowDialog() == DialogResult.OK)
+            {
+                mass_resize mr = new mass_resize(ofd.FileName);
+                mr.Show();
+            }
         }
 
         private void createmedfiToolStripMenuItem_Click(object sender, EventArgs e)
         {
             medfi.medfi_creator mc = new medfi.medfi_creator();
             mc.Show();
+        }
+
+        private void massFilterToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog ofd = new OpenFileDialog();
+            ofd.Filter = "MEDFI | *.medfi";
+
+            if (ofd.ShowDialog() == DialogResult.OK)
+            {
+                mass_filter mfi = new mass_filter(ofd.FileName);
+                mfi.Show();
+            }
         }
     }
 }
