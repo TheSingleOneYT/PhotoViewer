@@ -1,10 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
-using System.Linq;
 using System.Reflection;
 using System.Windows.Forms;
 
@@ -190,7 +188,9 @@ namespace PhotoViewer
                     "INFO - displays information about Photo Viewer. Extensions: ver, projectinfo, github, website\n" +
                     "CONSOLE - controls the console form. Extensions: hide\n" +
                     "RUN - runs extension. Extension: website, github\n" +
-                    "APPLICATION - controls the application. Extensions: show (REQUIRES A PARAMETER), kill, restart" +
+                    "APPLICATION - controls the application. Extensions: show (REQUIRES A PARAMETER), kill, restart\n" +
+                    "UPDATE - update the application. Extensions: do\n" +
+                    "RESIZE - resize an image at a specified location. Extensions: show" +
                     "\n\nPARAMETERS:\n" +
                     "APPLICATION PARAMETERS: /s, /h\n" +
                     "GENERAL PARAMETERS: /c";
@@ -447,7 +447,11 @@ namespace PhotoViewer
             else if (In.StartsWith("application-restart"))
             {
                 Application.Exit();
-                System.Diagnostics.Process.Start(Application.ExecutablePath);
+                System.Diagnostics.Process.Start(new ProcessStartInfo
+                {
+                    FileName = Application.ExecutablePath,
+                    UseShellExecute = true
+                });
             }
             else if (In.StartsWith("info-website"))
             {
@@ -514,6 +518,11 @@ namespace PhotoViewer
                     });
                 }
             }
+            else if (In.StartsWith("resize-show"))
+            {
+                Edit_Forms.resize r = new Edit_Forms.resize(Image.FromFile(In.Remove(0, 12)));
+                r.Show();
+            }
             else
             {
                 OutputFeed.Text = InputFeed.Text.ToString() + " is not recognised.\nERROR: 1";
@@ -573,7 +582,7 @@ namespace PhotoViewer
             {
                 DYMText.Text = "Did you mean 'console'?";
             }
-            else if (InputFeed.Text.StartsWith("r") && !InputFeed.Text.StartsWith("run"))
+            else if (InputFeed.Text.StartsWith("ru") && !InputFeed.Text.StartsWith("run"))
             {
                 DYMText.Text = "Did you mean 'run'?";
             }
@@ -584,6 +593,10 @@ namespace PhotoViewer
             else if (InputFeed.Text.StartsWith("u") && !InputFeed.Text.StartsWith("update"))
             {
                 DYMText.Text = "Did you mean 'update'?";
+            }
+            else if (InputFeed.Text.StartsWith("re") && !InputFeed.Text.StartsWith("resize"))
+            {
+                DYMText.Text = "Did you mean 'resize'?";
             }
             else if (InputFeed.Text.StartsWith("edit-i") && !InputFeed.Text.StartsWith("edit-invert")) //edit //extensions-start
             {
@@ -661,9 +674,13 @@ namespace PhotoViewer
             {
                 DYMText.Text = "Did you mean 'application-restart'?";
             }
-            else if (InputFeed.Text.StartsWith("update-d") && !InputFeed.Text.StartsWith("update-do"))
+            else if (InputFeed.Text.StartsWith("update-d") && !InputFeed.Text.StartsWith("update-do")) //update
             {
                 DYMText.Text = "Did you mean 'update-do'?";
+            }
+            else if (InputFeed.Text.StartsWith("resize-s") && !InputFeed.Text.StartsWith("resize-show")) //resize
+            {
+                DYMText.Text = "Did you mean 'resize-show'?";
             }
             else
             {

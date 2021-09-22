@@ -6,6 +6,7 @@ using System.Windows.Forms;
 using System.Reflection;
 using System.Diagnostics;
 using System.Drawing.Printing;
+using PhotoViewer.Edit_Forms;
 
 namespace PhotoViewer
 {
@@ -311,7 +312,7 @@ namespace PhotoViewer
             player.Play();
 
             var AppVer = Assembly.GetExecutingAssembly().GetName().Version.ToString();
-            MessageBox.Show("The Photo Viewer Project\nVersion: " + AppVer + "\nAn Open-source Photo Viewer And Simple Editor Intended For Use With Windows Sandbox\n\nBy TheSingleOne (TS1)\nProject Github - https://www.github.com/TheSingleOneYT/PhotoViewer" + "\nProject Website - https://TheSingleOneYT.github.io/PhotoViewer", "Project Information", MessageBoxButtons.OK, MessageBoxIcon.None, MessageBoxDefaultButton.Button1);
+            MessageBox.Show("The Photo Viewer Project\nVersion: " + AppVer + "\nAn Open-source Photo Viewer And Simple Editor.\n\nBy TheSingleOne (TS1)\nProject Github - https://www.github.com/TheSingleOneYT/PhotoViewer" + "\nProject Website - https://TheSingleOneYT.github.io/PhotoViewer", "Project Information", MessageBoxButtons.OK, MessageBoxIcon.None, MessageBoxDefaultButton.Button1);
         }
 
         private void ProjectInfoBTN_MouseHover(object sender, EventArgs e)
@@ -530,6 +531,10 @@ namespace PhotoViewer
             {
                 ResetZoomBTN.PerformClick();
             }
+            else if (e.Control == true && e.KeyCode == Keys.R && e.Shift == true)
+            {
+                EditCMS.Items[4].PerformClick();
+            }
             else if (e.Control == true && e.KeyCode == Keys.R)
             {
                 Application.Exit();
@@ -683,6 +688,42 @@ namespace PhotoViewer
             MainImage.DrawToBitmap(bm, new Rectangle(0, 0, MainImage.Width, MainImage.Height));
             e.Graphics.DrawImage(bm, 0, 0);
             bm.Dispose();
+        }
+
+        private void resizeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            resize r = new resize(MainImage.Image);
+            r.Show();
+        }
+
+        private void massResizeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog ofd = new OpenFileDialog();
+            ofd.Filter = "MEDFI | *.medfi";
+
+            if (ofd.ShowDialog() == DialogResult.OK)
+            {
+                mass_resize mr = new mass_resize(ofd.FileName);
+                mr.Show();
+            }
+        }
+
+        private void createmedfiToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            medfi.medfi_creator mc = new medfi.medfi_creator();
+            mc.Show();
+        }
+
+        private void massFilterToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog ofd = new OpenFileDialog();
+            ofd.Filter = "MEDFI | *.medfi";
+
+            if (ofd.ShowDialog() == DialogResult.OK)
+            {
+                mass_filter mfi = new mass_filter(ofd.FileName);
+                mfi.Show();
+            }
         }
     }
 }
