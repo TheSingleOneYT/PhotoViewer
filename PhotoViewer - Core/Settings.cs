@@ -83,20 +83,24 @@ namespace PhotoViewer
         private void CFUBTN_Click(object sender, EventArgs e)
         {
             var url = "https://raw.githubusercontent.com/TheSingleOneYT/PhotoViewer/main/Update/Version.txt";
+            var prURL = "https://raw.githubusercontent.com/TheSingleOneYT/PhotoViewer/pre-release/Update/Version.txt";
             var wc = new System.Net.WebClient();
             var GithubVer = wc.DownloadString(url).Split(new[] { '\r', '\n' })[0].Replace(" ", "");
+            var PreRelease = wc.DownloadString(prURL).Split(new[] { '\r', '\n' })[0].Replace(" ", "");
             var AppVer = Assembly.GetExecutingAssembly().GetName().Version.ToString();
 
-            if (AppVer == GithubVer)
+            if (AppVer != GithubVer && PreRelease == AppVer)
             {
                 notify.Icon = SystemIcons.Application;
-                notify.BalloonTipText = "You have the latest version of Photo Viewer & Editor.";
+                notify.BalloonTipText = "You are testing a Pre-Release. Downgrade to a release?";
                 notify.ShowBalloonTip(1000);
+                notify.BalloonTipClicked += Notify_BalloonTipClicked;
+                NewVer = GithubVer;
             }
-            else
+            else if (AppVer != GithubVer)
             {
                 notify.Icon = SystemIcons.Application;
-                notify.BalloonTipText = "A new version of PhotoViewer is available. Click to install new version";
+                notify.BalloonTipText = "A new version of PhotoViewer is available. Click to install new version.";
                 notify.ShowBalloonTip(1000);
                 notify.BalloonTipClicked += Notify_BalloonTipClicked;
                 NewVer = GithubVer;
@@ -105,27 +109,13 @@ namespace PhotoViewer
 
         private void Notify_BalloonTipClicked(object sender, EventArgs e)
         {
-            System.Diagnostics.Process.Start(new ProcessStartInfo
-            {
-                FileName = "https://github.com/TheSingleOneYT/PhotoViewer/releases/download/" + NewVer + "/Installer.msi",
-                UseShellExecute = true
-            });
-            var Downloads = @"C:\Users\" + SystemInformation.UserName.ToString() + @"\Downloads";
+            File.WriteAllText(Directory.GetCurrentDirectory() + "/NewVer.txt", NewVer.ToString());
+
             Application.Exit();
-
-            while (File.Exists(Downloads + "/Installer.msi") == false)
-            {
-                this.Cursor = Cursors.WaitCursor;
-            }
-
-            notify.Icon = SystemIcons.Application;
-            notify.BalloonTipText = "Download Complete!";
-            notify.ShowBalloonTip(1000);
 
             Process.Start(new ProcessStartInfo
             {
-                FileName = Downloads + "/Installer.msi",
-                UseShellExecute = true
+                FileName = Directory.GetCurrentDirectory() + "/Updater.exe"
             });
         }
 

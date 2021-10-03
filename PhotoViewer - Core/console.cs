@@ -52,6 +52,7 @@ namespace PhotoViewer
         public object LocalAppData = Environment.GetEnvironmentVariable("LocalAppData");
 
         public object prefs = Environment.GetEnvironmentVariable("LocalAppData").ToString() + "/PhotoViewer/Preferences";
+        private object NewVer;
 
         private void Submit_Click(object sender, EventArgs e)
         {
@@ -486,35 +487,40 @@ namespace PhotoViewer
             else if (In.StartsWith("update-do"))
             {
                 var url = "https://raw.githubusercontent.com/TheSingleOneYT/PhotoViewer/main/Update/Version.txt";
+                var prURL = "https://raw.githubusercontent.com/TheSingleOneYT/PhotoViewer/pre-release/Update/Version.txt";
                 var wc = new System.Net.WebClient();
                 var GithubVer = wc.DownloadString(url).Split(new[] { '\r', '\n' })[0].Replace(" ", "");
+                var PreRelease = wc.DownloadString(prURL).Split(new[] { '\r', '\n' })[0].Replace(" ", "");
                 var AppVer = Assembly.GetExecutingAssembly().GetName().Version.ToString();
 
                 if (AppVer == GithubVer)
                 {
                     MessageBox.Show("Could not find a newer version of PhotoViewer", "PhotoViewer", icon: MessageBoxIcon.Information, buttons: MessageBoxButtons.OK);
                 }
-                else
+                else if (AppVer != GithubVer && PreRelease != AppVer)
                 {
                     MessageBox.Show("Newer version found, press OK to continue updating...", "PhotoViewer", icon: MessageBoxIcon.Information, buttons: MessageBoxButtons.OK);
 
-                    System.Diagnostics.Process.Start(new ProcessStartInfo
-                    {
-                        FileName = "https://github.com/TheSingleOneYT/PhotoViewer/releases/download/" + GithubVer + "/Installer.msi",
-                        UseShellExecute = true
-                    });
-                    var Downloads = @"C:\Users\" + SystemInformation.UserName.ToString() + @"\Downloads";
-                    Application.Exit();
+                    File.WriteAllText(Directory.GetCurrentDirectory() + "/NewVer.txt", NewVer.ToString());
 
-                    while (!File.Exists(Downloads + "/Installer.msi"))
-                    {
-                        this.Cursor = Cursors.WaitCursor;
-                    }
+                    Application.Exit();
 
                     Process.Start(new ProcessStartInfo
                     {
-                        FileName = Downloads + "/Installer.msi",
-                        UseShellExecute = true
+                        FileName = Directory.GetCurrentDirectory() + "/Updater.exe"
+                    });
+                }
+                else if (AppVer != GithubVer && PreRelease == AppVer)
+                {
+                    MessageBox.Show("You are testing a Pre-Release. Downgrade to a release?", "PhotoViewer", icon: MessageBoxIcon.Information, buttons: MessageBoxButtons.OK);
+
+                    File.WriteAllText(Directory.GetCurrentDirectory() + "/NewVer.txt", NewVer.ToString());
+
+                    Application.Exit();
+
+                    Process.Start(new ProcessStartInfo
+                    {
+                        FileName = Directory.GetCurrentDirectory() + "/Updater.exe"
                     });
                 }
             }

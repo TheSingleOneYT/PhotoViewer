@@ -74,18 +74,24 @@ namespace PhotoViewer
                 if (CFU == "true")
                 {
                     var url = "https://raw.githubusercontent.com/TheSingleOneYT/PhotoViewer/main/Update/Version.txt";
+                    var prURL = "https://raw.githubusercontent.com/TheSingleOneYT/PhotoViewer/pre-release/Update/Version.txt";
                     var wc = new System.Net.WebClient();
                     var GithubVer = wc.DownloadString(url).Split(new[] { '\r', '\n' })[0].Replace(" ", "");
+                    var PreRelease = wc.DownloadString(prURL).Split(new[] { '\r', '\n' })[0].Replace(" ", "");
                     var AppVer = Assembly.GetExecutingAssembly().GetName().Version.ToString();
 
-                    if (AppVer == GithubVer)
-                    {
-
-                    }
-                    else
+                    if (AppVer != GithubVer && PreRelease == AppVer)
                     {
                         notify.Icon = SystemIcons.Application;
-                        notify.BalloonTipText = "A new version of PhotoViewer is available. Click to install new version";
+                        notify.BalloonTipText = "You are testing a Pre-Release. Downgrade to a release?";
+                        notify.ShowBalloonTip(1000);
+                        notify.BalloonTipClicked += Notify_BalloonTipClicked;
+                        NewVer = GithubVer;
+                    }
+                    else if (AppVer != GithubVer)
+                    {
+                        notify.Icon = SystemIcons.Application;
+                        notify.BalloonTipText = "A new version of PhotoViewer is available. Click to install new version.";
                         notify.ShowBalloonTip(1000);
                         notify.BalloonTipClicked += Notify_BalloonTipClicked;
                         NewVer = GithubVer;
@@ -95,18 +101,24 @@ namespace PhotoViewer
             else
             {
                 var url = "https://raw.githubusercontent.com/TheSingleOneYT/PhotoViewer/main/Update/Version.txt";
+                var prURL = "https://raw.githubusercontent.com/TheSingleOneYT/PhotoViewer/pre-release/Update/Version.txt";
                 var wc = new System.Net.WebClient();
                 var GithubVer = wc.DownloadString(url).Split(new[] { '\r', '\n' })[0].Replace(" ", "");
+                var PreRelease = wc.DownloadString(prURL).Split(new[] { '\r', '\n' })[0].Replace(" ", "");
                 var AppVer = Assembly.GetExecutingAssembly().GetName().Version.ToString();
 
-                if (AppVer == GithubVer)
-                {
-
-                }
-                else
+                if (AppVer != GithubVer && PreRelease == AppVer)
                 {
                     notify.Icon = SystemIcons.Application;
-                    notify.BalloonTipText = "A new version of PhotoViewer is available. Click to install new version";
+                    notify.BalloonTipText = "You are testing a Pre-Release. Downgrade to a release?";
+                    notify.ShowBalloonTip(1000);
+                    notify.BalloonTipClicked += Notify_BalloonTipClicked;
+                    NewVer = GithubVer;
+                }
+                else if (AppVer != GithubVer && PreRelease != AppVer)
+                {
+                    notify.Icon = SystemIcons.Application;
+                    notify.BalloonTipText = "A new version of PhotoViewer is available. Click to install new version.";
                     notify.ShowBalloonTip(1000);
                     notify.BalloonTipClicked += Notify_BalloonTipClicked;
                     NewVer = GithubVer;
@@ -116,27 +128,13 @@ namespace PhotoViewer
 
         private void Notify_BalloonTipClicked(object sender, EventArgs e)
         {
-            System.Diagnostics.Process.Start(new ProcessStartInfo
-            {
-                FileName = "https://github.com/TheSingleOneYT/PhotoViewer/releases/download/" + NewVer + "/Installer.msi",
-                UseShellExecute = true
-            });
-            var Downloads = @"C:\Users\" + SystemInformation.UserName.ToString() + @"\Downloads";
+            File.WriteAllText(Directory.GetCurrentDirectory() + "/NewVer.txt", NewVer.ToString());
+
             Application.Exit();
-
-            while (!File.Exists(Downloads + "/Installer.msi"))
-            {
-                this.Cursor = Cursors.WaitCursor;
-            }
-
-            notify.Icon = SystemIcons.Application;
-            notify.BalloonTipText = "Download Complete!";
-            notify.ShowBalloonTip(1000);
 
             Process.Start(new ProcessStartInfo
             {
-                FileName = Downloads + "/Installer.msi",
-                UseShellExecute = true
+                FileName = Directory.GetCurrentDirectory() + "/Updater.exe"
             });
         }
 
@@ -178,7 +176,9 @@ namespace PhotoViewer
         {
             MainImage.Image.RotateFlip(RotateFlipType.Rotate90FlipNone);
             MainImage.Refresh();
-            Main.ActiveForm.Text = "Photo Viewer & Editor - " + File.ReadAllText(LocalAppData + "/PhotoViewer/CurrentImportName.txt") + File.ReadAllText(LocalAppData + "/PhotoViewer/CurrentImportExt.txt") + " *";
+
+            if (File.Exists(LocalAppData + "/PhotoViewer/CurrentImportName.txt") && File.Exists(LocalAppData + "/PhotoViewer/CurrentImportExt.txt"))
+                Main.ActiveForm.Text = "Photo Viewer & Editor - " + File.ReadAllText(LocalAppData + "/PhotoViewer/CurrentImportName.txt") + File.ReadAllText(LocalAppData + "/PhotoViewer/CurrentImportExt.txt") + " *";
         }
 
         private void SaveBTN_Click(object sender, EventArgs e)
@@ -250,7 +250,8 @@ namespace PhotoViewer
                     MainImage.Image.Save(dialog.FileName + ".png", ImageFormat.Png);
                 }
 
-                Main.ActiveForm.Text = "Photo Viewer & Editor - " + File.ReadAllText(LocalAppData + "/PhotoViewer/CurrentImportName.txt") + File.ReadAllText(LocalAppData + "/PhotoViewer/CurrentImportExt.txt");
+                if (File.Exists(LocalAppData + "/PhotoViewer/CurrentImportName.txt") && File.Exists(LocalAppData + "/PhotoViewer/CurrentImportExt.txt"))
+                    Main.ActiveForm.Text = "Photo Viewer & Editor - " + File.ReadAllText(LocalAppData + "/PhotoViewer/CurrentImportName.txt") + File.ReadAllText(LocalAppData + "/PhotoViewer/CurrentImportExt.txt");
             }
         }
 
@@ -258,14 +259,18 @@ namespace PhotoViewer
         {
             MainImage.Image.RotateFlip(RotateFlipType.RotateNoneFlipX);
             MainImage.Refresh();
-            Main.ActiveForm.Text = "Photo Viewer & Editor - " + File.ReadAllText(LocalAppData + "/PhotoViewer/CurrentImportName.txt") + File.ReadAllText(LocalAppData + "/PhotoViewer/CurrentImportExt.txt") + " *";
+
+            if (File.Exists(LocalAppData + "/PhotoViewer/CurrentImportName.txt") && File.Exists(LocalAppData + "/PhotoViewer/CurrentImportExt.txt"))
+                Main.ActiveForm.Text = "Photo Viewer & Editor - " + File.ReadAllText(LocalAppData + "/PhotoViewer/CurrentImportName.txt") + File.ReadAllText(LocalAppData + "/PhotoViewer/CurrentImportExt.txt") + " *";
         }
 
         private void FlipYBTN_Click(object sender, EventArgs e)
         {
             MainImage.Image.RotateFlip(RotateFlipType.RotateNoneFlipY);
             MainImage.Refresh();
-            Main.ActiveForm.Text = "Photo Viewer & Editor - " + File.ReadAllText(LocalAppData + "/PhotoViewer/CurrentImportName.txt") + File.ReadAllText(LocalAppData + "/PhotoViewer/CurrentImportExt.txt") + " *";
+
+            if (File.Exists(LocalAppData + "/PhotoViewer/CurrentImportName.txt") && File.Exists(LocalAppData + "/PhotoViewer/CurrentImportExt.txt"))
+                Main.ActiveForm.Text = "Photo Viewer & Editor - " + File.ReadAllText(LocalAppData + "/PhotoViewer/CurrentImportName.txt") + File.ReadAllText(LocalAppData + "/PhotoViewer/CurrentImportExt.txt") + " *";
         }
 
         private void CloseLabel_Click(object sender, EventArgs e)
@@ -326,7 +331,8 @@ namespace PhotoViewer
 
             this.Cursor = Cursors.WaitCursor;
 
-            Main.ActiveForm.Text = "Photo Viewer & Editor - " + File.ReadAllText(LocalAppData + "/PhotoViewer/CurrentImportName.txt") + File.ReadAllText(LocalAppData + "/PhotoViewer/CurrentImportExt.txt") + " *";
+            if (File.Exists(LocalAppData + "/PhotoViewer/CurrentImportName.txt") && File.Exists(LocalAppData + "/PhotoViewer/CurrentImportExt.txt"))
+                Main.ActiveForm.Text = "Photo Viewer & Editor - " + File.ReadAllText(LocalAppData + "/PhotoViewer/CurrentImportName.txt") + File.ReadAllText(LocalAppData + "/PhotoViewer/CurrentImportExt.txt") + " *";
 
             for (int x = 0; x < newBitmap.Width; x++)
             {
@@ -350,7 +356,8 @@ namespace PhotoViewer
         {
             newBitmap = new Bitmap(MainImage.Image);
 
-            Main.ActiveForm.Text = "Photo Viewer & Editor - " + File.ReadAllText(LocalAppData + "/PhotoViewer/CurrentImportName.txt") + File.ReadAllText(LocalAppData + "/PhotoViewer/CurrentImportExt.txt") + " *";
+            if (File.Exists(LocalAppData + "/PhotoViewer/CurrentImportName.txt") && File.Exists(LocalAppData + "/PhotoViewer/CurrentImportExt.txt"))
+                Main.ActiveForm.Text = "Photo Viewer & Editor - " + File.ReadAllText(LocalAppData + "/PhotoViewer/CurrentImportName.txt") + File.ReadAllText(LocalAppData + "/PhotoViewer/CurrentImportExt.txt") + " *";
 
             this.Cursor = Cursors.WaitCursor;
 
@@ -442,6 +449,28 @@ namespace PhotoViewer
 
                 if (dialog == DialogResult.OK)
                 {
+                    if (File.Exists(LocalAppData + "/PhotoViewer/CurrentImportName.txt") && File.Exists(LocalAppData + "/PhotoViewer/CurrentImportExt.txt") && File.Exists(LocalAppData + "/PhotoViewer/CurrentImportPath.txt"))
+                    {
+                        MainImage.Image = null;
+
+                        var path = File.ReadAllText(LocalAppData + "/PhotoViewer/CurrentImportPath.txt");
+                        var name = File.ReadAllText(LocalAppData + "/PhotoViewer/CurrentImportName.txt");
+                        var ext = File.ReadAllText(LocalAppData + "/PhotoViewer/CurrentImportExt.txt");
+
+                        MainImage.Image = Image.FromFile(path + "/" + name + ext);
+
+                        Main.ActiveForm.Text = "Photo Viewer & Editor - " + File.ReadAllText(LocalAppData + "/PhotoViewer/CurrentImportName.txt") + File.ReadAllText(LocalAppData + "/PhotoViewer/CurrentImportExt.txt");
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("This image was pasted or dragged in and dropped. This means the original file cannot be found.", "PhotoViewer", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            else
+            {
+                if (File.Exists(LocalAppData + "/PhotoViewer/CurrentImportName.txt") && File.Exists(LocalAppData + "/PhotoViewer/CurrentImportExt.txt") && File.Exists(LocalAppData + "/PhotoViewer/CurrentImportPath.txt"))
+                {
                     MainImage.Image = null;
 
                     var path = File.ReadAllText(LocalAppData + "/PhotoViewer/CurrentImportPath.txt");
@@ -452,18 +481,10 @@ namespace PhotoViewer
 
                     Main.ActiveForm.Text = "Photo Viewer & Editor - " + File.ReadAllText(LocalAppData + "/PhotoViewer/CurrentImportName.txt") + File.ReadAllText(LocalAppData + "/PhotoViewer/CurrentImportExt.txt");
                 }
-            }
-            else
-            {
-                MainImage.Image = null;
-
-                var path = File.ReadAllText(LocalAppData + "/PhotoViewer/CurrentImportPath.txt");
-                var name = File.ReadAllText(LocalAppData + "/PhotoViewer/CurrentImportName.txt");
-                var ext = File.ReadAllText(LocalAppData + "/PhotoViewer/CurrentImportExt.txt");
-
-                MainImage.Image = Image.FromFile(path + "/" + name + ext);
-
-                Main.ActiveForm.Text = "Photo Viewer & Editor - " + File.ReadAllText(LocalAppData + "/PhotoViewer/CurrentImportName.txt") + File.ReadAllText(LocalAppData + "/PhotoViewer/CurrentImportExt.txt");
+                else
+                {
+                    MessageBox.Show("This image was pasted or dragged in and dropped. This means the original file cannot be found.", "PhotoViewer", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
         }
 
@@ -611,7 +632,8 @@ namespace PhotoViewer
             if (File.Exists(LocalAppData + "/PhotoViewer/%%Temp.png"))
             {
                 MainImage.Image = Image.FromFile(LocalAppData + "/PhotoViewer/%%Temp.png");
-                Main.ActiveForm.Text = "Photo Viewer & Editor - " + File.ReadAllText(LocalAppData + "/PhotoViewer/CurrentImportName.txt") + File.ReadAllText(LocalAppData + "/PhotoViewer/CurrentImportExt.txt") + " *";
+                if (File.Exists(LocalAppData + "/PhotoViewer/CurrentImportName.txt") && File.Exists(LocalAppData + "/PhotoViewer/CurrentImportExt.txt"))
+                    Main.ActiveForm.Text = "Photo Viewer & Editor - " + File.ReadAllText(LocalAppData + "/PhotoViewer/CurrentImportName.txt") + File.ReadAllText(LocalAppData + "/PhotoViewer/CurrentImportExt.txt") + " *";
             }
 
             if (MainImage.Image == null)
@@ -651,7 +673,9 @@ namespace PhotoViewer
         {
             MainImage.Image.RotateFlip(RotateFlipType.Rotate180FlipNone);
             MainImage.Refresh();
-            Main.ActiveForm.Text = "Photo Viewer & Editor - " + File.ReadAllText(LocalAppData + "/PhotoViewer/CurrentImportName.txt") + File.ReadAllText(LocalAppData + "/PhotoViewer/CurrentImportExt.txt") + " *";
+
+            if (File.Exists(LocalAppData + "/PhotoViewer/CurrentImportName.txt") && File.Exists(LocalAppData + "/PhotoViewer/CurrentImportExt.txt"))
+                Main.ActiveForm.Text = "Photo Viewer & Editor - " + File.ReadAllText(LocalAppData + "/PhotoViewer/CurrentImportName.txt") + File.ReadAllText(LocalAppData + "/PhotoViewer/CurrentImportExt.txt") + " *";
 
         }
 
@@ -660,7 +684,9 @@ namespace PhotoViewer
             MainImage.Image.RotateFlip(RotateFlipType.Rotate180FlipNone);
             MainImage.Image.RotateFlip(RotateFlipType.Rotate90FlipNone);
             MainImage.Refresh();
-            Main.ActiveForm.Text = "Photo Viewer & Editor - " + File.ReadAllText(LocalAppData + "/PhotoViewer/CurrentImportName.txt") + File.ReadAllText(LocalAppData + "/PhotoViewer/CurrentImportExt.txt") + " *";
+
+            if (File.Exists(LocalAppData + "/PhotoViewer/CurrentImportName.txt") && File.Exists(LocalAppData + "/PhotoViewer/CurrentImportExt.txt"))
+                Main.ActiveForm.Text = "Photo Viewer & Editor - " + File.ReadAllText(LocalAppData + "/PhotoViewer/CurrentImportName.txt") + File.ReadAllText(LocalAppData + "/PhotoViewer/CurrentImportExt.txt") + " *";
         }
 
         private void ConsoleBTN_Click(object sender, EventArgs e)
