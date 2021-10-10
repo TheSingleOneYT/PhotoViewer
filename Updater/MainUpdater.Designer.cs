@@ -33,8 +33,8 @@ namespace Updater
             this.EditingBar = new System.Windows.Forms.PictureBox();
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
             this.label1 = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
             this.UpdateInfo = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.EditingBar)).BeginInit();
             this.SuspendLayout();
             // 
@@ -50,7 +50,7 @@ namespace Updater
             // 
             // progressBar1
             // 
-            this.progressBar1.Location = new System.Drawing.Point(7, 93);
+            this.progressBar1.Location = new System.Drawing.Point(7, 64);
             this.progressBar1.Name = "progressBar1";
             this.progressBar1.Size = new System.Drawing.Size(316, 23);
             this.progressBar1.TabIndex = 29;
@@ -58,21 +58,11 @@ namespace Updater
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(8, 71);
+            this.label1.Location = new System.Drawing.Point(8, 42);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(69, 15);
             this.label1.TabIndex = 30;
             this.label1.Text = "Current file:";
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(7, 40);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(316, 23);
-            this.button1.TabIndex = 31;
-            this.button1.Text = "Start";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // UpdateInfo
             // 
@@ -86,13 +76,22 @@ namespace Updater
             this.UpdateInfo.TabIndex = 28;
             this.UpdateInfo.Text = "New: x.x.x.x";
             // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(8, 90);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(96, 15);
+            this.label2.TabIndex = 31;
+            this.label2.Text = "Updater Version: ";
+            // 
             // MainUpdater
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(335, 123);
+            this.ClientSize = new System.Drawing.Size(335, 112);
             this.ControlBox = false;
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.progressBar1);
             this.Controls.Add(this.UpdateInfo);
@@ -113,8 +112,8 @@ namespace Updater
         private System.Windows.Forms.PictureBox EditingBar;
         private System.Windows.Forms.ProgressBar progressBar1;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Label UpdateInfo;
+        private System.Windows.Forms.Label label2;
     }
 }
 

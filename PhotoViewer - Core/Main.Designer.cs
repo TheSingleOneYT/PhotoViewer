@@ -57,7 +57,9 @@ namespace PhotoViewer
             this.medfiToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openMedfiToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.massResizeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.massFilterToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.createmedfiToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.convertTomedfiToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.EditLabel = new System.Windows.Forms.Label();
             this.EditCMS = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.flipAxisToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -78,9 +80,8 @@ namespace PhotoViewer
             this.resetToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.zoomToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.HelpLabel = new System.Windows.Forms.Label();
-            this.MainImage = new PhotoViewer.MovablePB(this.components);
             this.ConsoleBTN = new System.Windows.Forms.Button();
-            this.massFilterToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.MainImage = new PhotoViewer.MovablePB(this.components);
             this.MainImageContextStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ColourBar)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.MiniControl)).BeginInit();
@@ -293,26 +294,26 @@ namespace PhotoViewer
             this.printToolStripMenuItem,
             this.medfiToolStripMenuItem});
             this.FileCMS.Name = "FileCMS";
-            this.FileCMS.Size = new System.Drawing.Size(181, 114);
+            this.FileCMS.Size = new System.Drawing.Size(109, 92);
             // 
             // openToolStripMenuItem
             // 
             this.openToolStripMenuItem.Name = "openToolStripMenuItem";
-            this.openToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.openToolStripMenuItem.Size = new System.Drawing.Size(108, 22);
             this.openToolStripMenuItem.Text = "Open";
             this.openToolStripMenuItem.Click += new System.EventHandler(this.MainImage_Click);
             // 
             // saveToolStripMenuItem
             // 
             this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
-            this.saveToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(108, 22);
             this.saveToolStripMenuItem.Text = "Save";
             this.saveToolStripMenuItem.Click += new System.EventHandler(this.SaveBTN_Click);
             // 
             // printToolStripMenuItem
             // 
             this.printToolStripMenuItem.Name = "printToolStripMenuItem";
-            this.printToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.printToolStripMenuItem.Size = new System.Drawing.Size(108, 22);
             this.printToolStripMenuItem.Text = "Print";
             this.printToolStripMenuItem.Click += new System.EventHandler(this.printToolStripMenuItem_Click);
             // 
@@ -320,9 +321,10 @@ namespace PhotoViewer
             // 
             this.medfiToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.openMedfiToolStripMenuItem,
-            this.createmedfiToolStripMenuItem});
+            this.createmedfiToolStripMenuItem,
+            this.convertTomedfiToolStripMenuItem});
             this.medfiToolStripMenuItem.Name = "medfiToolStripMenuItem";
-            this.medfiToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.medfiToolStripMenuItem.Size = new System.Drawing.Size(108, 22);
             this.medfiToolStripMenuItem.Text = ".medfi";
             // 
             // openMedfiToolStripMenuItem
@@ -331,22 +333,36 @@ namespace PhotoViewer
             this.massResizeToolStripMenuItem,
             this.massFilterToolStripMenuItem});
             this.openMedfiToolStripMenuItem.Name = "openMedfiToolStripMenuItem";
-            this.openMedfiToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.openMedfiToolStripMenuItem.Size = new System.Drawing.Size(168, 22);
             this.openMedfiToolStripMenuItem.Text = "Open .medfi";
             // 
             // massResizeToolStripMenuItem
             // 
             this.massResizeToolStripMenuItem.Name = "massResizeToolStripMenuItem";
-            this.massResizeToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.massResizeToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
             this.massResizeToolStripMenuItem.Text = "Mass Resize";
             this.massResizeToolStripMenuItem.Click += new System.EventHandler(this.massResizeToolStripMenuItem_Click);
+            // 
+            // massFilterToolStripMenuItem
+            // 
+            this.massFilterToolStripMenuItem.Name = "massFilterToolStripMenuItem";
+            this.massFilterToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
+            this.massFilterToolStripMenuItem.Text = "Mass Filter";
+            this.massFilterToolStripMenuItem.Click += new System.EventHandler(this.massFilterToolStripMenuItem_Click);
             // 
             // createmedfiToolStripMenuItem
             // 
             this.createmedfiToolStripMenuItem.Name = "createmedfiToolStripMenuItem";
-            this.createmedfiToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.createmedfiToolStripMenuItem.Size = new System.Drawing.Size(168, 22);
             this.createmedfiToolStripMenuItem.Text = "Create .medfi";
             this.createmedfiToolStripMenuItem.Click += new System.EventHandler(this.createmedfiToolStripMenuItem_Click);
+            // 
+            // convertTomedfiToolStripMenuItem
+            // 
+            this.convertTomedfiToolStripMenuItem.Name = "convertTomedfiToolStripMenuItem";
+            this.convertTomedfiToolStripMenuItem.Size = new System.Drawing.Size(168, 22);
+            this.convertTomedfiToolStripMenuItem.Text = "Convert To .medfi";
+            this.convertTomedfiToolStripMenuItem.Click += new System.EventHandler(this.convertTomedfiToolStripMenuItem_Click);
             // 
             // EditLabel
             // 
@@ -521,20 +537,6 @@ namespace PhotoViewer
             this.HelpLabel.Text = "Help";
             this.HelpLabel.Click += new System.EventHandler(this.HelpLabel_Click);
             // 
-            // MainImage
-            // 
-            this.MainImage.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.MainImage.ContextMenuStrip = this.MainImageContextStrip;
-            this.MainImage.Location = new System.Drawing.Point(-3, 34);
-            this.MainImage.Name = "MainImage";
-            this.MainImage.Size = new System.Drawing.Size(944, 452);
-            this.MainImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.MainImage.TabIndex = 30;
-            this.MainImage.TabStop = false;
-            this.MainImage.Click += new System.EventHandler(this.MainImage_Click);
-            this.MainImage.DragDrop += new System.Windows.Forms.DragEventHandler(this.MainImage_DragDrop);
-            this.MainImage.DragEnter += new System.Windows.Forms.DragEventHandler(this.MainImage_DragEnter);
-            // 
             // ConsoleBTN
             // 
             this.ConsoleBTN.Cursor = System.Windows.Forms.Cursors.Hand;
@@ -546,13 +548,19 @@ namespace PhotoViewer
             this.ConsoleBTN.Text = "Console";
             this.ConsoleBTN.UseVisualStyleBackColor = true;
             this.ConsoleBTN.Click += new System.EventHandler(this.ConsoleBTN_Click);
+            this.ConsoleBTN.MouseHover += new System.EventHandler(this.ConsoleBTN_MouseHover);
             // 
-            // massFilterToolStripMenuItem
+            // MainImage
             // 
-            this.massFilterToolStripMenuItem.Name = "massFilterToolStripMenuItem";
-            this.massFilterToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.massFilterToolStripMenuItem.Text = "Mass Filter";
-            this.massFilterToolStripMenuItem.Click += new System.EventHandler(this.massFilterToolStripMenuItem_Click);
+            this.MainImage.ContextMenuStrip = this.MainImageContextStrip;
+            this.MainImage.Location = new System.Drawing.Point(-1, 34);
+            this.MainImage.Name = "MainImage";
+            this.MainImage.Size = new System.Drawing.Size(941, 457);
+            this.MainImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.MainImage.TabIndex = 32;
+            this.MainImage.TabStop = false;
+            this.MainImage.Click += new System.EventHandler(this.MainImage_Click);
+            this.MainImage.DragDrop += new System.Windows.Forms.DragEventHandler(this.MainImage_DragDrop);
             // 
             // Main
             // 
@@ -644,7 +652,6 @@ namespace PhotoViewer
         private System.Windows.Forms.ToolStripMenuItem paintToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem rotate180ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem rotate270ToolStripMenuItem;
-        private MovablePB MainImage;
         private System.Windows.Forms.ToolStripMenuItem resetToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem zoomToolStripMenuItem;
         private System.Windows.Forms.Button ConsoleBTN;
@@ -655,6 +662,8 @@ namespace PhotoViewer
         private System.Windows.Forms.ToolStripMenuItem massResizeToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem createmedfiToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem massFilterToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem convertTomedfiToolStripMenuItem;
+        private MovablePB MainImage;
     }
 }
 

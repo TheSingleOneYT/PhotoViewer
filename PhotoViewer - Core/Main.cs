@@ -7,6 +7,8 @@ using System.Reflection;
 using System.Diagnostics;
 using System.Drawing.Printing;
 using PhotoViewer.Edit_Forms;
+using System.Net.NetworkInformation;
+using System.Net;
 
 namespace PhotoViewer
 {
@@ -30,7 +32,7 @@ namespace PhotoViewer
 
             InitializeComponent();
 
-            MainImage.AllowDrop = true;
+            this.MainImage.AllowDrop = true;
 
             this.KeyPreview = true;
 
@@ -73,6 +75,38 @@ namespace PhotoViewer
 
                 if (CFU == "true")
                 {
+                    if (internetTest() == true)
+                    {
+                        var url = "https://raw.githubusercontent.com/TheSingleOneYT/PhotoViewer/main/Update/Version.txt";
+                        var prURL = "https://raw.githubusercontent.com/TheSingleOneYT/PhotoViewer/pre-release/Update/Version.txt";
+                        var wc = new System.Net.WebClient();
+                        var GithubVer = wc.DownloadString(url).Split(new[] { '\r', '\n' })[0].Replace(" ", "");
+                        var PreRelease = wc.DownloadString(prURL).Split(new[] { '\r', '\n' })[0].Replace(" ", "");
+                        var AppVer = Assembly.GetExecutingAssembly().GetName().Version.ToString();
+
+                        if (AppVer != GithubVer && PreRelease == AppVer)
+                        {
+                            notify.Icon = SystemIcons.Application;
+                            notify.BalloonTipText = "You are testing a Pre-Release. Downgrade to a release?";
+                            notify.ShowBalloonTip(1000);
+                            notify.BalloonTipClicked += Notify_BalloonTipClicked;
+                            NewVer = GithubVer;
+                        }
+                        else if (AppVer != GithubVer)
+                        {
+                            notify.Icon = SystemIcons.Application;
+                            notify.BalloonTipText = "A new version of PhotoViewer is available. Click to install new version.";
+                            notify.ShowBalloonTip(1000);
+                            notify.BalloonTipClicked += Notify_BalloonTipClicked;
+                            NewVer = GithubVer;
+                        }
+                    }
+                }
+            }
+            else
+            {
+                if (internetTest() == true)
+                {
                     var url = "https://raw.githubusercontent.com/TheSingleOneYT/PhotoViewer/main/Update/Version.txt";
                     var prURL = "https://raw.githubusercontent.com/TheSingleOneYT/PhotoViewer/pre-release/Update/Version.txt";
                     var wc = new System.Net.WebClient();
@@ -98,43 +132,19 @@ namespace PhotoViewer
                     }
                 }
             }
-            else
-            {
-                var url = "https://raw.githubusercontent.com/TheSingleOneYT/PhotoViewer/main/Update/Version.txt";
-                var prURL = "https://raw.githubusercontent.com/TheSingleOneYT/PhotoViewer/pre-release/Update/Version.txt";
-                var wc = new System.Net.WebClient();
-                var GithubVer = wc.DownloadString(url).Split(new[] { '\r', '\n' })[0].Replace(" ", "");
-                var PreRelease = wc.DownloadString(prURL).Split(new[] { '\r', '\n' })[0].Replace(" ", "");
-                var AppVer = Assembly.GetExecutingAssembly().GetName().Version.ToString();
-
-                if (AppVer != GithubVer && PreRelease == AppVer)
-                {
-                    notify.Icon = SystemIcons.Application;
-                    notify.BalloonTipText = "You are testing a Pre-Release. Downgrade to a release?";
-                    notify.ShowBalloonTip(1000);
-                    notify.BalloonTipClicked += Notify_BalloonTipClicked;
-                    NewVer = GithubVer;
-                }
-                else if (AppVer != GithubVer && PreRelease != AppVer)
-                {
-                    notify.Icon = SystemIcons.Application;
-                    notify.BalloonTipText = "A new version of PhotoViewer is available. Click to install new version.";
-                    notify.ShowBalloonTip(1000);
-                    notify.BalloonTipClicked += Notify_BalloonTipClicked;
-                    NewVer = GithubVer;
-                }
-            }
         }
 
         private void Notify_BalloonTipClicked(object sender, EventArgs e)
         {
-            File.WriteAllText(Directory.GetCurrentDirectory() + "/NewVer.txt", NewVer.ToString());
+            File.WriteAllText(LocalAppData + "/NewVer.txt", NewVer.ToString());
 
             Application.Exit();
 
             Process.Start(new ProcessStartInfo
             {
-                FileName = Directory.GetCurrentDirectory() + "/Updater.exe"
+                FileName = Directory.GetCurrentDirectory() + "/Updater.exe",
+                Verb = "runas",
+                UseShellExecute = true
             });
         }
 
@@ -313,8 +323,11 @@ namespace PhotoViewer
 
         private void ProjectInfoBTN_Click(object sender, EventArgs e)
         {
-            System.Media.SoundPlayer player = new System.Media.SoundPlayer(@"C:\Windows\Media\Windows Print Complete.wav");
-            player.Play();
+            if (File.Exists(@"C:\Windows\Media\Windows Print Complete.wav"))
+            {
+                System.Media.SoundPlayer player = new System.Media.SoundPlayer(@"C:\Windows\Media\Windows Print Complete.wav");
+                player.Play();
+            }
 
             var AppVer = Assembly.GetExecutingAssembly().GetName().Version.ToString();
             MessageBox.Show("The Photo Viewer Project\nVersion: " + AppVer + "\nAn Open-source Photo Viewer And Simple Editor.\n\nBy TheSingleOne (TS1)\nProject Github - https://www.github.com/TheSingleOneYT/PhotoViewer" + "\nProject Website - https://TheSingleOneYT.github.io/PhotoViewer", "Project Information", MessageBoxButtons.OK, MessageBoxIcon.None, MessageBoxDefaultButton.Button1);
@@ -749,6 +762,44 @@ namespace PhotoViewer
             {
                 mass_filter mfi = new mass_filter(ofd.FileName);
                 mfi.Show();
+            }
+        }
+
+        public static bool internetTest(int timeoutMs = 10000, string url = "https://www.google.com")
+        {
+            try
+            {
+                var request = (HttpWebRequest)WebRequest.Create(url);
+                request.KeepAlive = false;
+                request.Timeout = timeoutMs;
+                using (var response = (HttpWebResponse)request.GetResponse())
+                    return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        private void ConsoleBTN_MouseHover(object sender, EventArgs e)
+        {
+            tooltip.Show("Open the PhotoViewer Console window.", ConsoleBTN);
+        }
+
+        private void convertTomedfiToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog ofd = new OpenFileDialog();
+            ofd.Filter = "TEXT FILES | *.txt";
+
+            if (ofd.ShowDialog() == DialogResult.OK)
+            {
+                SaveFileDialog sfd = new SaveFileDialog();
+                sfd.Filter = "MEDFI | *.medfi";
+
+                if (sfd.ShowDialog() == DialogResult.OK)
+                {
+                    File.WriteAllText(sfd.FileName, File.ReadAllText(ofd.FileName));
+                }
             }
         }
     }
