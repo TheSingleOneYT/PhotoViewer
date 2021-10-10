@@ -3,15 +3,17 @@ using System;
 using System.Diagnostics;
 using System.Drawing;
 using System.IO;
+using System.Net;
 using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
-using static System.Environment;
 
 namespace PhotoViewer
 {
     public partial class Settings : Form
     {
+        public object LocalAppData = Environment.GetEnvironmentVariable("LocalAppData");
+
         public object NewVer;
 
         public object prefs = Environment.GetEnvironmentVariable("LocalAppData") + "/PhotoViewer/Preferences";
@@ -82,49 +84,48 @@ namespace PhotoViewer
 
         private void CFUBTN_Click(object sender, EventArgs e)
         {
-            var url = "https://raw.githubusercontent.com/TheSingleOneYT/PhotoViewer/main/Update/Version.txt";
-            var wc = new System.Net.WebClient();
-            var GithubVer = wc.DownloadString(url).Split(new[] { '\r', '\n' })[0].Replace(" ", "");
-            var AppVer = Assembly.GetExecutingAssembly().GetName().Version.ToString();
-
-            if (AppVer == GithubVer)
+            if (internetTest() == true)
             {
-                notify.Icon = SystemIcons.Application;
-                notify.BalloonTipText = "You have the latest version of Photo Viewer & Editor.";
-                notify.ShowBalloonTip(1000);
+                var url = "https://raw.githubusercontent.com/TheSingleOneYT/PhotoViewer/main/Update/Version.txt";
+                var prURL = "https://raw.githubusercontent.com/TheSingleOneYT/PhotoViewer/pre-release/Update/Version.txt";
+                var wc = new System.Net.WebClient();
+                var GithubVer = wc.DownloadString(url).Split(new[] { '\r', '\n' })[0].Replace(" ", "");
+                var PreRelease = wc.DownloadString(prURL).Split(new[] { '\r', '\n' })[0].Replace(" ", "");
+                var AppVer = Assembly.GetExecutingAssembly().GetName().Version.ToString();
+
+                if (AppVer != GithubVer && PreRelease == AppVer)
+                {
+                    notify.Icon = SystemIcons.Application;
+                    notify.BalloonTipText = "You are testing a Pre-Release. Downgrade to a release?";
+                    notify.ShowBalloonTip(1000);
+                    notify.BalloonTipClicked += Notify_BalloonTipClicked;
+                    NewVer = GithubVer;
+                }
+                else if (AppVer != GithubVer)
+                {
+                    notify.Icon = SystemIcons.Application;
+                    notify.BalloonTipText = "A new version of PhotoViewer is available. Click to install new version.";
+                    notify.ShowBalloonTip(1000);
+                    notify.BalloonTipClicked += Notify_BalloonTipClicked;
+                    NewVer = GithubVer;
+                }
             }
             else
             {
-                notify.Icon = SystemIcons.Application;
-                notify.BalloonTipText = "A new version of PhotoViewer is available. Click to install new version";
-                notify.ShowBalloonTip(1000);
-                notify.BalloonTipClicked += Notify_BalloonTipClicked;
-                NewVer = GithubVer;
+                MessageBox.Show("No internet connection. Please connect to the internet and try again.", "PhotoViewer", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
         private void Notify_BalloonTipClicked(object sender, EventArgs e)
         {
-            System.Diagnostics.Process.Start(new ProcessStartInfo
-            {
-                FileName = "https://github.com/TheSingleOneYT/PhotoViewer/releases/download/" + NewVer + "/Installer.msi",
-                UseShellExecute = true
-            });
-            var Downloads = @"C:\Users\" + SystemInformation.UserName.ToString() + @"\Downloads";
+            File.WriteAllText(LocalAppData + "/NewVer.txt", NewVer.ToString());
+
             Application.Exit();
-
-            while (File.Exists(Downloads + "/Installer.msi") == false)
-            {
-                this.Cursor = Cursors.WaitCursor;
-            }
-
-            notify.Icon = SystemIcons.Application;
-            notify.BalloonTipText = "Download Complete!";
-            notify.ShowBalloonTip(1000);
 
             Process.Start(new ProcessStartInfo
             {
-                FileName = Downloads + "/Installer.msi",
+                FileName = Directory.GetCurrentDirectory() + "/Updater.exe",
+                Verb = "runas",
                 UseShellExecute = true
             });
         }
@@ -243,6 +244,22 @@ namespace PhotoViewer
                     FileName = Application.ExecutablePath,
                     UseShellExecute = true
                 });
+            }
+        }
+
+        public static bool internetTest(int timeoutMs = 10000, string url = "https://www.google.com")
+        {
+            try
+            {
+                var request = (HttpWebRequest)WebRequest.Create(url);
+                request.KeepAlive = false;
+                request.Timeout = timeoutMs;
+                using (var response = (HttpWebResponse)request.GetResponse())
+                    return true;
+            }
+            catch
+            {
+                return false;
             }
         }
     }

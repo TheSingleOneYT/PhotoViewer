@@ -15,6 +15,24 @@
     {
         "Entry"
         {
+        "MsmKey" = "8:_114559A7C13A46419BE341C9EFCF5002"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_509A60B2863441C89FA5935EFC28A468"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_68728045360347CD8EC7699E4F12B709"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_A7364D5C08B9453498C207C13D986BBB"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -35,6 +53,12 @@
         {
         "MsmKey" = "8:_F93C2ED11DE44A1FA076B7EF5F79E8DD"
         "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_68728045360347CD8EC7699E4F12B709"
         "MsmSig" = "8:_UNDEFINED"
         }
     }
@@ -142,6 +166,77 @@
         }
         "File"
         {
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_114559A7C13A46419BE341C9EFCF5002"
+            {
+            "SourcePath" = "8:..\\Updater\\bin\\Debug\\net5.0-windows\\Updater.runtimeconfig.json"
+            "TargetName" = "8:Updater.runtimeconfig.json"
+            "Tag" = "8:"
+            "Folder" = "8:_0187E2BC992E44FB843627FB582893D9"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_509A60B2863441C89FA5935EFC28A468"
+            {
+            "SourcePath" = "8:..\\Updater\\bin\\Debug\\net5.0-windows\\Updater.exe"
+            "TargetName" = "8:Updater.exe"
+            "Tag" = "8:"
+            "Folder" = "8:_0187E2BC992E44FB843627FB582893D9"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_68728045360347CD8EC7699E4F12B709"
+            {
+            "AssemblyRegister" = "3:1"
+            "AssemblyIsInGAC" = "11:FALSE"
+            "AssemblyAsmDisplayName" = "8:Updater, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL"
+                "ScatterAssemblies"
+                {
+                    "_68728045360347CD8EC7699E4F12B709"
+                    {
+                    "Name" = "8:Updater.dll"
+                    "Attributes" = "3:512"
+                    }
+                }
+            "SourcePath" = "8:..\\Updater\\bin\\Debug\\net5.0-windows\\Updater.dll"
+            "TargetName" = "8:"
+            "Tag" = "8:"
+            "Folder" = "8:_0187E2BC992E44FB843627FB582893D9"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_E6315AAA961846E0B502D1B8C24E770D"
             {
             "SourcePath" = "8:..\\PhotoViewer - Core\\bin\\Debug\\net5.0-windows\\PhotoViewer.runtimeconfig.json"
@@ -258,15 +353,15 @@
         {
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:PhotoViewer"
-        "ProductCode" = "8:{EF67434F-FADC-43F6-88E1-3A21B790EE8B}"
-        "PackageCode" = "8:{7A653E27-EE89-453C-AB18-68AE27616B86}"
+        "ProductCode" = "8:{F8D7E080-010B-4425-B057-6C2B1C36BAD6}"
+        "PackageCode" = "8:{2ACA7AA3-BF74-45A6-81F1-F94B62C155FD}"
         "UpgradeCode" = "8:{11E42841-D2E2-4210-8347-A204B0ABC069}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:TRUE"
         "DetectNewerInstalledVersion" = "11:TRUE"
         "InstallAllUsers" = "11:TRUE"
-        "ProductVersion" = "8:2.5.0"
+        "ProductVersion" = "8:2.6.0"
         "Manufacturer" = "8:TS1"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:"

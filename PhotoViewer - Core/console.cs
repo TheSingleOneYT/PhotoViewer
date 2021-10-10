@@ -3,6 +3,7 @@ using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
+using System.Net;
 using System.Reflection;
 using System.Windows.Forms;
 
@@ -52,6 +53,7 @@ namespace PhotoViewer
         public object LocalAppData = Environment.GetEnvironmentVariable("LocalAppData");
 
         public object prefs = Environment.GetEnvironmentVariable("LocalAppData").ToString() + "/PhotoViewer/Preferences";
+        private object NewVer;
 
         private void Submit_Click(object sender, EventArgs e)
         {
@@ -485,37 +487,59 @@ namespace PhotoViewer
             }
             else if (In.StartsWith("update-do"))
             {
-                var url = "https://raw.githubusercontent.com/TheSingleOneYT/PhotoViewer/main/Update/Version.txt";
-                var wc = new System.Net.WebClient();
-                var GithubVer = wc.DownloadString(url).Split(new[] { '\r', '\n' })[0].Replace(" ", "");
-                var AppVer = Assembly.GetExecutingAssembly().GetName().Version.ToString();
-
-                if (AppVer == GithubVer)
+                if (internetTest() == true)
                 {
-                    MessageBox.Show("Could not find a newer version of PhotoViewer", "PhotoViewer", icon: MessageBoxIcon.Information, buttons: MessageBoxButtons.OK);
-                }
-                else
-                {
-                    MessageBox.Show("Newer version found, press OK to continue updating...", "PhotoViewer", icon: MessageBoxIcon.Information, buttons: MessageBoxButtons.OK);
+                    var url = "https://raw.githubusercontent.com/TheSingleOneYT/PhotoViewer/main/Update/Version.txt";
+                    var prURL = "https://raw.githubusercontent.com/TheSingleOneYT/PhotoViewer/pre-release/Update/Version.txt";
+                    var wc = new System.Net.WebClient();
+                    var GithubVer = wc.DownloadString(url).Split(new[] { '\r', '\n' })[0].Replace(" ", "");
+                    var PreRelease = wc.DownloadString(prURL).Split(new[] { '\r', '\n' })[0].Replace(" ", "");
+                    var AppVer = Assembly.GetExecutingAssembly().GetName().Version.ToString();
 
-                    System.Diagnostics.Process.Start(new ProcessStartInfo
+                    if (AppVer == GithubVer)
                     {
-                        FileName = "https://github.com/TheSingleOneYT/PhotoViewer/releases/download/" + GithubVer + "/Installer.msi",
-                        UseShellExecute = true
-                    });
-                    var Downloads = @"C:\Users\" + SystemInformation.UserName.ToString() + @"\Downloads";
-                    Application.Exit();
-
-                    while (!File.Exists(Downloads + "/Installer.msi"))
-                    {
-                        this.Cursor = Cursors.WaitCursor;
+                        MessageBox.Show("Could not find a newer version of PhotoViewer", "PhotoViewer", icon: MessageBoxIcon.Information, buttons: MessageBoxButtons.OK);
                     }
-
-                    Process.Start(new ProcessStartInfo
+                    else if (AppVer != GithubVer && PreRelease != AppVer)
                     {
-                        FileName = Downloads + "/Installer.msi",
-                        UseShellExecute = true
-                    });
+                        DialogResult dr = MessageBox.Show("Newer version found, press OK to continue updating...", "PhotoViewer", icon: MessageBoxIcon.Information, buttons: MessageBoxButtons.OKCancel);
+
+                        if (dr == DialogResult.OK)
+                        {
+                            NewVer = GithubVer;
+
+                            File.WriteAllText(LocalAppData + "/NewVer.txt", NewVer.ToString());
+
+                            Application.Exit();
+
+                            Process.Start(new ProcessStartInfo
+                            {
+                                FileName = Directory.GetCurrentDirectory() + "/Updater.exe",
+                                Verb = "runas",
+                                UseShellExecute = true
+                            });
+                        }
+                    }
+                    else if (AppVer != GithubVer && PreRelease == AppVer)
+                    {
+                        DialogResult dr = MessageBox.Show("You are testing a Pre-Release. Downgrade to a release?", "PhotoViewer", icon: MessageBoxIcon.Information, buttons: MessageBoxButtons.YesNo);
+
+                        if (dr == DialogResult.Yes)
+                        {
+                            NewVer = GithubVer;
+
+                            File.WriteAllText(LocalAppData + "/NewVer.txt", NewVer.ToString());
+
+                            Application.Exit();
+
+                            Process.Start(new ProcessStartInfo
+                            {
+                                FileName = Directory.GetCurrentDirectory() + "/Updater.exe",
+                                Verb = "runas",
+                                UseShellExecute = true
+                            });
+                        }
+                    }
                 }
             }
             else if (In.StartsWith("resize-show"))
@@ -739,6 +763,22 @@ namespace PhotoViewer
             {
                 Submit.PerformClick();
                 e.Handled = e.SuppressKeyPress = true;
+            }
+        }
+
+        public static bool internetTest(int timeoutMs = 10000, string url = "https://www.google.com")
+        {
+            try
+            {
+                var request = (HttpWebRequest)WebRequest.Create(url);
+                request.KeepAlive = false;
+                request.Timeout = timeoutMs;
+                using (var response = (HttpWebResponse)request.GetResponse())
+                    return true;
+            }
+            catch
+            {
+                return false;
             }
         }
     }

@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PhotoViewer - Core", "Photo
 EndProject
 Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "Installer", "Installer\Installer.vdproj", "{15EFE290-E13C-49C9-A535-61E95F1D9204}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Updater", "Updater\Updater.csproj", "{BE863CA6-5424-4C7A-93BD-F5FA0293138F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -19,6 +21,10 @@ Global
 		{25FEA499-9F82-419C-BA2F-C812139FDA84}.Release|Any CPU.Build.0 = Release|Any CPU
 		{15EFE290-E13C-49C9-A535-61E95F1D9204}.Debug|Any CPU.ActiveCfg = Debug
 		{15EFE290-E13C-49C9-A535-61E95F1D9204}.Release|Any CPU.ActiveCfg = Release
+		{BE863CA6-5424-4C7A-93BD-F5FA0293138F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BE863CA6-5424-4C7A-93BD-F5FA0293138F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BE863CA6-5424-4C7A-93BD-F5FA0293138F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BE863CA6-5424-4C7A-93BD-F5FA0293138F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
